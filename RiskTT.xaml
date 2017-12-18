@@ -1,0 +1,257 @@
+﻿<Window x:Class="Custodian.RiskTT"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Custodian"
+        mc:Ignorable="d" WindowStyle="None"
+        xmlns:User="clr-namespace:Custodian.Pages"
+        Title="PRI Test" Height="600" Width="800">
+
+    <Grid>
+     
+        <Grid MouseLeftButtonDown="DragMove_Click" Background="{StaticResource Gray26}" Grid.Row="0"  Height="32" VerticalAlignment="Top">
+            <Label Content="PRI TEST" HorizontalAlignment="Center" FontSize="18"
+                   Style="{StaticResource StyleTableHeader}" VerticalAlignment="Center"/>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+
+                <Button Content="_" Width="20" Margin="5,5" FontFamily="{StaticResource MainFont}" Click="MinimaseState_Click"
+                    Template="{StaticResource ButtonControlTemplate}" Style="{StaticResource StyleButton}" Cursor="Hand"/>
+                <Button Content="▀" Width="20" Margin="5,5" FontFamily="{StaticResource MainFont}" Click="NormalState_Click"
+                    Template="{StaticResource ButtonControlTemplate}" Style="{StaticResource StyleButton}" Cursor="Hand"/>
+                <Button Content="X" Width="20" Margin="5,5" FontFamily="{StaticResource MainFont}" Click="Hide_Click"
+                    Template="{StaticResource ButtonControlTemplate}" Style="{StaticResource StyleButton}" Cursor="Hand"/>
+            </StackPanel>
+        </Grid>
+
+        <ScrollViewer VerticalScrollBarVisibility="Visible" CanContentScroll="True" Margin="0,32,0,0" Background="{StaticResource Gray26}">
+            <Grid Grid.Row="1"  Style="{StaticResource StyleInnerBorder}">
+
+
+
+                <Grid x:Name="TestContent">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="32"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Style="{StaticResource StyleInfoBorder}" Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Label FontSize="18"
+                            Content="IMPORTANT – PLEASE READ BEFORE COMPLETING THIS RISK PROFILE FORM"  VerticalAlignment="Top" HorizontalAlignment="Center"/>
+
+                            <TextBlock Grid.Row="1" Margin="10" FontSize="17"
+                            Text= "The series of questions below may help us appraise your risk attitude, financial means and investment objectives prior to your selection of appropriate investment product(s). If you do not wish to provide any particular information, please inform us accordingly. If you feel that none of the suggested responses to a question apply to you, please inform us accordingly. Any recommendation will be solely based on the information you provide (or choose not to provide) hereunder. It is thus very important that you provide accurate and complete information as it may affect the appropriateness of our recommendation. You acknowledge and agree that if you provide inaccurate and/or incomplete information, and/or choose not to disclose certain information, such action will adversely affect the results of this profiling, for which we take no responsibility. "
+                                  TextWrapping="Wrap"/>
+                        </Grid>
+
+                        <StackPanel Grid.Row="2" Orientation="Vertical">
+                            <Label Content="What is your age?" VerticalAlignment="Top" Margin="20"  HorizontalAlignment="Left" FontSize="16"/>
+
+                            <RadioButton Style="{StaticResource StyleRadio}"   Tag="1" Name="A10" Click="TestContent_MouseDown" 
+                                 Content="Under 64 "   Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                            <RadioButton Style="{StaticResource StyleRadio}" Tag="2" Name="A20" Click="TestContent_MouseDown"
+                                 Content="Between 64 and 79"   Width="200" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <RadioButton Style="{StaticResource StyleRadio}"  Tag="3" Name="A30"  Click="TestContent_MouseDown"
+                                 Content="80 or over "  Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="3" Orientation="Vertical" >
+                            <Label Content="How long do you want to hold onto your investments?" Margin="20"  VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="16" />
+                            <RadioButton Style="{StaticResource StyleRadio}" Tag="1" Name="B11"  Click="TestContent_MouseDown"
+                                 Content="Less than 3 years"  Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                            <RadioButton Style="{StaticResource StyleRadio}" Tag="2" Name="B21"   Click="TestContent_MouseDown"
+                                 Content="At least 3 years"  Width="200" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <RadioButton Style="{StaticResource StyleRadio}" Tag="3" Name="B31" Click="TestContent_MouseDown"
+                                 Content="No specific period "   Width="200" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="4" Orientation="Vertical">
+                            <TextBlock FontSize="16"  Style="{StaticResource StyleRadioTitle}" Margin="20"  Text="Percentage of your liquid net worth you would like to invest in financial instruments.
+Liquid Net Worth (or money you can access quickly) = [Current accounts + savings + investments] - total loans outstanding. Please do not include real estate or the value of any businesses you own.
+
+" VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="Wrap"/>
+
+                            <RadioButton Style="{StaticResource StyleRadio}"  Name="C12" Tag="1" Click="TestContent_MouseDown"
+                                 Content="Less than 25% 	  "   MinWidth="200" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <RadioButton Style="{StaticResource StyleRadio}"   Name="C22"  Tag="2"  Click="TestContent_MouseDown"
+                                 Content="Between 25% and 50%  "   MinWidth="200" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <RadioButton Style="{StaticResource StyleRadio}" Name="C32"  Tag="3" Click="TestContent_MouseDown"
+                                 Content="More than 50% 	"   MinWidth="200" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="5" Orientation="Vertical">
+                            <TextBlock FontSize="16" Style="{StaticResource StyleRadioTitle}" Margin="20"  Text="Complete this sentence:
+I am relying on ______ of the money I have invested in financial products, including any earnings, to cover my spending this year. 
+" VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="Wrap"/>
+                            <RadioButton Style="{StaticResource StyleRadio}" Name="D13" Click="TestContent_MouseDown"
+                                 Tag="1"   Content="Less than 25% "  MinWidth="200" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+                            <RadioButton Style="{StaticResource StyleRadio}"  Name="D23" Click="TestContent_MouseDown"
+                                 Tag="2"  Content="Between 25% and 50% " MinWidth="20" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+                            <RadioButton Style="{StaticResource StyleRadio}"  Name="D33" Click="TestContent_MouseDown"
+                                 Tag="3" Content="Between 25% and 50% " MinWidth="20" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0" Style="{StaticResource StyleInfoBorder}" Orientation="Vertical">
+                            <Label Content="RISK ATTITUDE " FontSize="18" MinWidth="100" VerticalAlignment="Top" HorizontalAlignment="Center" />
+
+                            <TextBlock Margin="10"   FontSize="17" 
+                                       Text="The following questions are designed to help us evaluate your comfort level in taking investment risks in the account(s) in this relationship."
+                                       VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="Wrap"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1">
+                            <TextBlock FontSize="16" Style="{StaticResource StyleRadioTitle}" Margin="20"  Text="Which of the following statements best describes your investment objectives in this relationship?" VerticalAlignment="Top" HorizontalAlignment="Left"
+                                   TextWrapping="Wrap"/>
+                            <RadioButton  Style="{StaticResource StyleRadio}"  Tag="1" Name="E14" 
+                                  Click="TestContent_MouseDown"  Content="Safety – I aim to protect my capital and will accept returns in line with savings accounts. "
+                                      Height="20" MinWidth="700" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+                            <RadioButton Tag="2" Name="E24" Click="TestContent_MouseDown" Margin="10,0,0,0"  Height="30"
+                                  MinWidth="700" HorizontalAlignment="Left"  VerticalAlignment="Top">
+                                <RadioButton.Content>
+                                    <TextBlock  Style="{StaticResource StyleRadio}"  
+                                            Text="Defensive – I seek to maintain my investment value and will accept returns above savings accounts. " TextWrapping="Wrap"/>
+                                </RadioButton.Content>
+                            </RadioButton>
+
+                            <RadioButton  Style="{StaticResource StyleRadio}"  Name="E34" Tag="3" Click="TestContent_MouseDown" 
+                                      Content=" Income Oriented – I prefer regular income along with some capital growth.  "
+                                      Height="20" MinWidth="700" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+                            <RadioButton Style="{StaticResource StyleRadio}"  Name="E44"  Tag="4" Click="TestContent_MouseDown"  Content=" Growth and Income – I prefer a balance of capital growth and regular income.  " Height="20" MinWidth="700" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+                            <RadioButton Style="{StaticResource StyleRadio}"  Name="E54" Tag="5" Click="TestContent_MouseDown" 
+                                   MinWidth="700" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                <RadioButton.Content>
+                                    <TextBlock TextWrapping="Wrap" Text="Growth Oriented – I primarily want capital growth with some regular income. 	"/>
+                                </RadioButton.Content>
+                            </RadioButton>
+
+                            <RadioButton  Style="{StaticResource StyleRadio}"  Name="E64" Tag="6" Click="TestContent_MouseDown"  Content="Growth – I am looking only for capital growth and do not require regular income.  " Height="20" MinWidth="700" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+                            <RadioButton Style="{StaticResource StyleRadio}" Name="E74" Tag="6" Click="TestContent_MouseDown"  MinWidth="700" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                <RadioButton.Content>
+                                    <TextBlock TextWrapping="Wrap" Text="Specialist Investing – I am looking for specialist investments, which may have uncertain pricing, substantial fluctuations in value, limited liquidity and/or lack of redemption rights. Examples of specialist investment include Margin FX, Hedge funds, Private Equity. 	"/>
+                                </RadioButton.Content>
+                            </RadioButton>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="2">
+
+                            <TextBlock FontSize="16" Style="{StaticResource StyleRadioTitle}" Margin="20" 
+                                       Text="Which of the following statements best describes the amount of risk fluctuation you will tolerate in the value of your investments?  " 
+                                       VerticalAlignment="Top" HorizontalAlignment="Left"  TextWrapping="Wrap"/>
+                            <RadioButton Style="{StaticResource StyleRadio}" Tag="1" Name="F15" Click="TestContent_MouseDown"  Height="40" MinWidth="700" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                <RadioButton.Content>
+                                    <TextBlock  Text="I prefer investments with negligible price movements which can normally be sold within a week or promise to repay what I invested within a year. " TextWrapping="Wrap"/>
+                                </RadioButton.Content>
+                            </RadioButton>
+                            <RadioButton Style="{StaticResource StyleRadio}" Name="F25"  Tag="2" Click="TestContent_MouseDown" Height="40" MinWidth="700" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                <RadioButton.Content>
+                                    <TextBlock Text="I can tolerate investments with limited negative price movements which can normally be sold within a week for a price that is close to the recent market average.    " TextWrapping="Wrap"/>
+                                </RadioButton.Content>
+                            </RadioButton>
+                            <RadioButton Style="{StaticResource StyleRadio}" Name="F35"  Tag="3" Click="TestContent_MouseDown" Height="40" MinWidth="700" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                <RadioButton.Content>
+                                    <TextBlock Text=" I can tolerate investments with moderate negative price movements which can normally be sold within a week for a price that is close to the recent market average.  " TextWrapping="Wrap"/>
+                                </RadioButton.Content>
+                            </RadioButton>
+                            <RadioButton Style="{StaticResource StyleRadio}" Name="F45"  Tag="4" Click="TestContent_MouseDown"  Height="40" MinWidth="700" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                <RadioButton.Content>
+                                    <TextBlock Text="I can tolerate investments with substantial negative price movements, which	may have a small risk of losing their entire value, may be difficult to sell or may only be sold at a price below the recent market average.  " TextWrapping="Wrap"/>
+                                </RadioButton.Content>
+                            </RadioButton>
+                            <RadioButton  Style="{StaticResource StyleRadio}" Name="F55"  Tag="5" Click="TestContent_MouseDown" Height="40" MinWidth="700" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                <RadioButton.Content >
+                                    <TextBlock Text="I can tolerate investments with substantial negative price movements which may have a significant risk of losing their entire value and may be difficult or impossible to sell over an extended period.
+ " TextWrapping="Wrap"/>
+                                </RadioButton.Content>
+                            </RadioButton>
+                            <RadioButton Name="F65"  Tag="6" Click="TestContent_MouseDown"  Height="50" MinWidth="700" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                <RadioButton.Content>
+                                    <TextBlock Style="{StaticResource StyleRadio}"  Text="I can tolerate investments that may have a high risk of losing their entire value or even more than my initial investment and may have a highly uncertain value at any given time and also be very difficult or impossible to sell over an extended period. " TextWrapping="Wrap"/>
+                                </RadioButton.Content>
+                            </RadioButton>
+                        </StackPanel>
+
+                    </Grid>
+
+                    <Grid Grid.Row="2" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0" Style="{StaticResource StyleInfoBorder}" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Label FontSize="18" Style="{StaticResource StyleInfoTitle}" 
+                                   Content="KNOWLEDGE AND EXPERIENCE" Height="25" MinWidth="200" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                            <TextBlock Style="{StaticResource StyleInfoText}" FontSize="17" Grid.Row="1"
+                                   TextWrapping="Wrap" Margin="10" Text="The following questions are designed to help us evaluate the extent of your familiarity and knowledge of different types of investment products."/>
+                        </Grid>
+
+                        <StackPanel Grid.Row="1" Orientation="Vertical">
+
+                            <TextBlock TextWrapping="Wrap" FontSize="16" Margin="20" 
+                                   Text="Describe your investment knowledge and experience:" Style="{StaticResource StyleRadioTitle}"/>
+                            <RadioButton Name="J16"  Tag="1" Click="TestContent_MouseDown"  MinWidth="700" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource StyleRadio}">
+                                <RadioButton.Content >
+                                    <TextBlock Text="Limited – I have little or no knowledge of investments outside of savings accounts or time deposits. " TextWrapping="Wrap"/>
+                                </RadioButton.Content>
+                            </RadioButton>
+
+                            <RadioButton Name="J26" Tag="2" Click="TestContent_MouseDown"  MinWidth="700" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource StyleRadio}">
+                                <RadioButton.Content>
+                                    <TextBlock Text="Moderate – I have general knowledge and understanding of investments that are not savings accounts or time deposits, and I am aware of the general risks related to investing.	" TextWrapping="Wrap"/>
+                                </RadioButton.Content>
+                            </RadioButton>
+
+                            <RadioButton Name="J36" Tag="3" Click="TestContent_MouseDown"  MinWidth="700" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource StyleRadio}">
+                                <RadioButton.Content>
+                                    <TextBlock Text="Extensive – I have extensive knowledge and understanding of investments, and I am experienced enough to make my own investment decisions." TextWrapping="Wrap"/>
+                                </RadioButton.Content>
+                            </RadioButton>
+
+                        </StackPanel>
+                    </Grid>
+
+                    <Button Height="25" Style="{StaticResource StyleButton}" Grid.Row="3"
+                            Template="{StaticResource ButtonControlTemplate}" Width="100" Content="Ready"
+                            HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_Click"/>
+                </Grid>
+            
+        </Grid>
+        </ScrollViewer>
+
+    </Grid>
+</Window>

@@ -1,0 +1,35 @@
+﻿<Window x:Class="Custodian.ShowWind"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Custodian"
+        mc:Ignorable="d" Background="#363636" 
+        WindowStyle="None"     
+        AllowsTransparency="true"
+        Title="CGAAF" Height="137.968" Width="300">
+    <Border Background="{StaticResource Gray26}">
+    <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown" Style="{StaticResource StyleMainBorder}" Margin="2">
+        <TextBlock x:Name="informTXT" Style="{StaticResource StyleRadioTitle}" 
+                   Text="This is your first visit into your private room. For security reasons, we strongly recommend changing your password." 
+                   TextWrapping="Wrap" Margin="13,10,3,82" HorizontalAlignment="Center" Width="280" />
+        
+        <Label Content="6" Name="ricklev" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-40,0,0"
+               FontFamily="{StaticResource MainFont}" FontSize="30" Foreground="#FFC087"
+               />
+        
+        <Button x:Name="buttonPassChange" Content="Continue" Template="{StaticResource ButtonControlTemplate}" 
+                Style="{StaticResource StyleOkButton}" IsDefault="True"
+                Height="25"  Click="buttonPassChange_Click" Margin="90,78,86,31" Width="120"/>
+
+        <Button x:Name="Ok" Click="Ok_Click" Content="Yes" Visibility="Hidden" Template="{StaticResource ButtonControlTemplate}" 
+                Style="{StaticResource StyleOkButton}"
+                Height="25" Margin="38,87,167,22" Width="91"/>
+
+        <Button x:Name="No" Content="No" Visibility="Hidden" Template="{StaticResource ButtonControlTemplate}" 
+                Style="{StaticResource StyleOkButton}"
+                Height="25"  Click="buttonPassChange_Click" Margin="180,87,29,22" Width="87"/>
+
+    </Grid>
+    </Border>
+</Window>

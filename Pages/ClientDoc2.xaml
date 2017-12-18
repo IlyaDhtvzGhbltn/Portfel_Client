@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="Custodian.Pages.ClientDoc2"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Custodian.Model"
+      mc:Ignorable="d" 
+      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+      d:DesignHeight="600" d:DesignWidth="800"
+      Loaded="UserControl_Loaded">
+
+    <!--<DockPanel Background="{StaticResource Gray46}">
+        <Label Content="PUBLIC LIBRARY" Style="{StaticResource StyleTableHeader}" Margin="8,0" DockPanel.Dock="Top"/>-->
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*">
+            </ColumnDefinition>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <GridSplitter Grid.Column="1" Width="10" VerticalAlignment="Stretch" HorizontalAlignment="Center" Background="Transparent" />
+        <GridSplitter Grid.Column="3" Width="10" VerticalAlignment="Stretch" HorizontalAlignment="Center" Background="Transparent" />
+
+        <Border Grid.Column="0"  Style="{StaticResource StyleBorder86}" >
+            <DockPanel >
+                <Label Style="{StaticResource StyleHeader46}" Content="Useful forms " DockPanel.Dock="Top" />
+                <DataGrid Style="{StaticResource StyleTable}" x:Name="Forms" BorderThickness="0" 
+                          ColumnHeaderStyle="{StaticResource StyleColumnHeader86}"  AutoGenerateColumns="False" 
+                          ItemsSource="{Binding usefulformsCollections}" Height="Auto" IsReadOnly="True">
+
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding DownloadPDF}" CommandParameter="{Binding ElementName=Forms, Path=SelectedItem}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="*" Header="Download Useful forms :" Binding="{Binding Name}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
+        </Border>
+
+        <Border Grid.Column="2"  Style="{StaticResource StyleBorder86}">
+            <DockPanel >
+                <Label Style="{StaticResource StyleHeader46}" Content="Brochures" DockPanel.Dock="Top" />
+                <DataGrid  Style="{StaticResource StyleTable}" Name="Brochures" BorderThickness="0" ColumnHeaderStyle="{StaticResource StyleColumnHeader86}" Height="Auto"
+                           ItemsSource="{Binding brochuresCollections}" AutoGenerateColumns="False" IsReadOnly="True">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding DownloadPDF}" CommandParameter="{Binding ElementName=Brochures, Path=CurrentItem}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="*" Header="Download Brochures :" Binding="{Binding Name}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </DockPanel>
+        </Border>
+
+        <Border Grid.Column="4"  Style="{StaticResource StyleBorder86}">
+            <DockPanel>
+                <Label Style="{StaticResource StyleHeader46}" Content="My documents " DockPanel.Dock="Top" />
+                <DataGrid ColumnHeaderStyle="{StaticResource StyleColumnHeader86}" Style="{StaticResource StyleTable}" BorderThickness="0"
+                          x:Name="MyFTPDoc" ItemsSource="{Binding MyDocymentsCollections}" IsReadOnly="True" AutoGenerateColumns="False" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Download Documents :" Width="*" Binding="{Binding Name}">
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding DownloadMydoc}" CommandParameter="{Binding ElementName=MyFTPDoc, Path=CurrentItem}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </DataGrid>
+            </DockPanel>
+        </Border>
+    </Grid>
+    <!--</DockPanel>-->
+</UserControl>

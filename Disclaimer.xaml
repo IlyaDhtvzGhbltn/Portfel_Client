@@ -1,0 +1,140 @@
+﻿<Window x:Class="Custodian.Disclaimer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Custodian"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        Title="Disclaimer" Height="600" Width="800" MinHeight="400" MinWidth="500">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
+            <RowDefinition/>
+            <RowDefinition Height="0.17*"/>
+        </Grid.RowDefinitions>
+        <Grid MouseLeftButtonDown="DragMove_Click" Background="{StaticResource Gray26}" Grid.Row="0">
+            <Label Content="Terms of Use" HorizontalAlignment="Center"
+                   Style="{StaticResource StyleTableHeader}" VerticalAlignment="Center"/>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+
+                <Button Content="_" Width="20" Margin="5,5" FontFamily="{StaticResource MainFont}" Click="MinimaseState_Click"
+                    Template="{StaticResource ButtonControlTemplate}" Style="{StaticResource StyleButton}" Cursor="Hand"/>
+                <Button Content="▀" Width="20" Margin="5,5" FontFamily="{StaticResource MainFont}" Click="NormalState_Click"
+                    Template="{StaticResource ButtonControlTemplate}" Style="{StaticResource StyleButton}" Cursor="Hand"/>
+            </StackPanel>
+        </Grid>
+
+        <Border Background="{StaticResource Gray36}" Grid.Row="1" BorderBrush="{StaticResource Gray26}" BorderThickness="2">
+            <FlowDocumentScrollViewer Margin="10" >
+                <FlowDocument TextAlignment="Center" FontFamily="{StaticResource MainFont}" FontSize="18">
+                    <Paragraph>
+                        <Bold>Terms of Use</Bold>
+                    </Paragraph>
+                    <Paragraph TextAlignment="Justify">
+                                Please read this terms and conditions carefully. By accessing the CGAAF Software and any part hereof (“Software”), you indicate that you have read, acknowledged and agreed to be bound by this Terms of Use. If you do not agree to this Terms of Use, please cease to access this Software. Castle Family Office reserves the right to change and/or update this Terms of Use as and when necessary, according to relevant jurisdiction and/or regulation, which you are responsible for regularly reviewing. Your continued use of this Software shall constitute your agreement to all such changes and/or updates.
+By agreeing to this Terms of Use, you expressly confirm that you do read and understand English and as such, you do not require information relating to this Software and any investment product that may be described from time to time to be provided to you in any other language. By signing any document provided by or transmitted through Castle Family Office that is in English language, you understand that you are giving confirmation of your understanding and acceptance of the terms of such English language documents, and the terms of the relevant transaction(s) being entered as described therein. 
+By agreeing to this Terms of Use, you expressly confirm that any translations that might be provided to you, including of this Terms of Use, are purely for informational purposes and convenience only.
+By accessing and/or using this Software, you consent to the processing of your personal data. You acknowledge and agree that if you choose to reject the processing, some or all parts of this Software may not function properly or may not be accessible.
+                    </Paragraph>
+                    <Paragraph TextAlignment="Left">
+                        <Bold>
+                        Restricted Access
+                        </Bold>
+                    </Paragraph>
+                    <Paragraph TextAlignment="Justify">
+                        The contents and products found in this Software are not directed and/or intended for the general public. This Software and its contents are permitted only for the use of persons who are ‘accredited investors’ or ‘institutional investors’, as defined in the Securities and Futures Act (Cap. 289), or ‘professional client’ or ‘eligible counterparty’, as defined in the FCA Handbook, or its equivalent investor class. For instance, this Software and its contents are permitted only for the use of persons who are ‘qualified investors’ as defined in Article 51.2 of the Federal Law no. 39-FZ “On the Securities Market” dated 22 April 1996 (as amended). Accordingly, the information contained in this Software and the products and services described in this Software are for use by such investors only and prepared for the benefit of such investors only.
+By agreeing to this Terms of Use, you expressly represent and warrant that you are either an ‘accredited investor’, ‘institutional investor’, ‘professional client’ or ‘eligible counterparty’, or its equivalent investor class, and acknowledge that certain disclosure requirements and protection, as afforded to retail investors, in relation to the contents of this Software, do not apply to you as a recipient.
+Castle Family Office shall not be responsible and/or liable for any persons’ non-compliance and/or misrepresentation under this clause.
+                    </Paragraph>
+                    <Paragraph TextAlignment="Left">
+                        <Bold>
+                        General Information
+                        </Bold>
+                    </Paragraph>
+                    <Paragraph TextAlignment="Justify">
+                        Certain sections of or pages on this Software may contain separate terms and conditions, which are in addition to this Terms of Use. You should read those additional terms and conditions carefully. By accessing such sections or pages, you agree to be bound by those additional terms and conditions. In the event of a conflict, those additional terms and conditions will govern your use of those sections or pages.
+Unauthorized use of the Software and systems, including, but not limited to, unauthorized entry into the systems, misuse of passwords and/or misuse of any other information, is strictly prohibited. You may not use this Software in any manner that could damage, disable, overburden or impair any software or services, or interfere with any other party’s use and enjoyment of any software or services. You may not attempt to gain unauthorized access to any software or services, computer systems or networks connected, through hacking, password mining and/or any other means. You agree that you will not engage in any activity that is contrary to applicable laws or regulations.
+Castle Family Office reserves the right, in its sole discretion, without any obligation and without any notice requirement, to change, improve and/or correct the information, materials and descriptions on this Software and to suspend and/or deny access to this Software for scheduled or unscheduled maintenance, upgrades, improvements and/or corrections. The information and materials on this Software may contain typographical errors or inaccuracies. Any dated information is published as of its date only, and Castle Family Office does not undertake any obligation or responsibility to update or amend any such information. Castle Family Office may discontinue or change any product or service described in or offered on this Software at any time.
+                    </Paragraph>
+                    <Paragraph TextAlignment="Left">
+                        <Bold>
+                            Disclaimer of Warranty and Limitation of Liability
+                        </Bold>
+                    </Paragraph >
+                    <Paragraph TextAlignment="Justify">
+                        The information, products and services on this Software are provided on an “AS IS WHERE IS” and “WHERE AVAILABLE” basis. Castle Family Office does not warrant the information or services provided herein or your use of this Software generally, either expressly or impliedly, for any particular purpose and expressly disclaims any implied warranties, including but not limited to, warranties of title, non-infringement, merchantability or fitness for a particular purpose. Castle Family Office will not be responsible for any loss or damage that could result from interception by third parties of any information or services made available to you via this Software. Although the information provided to you on this Software is obtained or compiled from sources believed to be reliable, Castle Family Office cannot and does not guarantee the accuracy, validity, timeliness or completeness of any information or data made available to you for any particular purpose. Neither Castle Family Office, directors, officers or employees, nor any third party vendor, will be liable or have any responsibility of any kind for any loss or damage that you incur in the event of any failure or interruption of this Software, or resulting from the act or omission of any other party involved in making this Software, the data contained herein or the products or services offered on this Software available to you, or from any other cause relating to your access to, inability to access, or use of the Software or these materials, whether or not the circumstances giving rise to such cause may have been within the control of Castle Family Office or of any vendor providing software or services. In no event will Castle Family Office or any such parties be liable to you, whether in contract or tort, for any direct, special, indirect, consequential or incidental damages or any other damages of any kind even if Castle Family Office or any other such party has been advised of the possibility thereof. This limitation on liability includes, but is not limited to, the transmission of any viruses which may infect a user’s equipment, failure of mechanical or electronic equipment or communication lines, telephone or other interconnect problems (e.g., you cannot access your internet service provider), unauthorized access, theft, operator errors, strikes or other labor problems or any force majeure. Castle Family Office cannot and does not guarantee continuous, uninterrupted or secure access to the Software.
+                    </Paragraph>
+                    
+                    
+                    <Paragraph TextAlignment="Left">
+                        <Bold>
+                        Proprietary Rights
+                        </Bold>
+                    </Paragraph>
+                    <Paragraph TextAlignment="Justify">
+                        All right, title and interest in this Software and any content contained herein is the exclusive property of Castle Family Office and/or its affiliates, except and unless otherwise stated. Unless otherwise specified, this Software is for personal and non-commercial use only and you may print, copy and download any information or portion of this Software for your personal use only. You may not modify, copy, distribute, transmit, display, perform, reproduce, publish, license, frame, create derivative works from, transfer, or otherwise use in any other way for commercial or public purposes in whole or in part any information, software, products or services obtained from this Software, except for the purposes expressly provided herein, without Castle Family Office’s prior written approval.
+The company logo, trademarks and service marks featured herein are the property of Castle Family Office and/or its affiliates. The names of other companies and third-party products or services mentioned herein may be the trademarks or service marks of their respective owners. You are prohibited from using any marks for any purpose whatsoever including, but not limited to, use as metatags on other pages or sites on the internet without the written permission of Castle Family Office or such third party, which may own the marks.
+The materials located on the Software, including the information as well as any software data available on or through the Software (“Information”), are protected by copyright, trademark and other forms of proprietary rights. All rights, title and interest in the Information are owned and controlled by Castle Family Office and/or its affiliates.
+Castle Family Office takes a serious view regarding the plagiarism of the Information and/or the Software. 
+Accordingly, except as otherwise provided herein, the Information and the Software must not be reproduced, republished, uploaded, posted, transmitted, copied, plagiarized or otherwise distributed in any way, without the prior written permission of Castle Family Office.
+                    </Paragraph>
+                    <Paragraph TextAlignment="Left">
+                        <Bold>
+                            Use of Links
+                        </Bold>
+                    </Paragraph>
+                    <Paragraph TextAlignment="Justify">
+                        This Software contains links to third party web sites. These links are provided only as a means of convenience. The inclusion of any link is not and does not imply an affiliation, sponsorship, endorsement, approval, investigation, verification and/or monitoring by Castle Family Office of any information contained in any third party web site. In no event shall Castle Family Office be responsible and/or liable for the information contained on a third party site or your use of or inability to use such site. You should also be aware that the terms and conditions of such site and the site’s privacy policy may be different from those applicable to your use of this Software.
+                    </Paragraph>
+                    <Paragraph TextAlignment="Left">
+                        <Bold>Investment Products</Bold>
+                    </Paragraph>
+                    <Paragraph TextAlignment="Justify">
+                        The terms of investment in any of the funds are solely as set out in the fund's prospectus or Private Placement Memorandum (including any supplements thereto), as the case may be.
+Any person who transacts and/or participates with reference to or according to the contents mentioned herein shall be deemed to have made his own independent and necessary investigation, research and appraisal of the particular investment and shall be solely responsible and liable for any and all transaction decision made.
+None of the information contained in this Software constitutes a recommendation, solicitation, advice or offer by Castle Family Office. The information contained in this Software has been prepared without reference to any particular user’s investment requirements or financial situation except for general risk profile. Certain transactions give rise to substantial risk and are not suitable for all investors. Upon the execution of any transaction by you involving information you received from this Software, it shall be presumed that relevant research and advice has been conducted and obtained by you.
+Any pricing and information generated through the use of data or services made available herein shall not be taken as prices or values in real time. The information and services provided on this Software shall not be provided to and/or be used by any person or entity in any jurisdiction where the provision or use thereof would be contrary to applicable laws, rules or regulations of any governmental authority or regulatory or self-regulatory organization or where Castle Family Office is not authorized to provide such information or services. Some products and services described in this Software may not be available in all jurisdictions or to all clients.
+The value of investments, and the income from them, can go down as well as up and you may get back less than the amount invested. Past performance is not a guide to future results. Tax treatment depends on the individual circumstances of each investor and may be subject to change in the future. Castle Family Office recommends that you seek financial advice prior to making an investment decision.
+The details contained here are for information purposes only and should not be considered as an offer, investment recommendation, or solicitation, to deal in any of the investments mentioned herein and does not constitute investment research as defined under EU Directive 2003/125/EC. Castle Family Office does not warrant the accuracy, adequacy or completeness of the information contained herein and expressly disclaims liability for errors or omissions in such information and materials.
+                    </Paragraph>
+                    <Paragraph TextAlignment="Left">
+                        <Bold>Privacy Policy</Bold></Paragraph>
+                    <Paragraph TextAlignment="Justify">Castle Family Office may process personal data as part of and/or in connection with your access and/or use of this Software.
+Castle Family Office has a long-standing commitment to safeguard the privacy of information entrusted to us by our clients. Protecting the confidentiality and security of such information is an integral part of how we conduct our business worldwide. We pledge to continue to ensure that your privacy is protected.
+In the course of serving you as an individual or as someone associated with a corporation or institution, Castle Family Office may collect, hold, use and/or disclose information received, which may constitute personal data, where applicable and in accordance to personal data laws in relevant jurisdictions.
+Unless advised otherwise, all references to Castle Family Office, “we”, or “our” in this Privacy Policy includes, individually and collectively, Castle Family Office that process personal data in the relevant jurisdiction. You may, however, in connection with specific products or services offered by Castle Family Office, be provided with privacy policies or statements that supplement these provisions.
+In the event you do not agree to the terms and conditions as set out in the Privacy Policy, after agreeing to this Terms of Use, please cease to access the Software and exit immediately.
+                    </Paragraph>
+                    <Paragraph TextAlignment="Left">
+                        <Bold>Choice of Law</Bold>
+                    </Paragraph>
+                    <Paragraph TextAlignment="Justify">
+                        This Terms of Use shall be governed by and construed in accordance with the laws of Singapore, without regard to conflicts of law provisions. Sole and exclusive jurisdiction for any action or proceeding arising out of or related to this Terms of Use shall be in an appropriate court located in Singapore. Any cause of action you may have with respect to your use of this Software must be commenced within one (1) year after the claim or cause of action arises. If for any reason a court of competent jurisdiction finds any provision of this Terms of Use, or a portion thereof, to be unenforceable, that provision shall be enforced to the maximum extent permissible so as to affect the intent of this Terms of Use, and the remainder of this Terms of Use shall continue in full force and effect. This Terms of Use constitutes the entire agreement between Castle Family Office and you with respect to this site and it supersedes all prior or contemporaneous communications, agreements and understandings between Castle Family Office and you with respect to the subject matter hereof. A printed version of this Terms of Use shall be admissible in judicial or administrative proceedings.
+                    </Paragraph>
+                    
+                </FlowDocument>
+            </FlowDocumentScrollViewer>
+        </Border>
+        <Border Background="{StaticResource Gray36}" Grid.Row="2" BorderBrush="{StaticResource Gray26}" BorderThickness="2">
+            <Grid>
+                <CheckBox Template="{StaticResource TemplateCheckBox}" Style="{StaticResource StyleInput}" 
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Top" Margin="10" Width="auto" x:Name="Checbox" 
+                          Foreground="{StaticResource GrayEA}">
+                    I agree with these Terms of Use
+                </CheckBox>
+                <Grid Margin="42,22">
+                    <Button Content="OK" Width="50" Margin="5,5" Height="20" IsEnabled="{Binding ElementName=Checbox, Path=IsChecked}"
+                    FontFamily="{StaticResource MainFont}"  HorizontalAlignment="Right" Click="AcceptDisclaimer_click"
+                    Template="{StaticResource ButtonControlTemplate}" Style="{StaticResource StyleButton}" Cursor="Hand"/>
+
+                    <Button Content="No" Width="50" Height="20" HorizontalAlignment="Left" Margin="5,5" FontFamily="{StaticResource MainFont}"  
+                    Template="{StaticResource ButtonControlTemplate}" Style="{StaticResource StyleButton}" Click="CloseDisclaimer_Click" Cursor="Hand"/>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

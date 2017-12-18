@@ -1,0 +1,26 @@
+﻿<Page x:Class="Custodian.Pages.Admin.ISINQuote"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Custodian.Pages.Admin"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="ISINQuote" Loaded="InsertORUpdateISIN">
+
+    <Grid  Margin="0,10,0,3" Background="#FFE2e2e2">
+            <Grid>
+                <DataGrid x:Name="DGIsinQuote" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="262" Width="760" ColumnWidth="*"/>
+                <Button x:Name="button" Content="Save Changes" HorizontalAlignment="Left" Margin="609,364,0,0" VerticalAlignment="Top" Width="100" Click="SaveISINChanges"/>
+                <TextBox x:Name="ISINsearch" HorizontalAlignment="Left" Height="23" Margin="334,363,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="ISINsearch_TextChanged"/>
+                <Label x:Name="label12" Content="Search" HorizontalAlignment="Left" Margin="362,335,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="ISIN" HorizontalAlignment="Left" Height="23" Margin="59,306,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                <TextBox x:Name="Quote" HorizontalAlignment="Left" Height="23" Margin="192,306,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                <TextBox x:Name="TitleISIN" HorizontalAlignment="Left" Height="23" Margin="327,306,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                <Label x:Name="label13" Content="ISIN" HorizontalAlignment="Left" Margin="94,283,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label14" Content="Quote" HorizontalAlignment="Left" Margin="232,283,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label15" Content="Title" HorizontalAlignment="Left" Margin="367,283,0,0" VerticalAlignment="Top"/>
+                <Button x:Name="button1" Content="Insert New" HorizontalAlignment="Left" Margin="479,306,0,0" VerticalAlignment="Top" Width="75" Click="button1_Click"/>
+            </Grid>
+    </Grid>
+</Page>

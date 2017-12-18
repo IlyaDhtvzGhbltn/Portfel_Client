@@ -1,0 +1,624 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0A8D33DE-3BA5-4180-A76A-3F3571F905AD}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Custodian</RootNamespace>
+    <AssemblyName>CGAAF</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>_2.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>E992A1748CC71B9B021A56419C58BC169DFF485D</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Custodian_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.3.0.19038, Culture=neutral, PublicKeyToken=0e453835af4ee6ce, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net40\GalaSoft.MvvmLight.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.3.0.19026, Culture=neutral, PublicKeyToken=f46ff315b1088208, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net40\GalaSoft.MvvmLight.Extras.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.12.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\CGAAF Installer\CGAAF Setup\packages\iTextSharp.5.5.12\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Outlook, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\CGAAF Installer\CGAAF Setup\packages\Microsoft.Office.Interop.Outlook.15.0.4797.1003\lib\net20\Microsoft.Office.Interop.Outlook.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="mysql.data.cf">
+      <HintPath>..\..\..\Сфт\mySQL connector\mysql.data.cf.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework.Aero" />
+    <Reference Include="Syncfusion.Compression.Base, Version=15.2460.0.40, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.Compression.Base.15.2460.40\lib\net46\Syncfusion.Compression.Base.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Syncfusion.DocIO.Base, Version=15.2460.0.40, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.DocIO.WPF.15.2460.40\lib\net46\Syncfusion.DocIO.Base.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Syncfusion.DocIO.WPF, Version=15.2460.0.40, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.DocIO.WPF.15.2460.40\lib\net46\Syncfusion.DocIO.WPF.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Syncfusion.DocToPdfConverter.Base, Version=15.2460.0.40, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.PDF.WPF.15.2460.40\lib\net46\Syncfusion.DocToPdfConverter.Base.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Syncfusion.ExcelToPDFConverter.Base, Version=15.2460.0.40, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.PDF.WPF.15.2460.40\lib\net46\Syncfusion.ExcelToPDFConverter.Base.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Syncfusion.OfficeChart.Base, Version=15.2460.0.40, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.PDF.WPF.15.2460.40\lib\net46\Syncfusion.OfficeChart.Base.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Syncfusion.Pdf.Base, Version=15.2460.0.40, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.PDF.WPF.15.2460.40\lib\net46\Syncfusion.Pdf.Base.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Syncfusion.Pdf.WPF, Version=15.2460.0.40, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.PDF.WPF.15.2460.40\lib\net46\Syncfusion.Pdf.WPF.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Syncfusion.SfChart.WPF, Version=15.2460.0.40, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.SfChart.WPF.15.2460.40\lib\net46\Syncfusion.SfChart.WPF.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Syncfusion.XlsIO.Base, Version=15.2460.0.40, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.XlsIO.WPF.15.2460.40\lib\net46\Syncfusion.XlsIO.Base.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Syncfusion.XlsIO.WPF, Version=15.2460.0.40, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.XlsIO.WPF.15.2460.40\lib\net46\Syncfusion.XlsIO.WPF.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Controls.DataVisualization.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\WPFToolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="ActiveInfo.xaml.cs">
+      <DependentUpon>ActiveInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Change_PRI.xaml.cs">
+      <DependentUpon>Change_PRI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Chat.xaml.cs">
+      <DependentUpon>Chat.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ClientWindow.xaml.cs">
+      <DependentUpon>ClientWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DALs\adminDAL.cs" />
+    <Compile Include="DALs\InterfaceService\CellToBrushConverter.cs" />
+    <Compile Include="DALs\InterfaceService\ColorCollection.cs" />
+    <Compile Include="DALs\InterfaceService\CounterMessages.cs" />
+    <Compile Include="DALs\InterfaceService\DownloadFromFTP.cs" />
+    <Compile Include="DALs\InterfaceService\EtfData.cs" />
+    <Compile Include="DALs\InterfaceService\Ext.cs" />
+    <Compile Include="DALs\InterfaceService\Financial_Plan_Data_Correct\INTMinMaxFormat_Correct.cs" />
+    <Compile Include="DALs\InterfaceService\FTPGetNAMESfromSERVER.cs" />
+    <Compile Include="DALs\InterfaceService\FTPLoadToServer.cs" />
+    <Compile Include="DALs\InterfaceService\KparserUSD-Value.cs" />
+    <Compile Include="DALs\InterfaceService\HardwareAcces.cs" />
+    <Compile Include="DALs\InterfaceService\Logger.cs" />
+    <Compile Include="DALs\InterfaceService\MailSendMessage.cs" />
+    <Compile Include="DALs\InterfaceService\Page_Location_Visibly.cs" />
+    <Compile Include="DALs\InterfaceService\PassGeneric.cs" />
+    <Compile Include="DALs\InterfaceService\PDFTablesCreate.cs" />
+    <Compile Include="DALs\InterfaceService\QuteParse.cs" />
+    <Compile Include="DALs\InterfaceService\ReportPDFCreator.cs" />
+    <Compile Include="DALs\InterfaceService\RowToBrushConverter.cs" />
+    <Compile Include="DALs\InterfaceService\SQLDateConverter.cs" />
+    <Compile Include="DALs\InterfaceService\Storage.cs" />
+    <Compile Include="DALs\InterfaceService\TextBoxToBrushConverter.cs" />
+    <Compile Include="DALs\Interfaces\IHardwareAcces.cs" />
+    <Compile Include="DALs\Interfaces\IEnterHistory.cs" />
+    <Compile Include="DALs\userDAL.cs" />
+    <Compile Include="DALs\InterfaceService\ValueOperation.cs" />
+    <Compile Include="DALs\InterfaceService\YahooFinans.cs" />
+    <Compile Include="Disclaimer.xaml.cs">
+      <DependentUpon>Disclaimer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dynamics_Controls\FilesNameControll.xaml.cs">
+      <DependentUpon>FilesNameControll.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dynamics_Controls\MessageCloud.xaml.cs">
+      <DependentUpon>MessageCloud.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Financial_Plan.xaml.cs">
+      <DependentUpon>Financial_Plan.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HardwareAccesWindow.xaml.cs">
+      <DependentUpon>HardwareAccesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Librar.xaml.cs">
+      <DependentUpon>Librar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AdminTaskModel.cs" />
+    <Compile Include="Model\ClientChatModel.cs" />
+    <Compile Include="Model\ClientReportVM.cs" />
+    <Compile Include="Model\documentViewModel.cs" />
+    <Compile Include="Model\FinancialPlanVM.cs" />
+    <Compile Include="Model\MainVM.cs" />
+    <Compile Include="Model\TasksModel.cs" />
+    <Compile Include="Model\TestHistory.cs" />
+    <Compile Include="Model\VisualModels.cs" />
+    <Compile Include="More_Information.xaml.cs">
+      <DependentUpon>More_Information.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Admin\ClientOperations\TestHistoryKlient.xaml.cs">
+      <DependentUpon>TestHistoryKlient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Admin\ClientOperations\TestRiscProfilRU.xaml.cs">
+      <DependentUpon>TestRiscProfilRU.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\All_Create_Inflow.xaml.cs">
+      <DependentUpon>All_Create_Inflow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\All_Create_Outflow.xaml.cs">
+      <DependentUpon>All_Create_Outflow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\All_Create_Task.xaml.cs">
+      <DependentUpon>All_Create_Task.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ChartInfo.xaml.cs">
+      <DependentUpon>ChartInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ClientDoc2.xaml.cs">
+      <DependentUpon>ClientDoc2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\CurrentTaskc.xaml.cs">
+      <DependentUpon>CurrentTaskc.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Current_PortfelVm.xaml.cs">
+      <DependentUpon>Current_PortfelVm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Fond_Summary.xaml.cs">
+      <DependentUpon>Fond_Summary.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\IndactiveLTV.xaml.cs">
+      <DependentUpon>IndactiveLTV.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\InvestmentDetails_mini.xaml.cs">
+      <DependentUpon>InvestmentDetails_mini.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Investment_Details.xaml.cs">
+      <DependentUpon>Investment_Details.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\More_Info.xaml.cs">
+      <DependentUpon>More_Info.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\RecomendPortfel.xaml.cs">
+      <DependentUpon>RecomendPortfel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Report.xaml.cs">
+      <DependentUpon>Report.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DALs\InterfaceService\RiscDict.cs" />
+    <Compile Include="Pages\RiscLevel.xaml.cs">
+      <DependentUpon>RiscLevel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Summary_ClientDet_Docs.xaml.cs">
+      <DependentUpon>Summary_ClientDet_Docs.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DALs\InterfaceService\TagToImageSourceConverter.cs" />
+    <Compile Include="Pages\TotalPort.xaml.cs">
+      <DependentUpon>TotalPort.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Report.xaml.cs">
+      <DependentUpon>Report.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RiskHH.xaml.cs">
+      <DependentUpon>RiskHH.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RiskTT.xaml.cs">
+      <DependentUpon>RiskTT.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SupportSend.xaml.cs">
+      <DependentUpon>SupportSend.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings1.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Settings_Client.xaml.cs">
+      <DependentUpon>Settings_Client.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ShowWind.xaml.cs">
+      <DependentUpon>ShowWind.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TasksIn.xaml.cs">
+      <DependentUpon>TasksIn.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TasksM.xaml.cs">
+      <DependentUpon>TasksM.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TasksOut.xaml.cs">
+      <DependentUpon>TasksOut.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TestResult.xaml.cs">
+      <DependentUpon>TestResult.xaml</DependentUpon>
+    </Compile>
+    <Page Include="ActiveInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Change_PRI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Chat.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ClientWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Disclaimer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dynamics_Controls\FilesNameControll.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dynamics_Controls\MessageCloud.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Financial_Plan.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HardwareAccesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Librar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DALs\InterfaceService\BOX.cs" />
+    <Compile Include="DALs\InterfaceService\Hash.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="More_Information.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Admin\ClientOperations\TestHistoryKlient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Admin\ClientOperations\TestRiscProfilRU.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\All_Create_Inflow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\All_Create_Outflow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\All_Create_Task.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ChartInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ClientDoc2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\CurrentTaskc.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Current_PortfelVm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Fond_Summary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\IndactiveLTV.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\InvestmentDetails_mini.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Investment_Details.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\More_Info.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\RecomendPortfel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Report.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\RiscLevel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Summary_ClientDet_Docs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\TotalPort.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Report.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RiskHH.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RiskTT.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SupportSend.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Settings_Client.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ShowWind.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TasksIn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TasksM.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TasksOut.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TestResult.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DALs\InterfaceService\Parser.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Custodian_TemporaryKey.pfx" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="Resources\ByteMassive.back" />
+    <None Include="Resources\Futuris Cyrillic.ttf" />
+    <None Include="Settings1.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings1.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\" />
+    <Folder Include="Windows\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\options.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 и x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\castle.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\calendar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\hourglass.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="_2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Castle_logo.JPG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\clip.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\reminder.png" />
+    <Resource Include="Resources\reminder_Delet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\notLoad.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\arrowDown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\arrowUp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tituln.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\activeDown.png" />
+    <Resource Include="Resources\activeUp.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

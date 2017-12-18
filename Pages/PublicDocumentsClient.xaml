@@ -1,0 +1,83 @@
+﻿<Page x:Class="Custodian.Pages.documentsClient"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Custodian.Model"
+      mc:Ignorable="d" 
+      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="documentsClient">
+    <Page.DataContext>
+        <local:documentViewModel/>
+    </Page.DataContext>
+    <Page.Resources>
+        <Style x:Key="TextFont">
+            <Setter Property="Control.FontSize" Value="14" />
+            <Setter Property="Control.FontFamily" Value="Comic Sans MS"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid Background="AliceBlue" Style="{StaticResource TextFont}">
+        <Label Content="Public Library" Width="100" Height="30" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="350,0"/>
+        <Grid Margin="0,30,0,10">
+            <Grid Background="#FFE2A052" VerticalAlignment="Top" MinHeight="750" Height="Auto">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*">
+                    </ColumnDefinition>
+                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition Width="2*"/>
+
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Row="2" Grid.Column="1" Height="Auto" Background="#FFE6C99F" />
+                <Border Grid.Column="3" Background="#FFE6C99F" />
+                <Label Grid.Column="0" Content="Usefulforms " Width="200" Height="30" VerticalAlignment="Top" />
+                <Label Grid.Column="2" Content="Brochures" Width="200" Height="30" VerticalAlignment="Top" Margin="25,2,37,0" />
+                <Label Grid.Column="4" Content="Mydocuments " Height="30" VerticalAlignment="Top" Margin="12,2,40,0" />
+
+
+                <DataGrid x:Name="AppFTPfiles" Margin="0,30,0,0" AutoGenerateColumns="False" ItemsSource="{Binding usefulformsCollections}" Height="Auto" IsReadOnly="True">
+
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding DownloadPDF}" CommandParameter="{Binding ElementName=AppFTPfiles, Path=SelectedItem}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="*" Header="FTP files" Binding="{Binding Name}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <DataGrid x:Name="ManagFTPfiles" Grid.Column="2" Height="Auto" Margin="0,30,0,0"  ItemsSource="{Binding brochuresCollections}" AutoGenerateColumns="False" IsReadOnly="True">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding DownloadPDF}" CommandParameter="{Binding ElementName=ManagFTPfiles, Path=CurrentItem}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="*" Header="FTP files" Binding="{Binding Name}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                
+                
+                <DataGrid Grid.Column="4" x:Name="MyFTPDoc" Margin="0,30,0,0" ItemsSource="{Binding MyDocymentsCollections}" IsReadOnly="True" AutoGenerateColumns="False" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="My Documents" Width="*" Binding="{Binding Name}">
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding DownloadMydoc}" CommandParameter="{Binding ElementName=MyFTPDoc, Path=CurrentItem}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </DataGrid>
+
+            </Grid>
+
+        </Grid>
+    </Grid>
+</Page>

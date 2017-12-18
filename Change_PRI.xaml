@@ -1,0 +1,45 @@
+﻿<Window x:Class="Custodian.Change_PRI"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Custodian"
+        mc:Ignorable="d" WindowStyle="None"
+        Title="Change_PRI" Height="300" Width="400" MinHeight="300" MinWidth="400">
+    <Grid Background="{StaticResource Gray46}" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="72"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="22"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Content="You Risk Profil is : " FontSize="14" 
+               HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource MainFont}" Height="28" />
+
+        <Label Grid.Row="1" Name="PRI" Content="-1"  FontFamily="{StaticResource MainFont}" Foreground="#FFC087" HorizontalAlignment="Center"
+               VerticalAlignment="Center" FontSize="33"/>
+
+        <ScrollViewer Grid.Row="2" Margin="5">
+        <TextBlock FontFamily="{StaticResource MainFont}" Name="LargeText" Foreground="White" TextWrapping="Wrap"  Margin="10"/>
+        </ScrollViewer>
+
+        <Grid Grid.Row="3">
+        <CheckBox FontFamily="{StaticResource MainFont}" VerticalAlignment="Center" Height="16"
+                  Template="{StaticResource TemplateCheckBox}" HorizontalAlignment="Left" Name="CheckAgree"
+                  Style="{StaticResource StyleInput}">I agree</CheckBox>
+            <Button Content="Read More About PRI  " Style="{StaticResource StyleButton}" Template="{StaticResource ButtonControlTemplate}" 
+                    HorizontalAlignment="Right" FontFamily="{StaticResource MainFont}" Click="GetMoreInfo_Click"
+                   VerticalAlignment="Center" Height="23" Margin="0" Cursor="Hand"/>
+        </Grid>
+
+        <Grid Grid.Row="4" Margin="10">
+                <Button Content="NO" Width="100" HorizontalAlignment="Left" Style="{StaticResource StyleButton}"
+                        Template="{StaticResource ButtonControlTemplate}" Click="Close_Click"/>
+            <Button Content="Ok" Width="100" HorizontalAlignment="Right"  Style="{StaticResource StyleButton}"
+                    Template="{StaticResource ButtonControlTemplate}" IsEnabled="{Binding ElementName=CheckAgree, Path=IsChecked}"
+                    Click="Agree_Click" />
+        </Grid>
+    </Grid>
+</Window>

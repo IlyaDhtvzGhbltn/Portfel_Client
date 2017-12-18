@@ -1,0 +1,1683 @@
+﻿<UserControl
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Custodian.Model"
+      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+      xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit" x:Class="Custodian.Pages.Report"
+      xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+      xmlns:chart="http://schemas.syncfusion.com/wpf"
+      mc:Ignorable="d" 
+      xmlns:pages="clr-namespace:Custodian.Pages"
+      xmlns:convert="clr-namespace:Custodian.DALs.InterfaceService"
+      d:DesignHeight="900" d:DesignWidth="1600">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="B2V"/>
+        <convert:TextBoxToBrushConverter x:Key="txtConvert"/>
+    </UserControl.Resources>
+
+    <Grid>
+
+        <Grid Panel.ZIndex="1">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="30">
+                
+                <Border BorderBrush="AntiqueWhite" BorderThickness="2" CornerRadius="40" Height="55" Width="55" Margin="10" Background="{StaticResource Gray46}">
+                <RepeatButton Background="{StaticResource Gray26}" BorderThickness="2"
+                    BorderBrush="{StaticResource Gray86}" Cursor="Hand" 
+                    Height="55" Width="55" Click="RepeatButton_Click_1" Style="{StaticResource RepeatButtonStyle}">
+                    <Image Source="pack://application:,,,/Resources/arrowUp.png" Margin="6,6,9,9" Height="40" Width="40"/>
+                </RepeatButton>
+                </Border>
+
+                <Border BorderBrush="AntiqueWhite" BorderThickness="2" CornerRadius="40" Height="55" Width="55" Margin="10" Background="{StaticResource Gray46}">
+                    <RepeatButton Background="{StaticResource Gray26}" BorderThickness="2"
+                    BorderBrush="{StaticResource Gray86}"  Cursor="Hand" Style="{StaticResource RepeatButtonStyle}"
+                    Height="55" Width="55" Click="RepeatButton_Click"   >
+                    <Image Source="pack://application:,,,/Resources/arrowDown.png" Margin="3,3,7,7"/>
+                </RepeatButton>
+                </Border>
+
+            </StackPanel>
+        </Grid>
+        <Border Style="{StaticResource StyleBackground}" Padding="10">
+
+            <ScrollViewer VerticalScrollBarVisibility="Visible" x:Name="WindowScroll">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="260" MinHeight="260"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="270"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="10" MaxHeight="10" MinHeight="10"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="10" MaxHeight="10"/>
+                        <RowDefinition Height="200" />
+                        <RowDefinition Height="10" MaxHeight="10"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="10" />
+                    </Grid.RowDefinitions>
+
+                    <GridSplitter Grid.Row="1" 
+                      Height="10" Style="{StaticResource StyleSplitter}" 
+                      HorizontalAlignment="Stretch" />
+                    <GridSplitter Grid.Row="3" Height="10" Style="{StaticResource StyleSplitter}" 
+                           HorizontalAlignment="Stretch"    />
+                    <GridSplitter Grid.Row="5" 
+                      Height="10" Style="{StaticResource StyleSplitter}" 
+                      HorizontalAlignment="Stretch" />
+                    <GridSplitter Grid.Row="7" 
+                          Height="10" Style="{StaticResource StyleSplitter}"
+                          HorizontalAlignment="Stretch"/>
+                    <GridSplitter Grid.Row="9" 
+                              Height="10" Style="{StaticResource StyleSplitter}" 
+                              HorizontalAlignment="Stretch"/>
+                    <GridSplitter Grid.Row="11" 
+                              Height="10" Style="{StaticResource StyleSplitter}" 
+                              HorizontalAlignment="Stretch"/>
+                    <GridSplitter Grid.Row="13" 
+                              Height="10" Style="{StaticResource StyleSplitter}" 
+                              HorizontalAlignment="Stretch"/>
+
+
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="300" MinWidth="100"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="250"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="310"/>
+                        </Grid.ColumnDefinitions>
+
+                        <GridSplitter Grid.Column="1" Width="10" VerticalAlignment="Stretch" HorizontalAlignment="Left"
+                              Style="{StaticResource StyleSplitter}" />
+                        <GridSplitter Grid.Column="3" Width="10" VerticalAlignment="Stretch" HorizontalAlignment="Left"
+                              Style="{StaticResource StyleSplitter}" />
+                        <Border Grid.Column="0" Grid.Row="0" Style="{StaticResource StyleMainBorder}" HorizontalAlignment="Stretch" >
+                            <!--  -->
+
+                            <Border Style="{StaticResource StyleInnerBorder}" >
+                                <Grid  Background="#454545">
+                                    <Label Content="SUMMARY" FontSize="12" Margin="0,0" Style="{StaticResource StyleComment}"
+                                        Width="150" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                    <Button Content=" Print PDF Report " Background="{StaticResource Gray26}" HorizontalAlignment="Right" 
+                                 Width="103" Style="{StaticResource StyleButton}" Template="{StaticResource ButtonControlTemplate}" 
+                                        Click="Button_Click" VerticalAlignment="Top"/>
+
+                                    <Grid x:Name="OrderDetails" Margin="0,26,0,0" Background="#363636">
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <Label Content="Contract Number" Style="{StaticResource StyleComment}" Grid.Row="0" Grid.Column="0" FontSize="14"/>
+                                        <Label Content="{Binding Order}" Style="{StaticResource StyleLabel}" Grid.Row="0" Grid.Column="3" FontSize="14"/>
+
+                                        <Label Content="Currency" Style="{StaticResource StyleComment}" Grid.Row="1" Grid.Column="0" FontSize="14"/>
+                                        <Label Content="USD"  Style="{StaticResource StyleLabel}" Grid.Row="1" Grid.Column="1" FontSize="14"/>
+
+                                        <Label Content="Status" Style="{StaticResource StyleComment}" Grid.Row="2" Grid.Column="0" FontSize="14"/>
+                                        <Label Content="{Binding Status}" Style="{StaticResource StyleLabel}" Grid.Row="2" Grid.Column="1" FontSize="14"/>
+
+                                        <Label Content="Subscription Date" Style="{StaticResource StyleComment}" Grid.Row="3" Grid.ColumnSpan="1" FontSize="14" />
+                                        <Label Content="{Binding DateReg}"  Style="{StaticResource StyleLabel}" Grid.Row="3" Grid.Column="3" FontSize="14"/>
+
+                                        <Label Content="Consultant" Style="{StaticResource StyleComment}" Grid.Row="4" Grid.ColumnSpan="2" FontSize="14"/>
+                                        <Label Content="{Binding Adviser}"  Style="{StaticResource StyleLabel}" Grid.Row="4" Grid.Column="1" FontSize="14"/>
+                                        <!-- <Label Content="{Binding Company}"  Style="{StaticResource StyleLabel}" Grid.Row="5" Grid.Column="1"/>-->
+                                    </Grid>
+                                </Grid>
+                            </Border>
+                        </Border>
+
+                        <Border Grid.Column="2" Style="{StaticResource StyleMainBorder}" HorizontalAlignment="Stretch">
+
+                            <Grid Background="{StaticResource Gray26}">
+                                <Grid x:Name="Details" HorizontalAlignment="Stretch" Margin="1,1,1,1"
+                            Style="{StaticResource StyleLabel}"  Background="#454545">
+
+                                    <Label Content="CLIENT DETAILS" FontSize="12" HorizontalAlignment="Left" Style="{StaticResource StyleComment}"/>
+                                    <Grid Background="#363636" Margin="0,27,0,0">
+                                        <Label Content="Name" Margin="0,0,150,0" Style="{StaticResource StyleComment}" FontSize="14"/>
+                                        <Label Content="Date of Birth" Margin="0,25,145,0" Style="{StaticResource StyleComment}" FontSize="14"/>
+                                        <Label Content="{Binding FIO}" Margin="90,0,0,0"  Style="{StaticResource StyleLabel}"  FontSize="14"/>
+                                        <Label Content="{Binding DateofBirth}" Margin="90,25,0,0" HorizontalAlignment="Left" FontSize="14" Width="143" Style="{StaticResource StyleLabel}"/>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Border>
+
+                        <Border Grid.Column="4" Style="{StaticResource StyleMainBorder}" >
+                            <DockPanel x:Name="FondSumm" >
+                                <Label Content="CELL SUMMARY" Style="{StaticResource StyleTableHeader}" DockPanel.Dock="Top" />
+                                <Grid >
+                                    <DataGrid Style="{StaticResource StyleTable}" ItemsSource="{Binding Collection}" 
+                  AutoGenerateColumns="False" RowHeight="24" GridLinesVisibility="None" FontSize="14" >
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="Type" Width="0.4*" IsReadOnly="True"  Binding="{Binding Type}"/>
+                                            <DataGridTextColumn Header="Balance" Width="100" IsReadOnly="True"  Binding="{Binding Balance}" />
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </Grid>
+                            </DockPanel>
+                        </Border>
+
+                    </Grid>
+
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <GridSplitter Grid.Column="1" Style="{StaticResource StyleSplitter}"/>
+                        <Grid Grid.Column="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid Background="{StaticResource Gray46}">
+                                <Label Content="RECOMMENDED PORTFOLIO" Style="{StaticResource StyleHeaderLabel}" FontFamily="{StaticResource MainFont}" FontSize="12" />
+                                <!-- <Button Content="Risk Profile" Style="{StaticResource StyleOkButton}"  Template="{StaticResource ButtonControlTemplate}"  Margin="10,0" Padding="5,0" HorizontalAlignment="Right" /> -->
+                            </Grid>
+                            <Border Grid.Row="1" BorderBrush="{StaticResource Gray36}" BorderThickness="1">
+                                <Grid x:Name="RecomendPort">
+                                    <pages:RecomendPortfel/>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                        <Grid Grid.Column="0">
+                            <Border Grid.Column="4" BorderBrush="{StaticResource Gray36}" BorderThickness="1">
+                                <Grid MinWidth="250" >
+                                    <Grid.Resources>
+                                        <Thickness x:Key="ChartMargin">45 10 0 10</Thickness>
+                                        <Thickness x:Key="ChartMargin50">20 10 50 10</Thickness>
+                                    </Grid.Resources>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Label Content="CURRENT PORTFOLIO" Style="{StaticResource StyleHeaderLabel}" Grid.Row="0"  FontSize="12" FontFamily="{StaticResource MainFont}" />
+
+                                    <Grid Background="{StaticResource Gray36}"  Grid.Row="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="378*"/>
+                                            <ColumnDefinition Width="137*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="0" Margin="20" x:Name="CurrentPortfel">
+                                            <syncfusion:SfChart x:Name="cInner" AreaBorderThickness="0">
+                                                <syncfusion:PieSeries x:Name="sInner" EnableSmartLabels="True" Style="{StaticResource StyleDSeries}" 
+                                      SegmentSelectionBrush="White" ShowTooltip="True" 
+                                      XBindingPath="Name" YBindingPath="Value" 
+                                      ItemsSource="{Binding CurrentISINs}" >
+                                                    <syncfusion:PieSeries.ColorModel>
+                                                        <syncfusion:ChartColorModel>
+                                                            <syncfusion:ChartColorModel.CustomBrushes>
+                                                                <SolidColorBrush Color="Red"/>
+                                                                <SolidColorBrush Color="#FFC087"/>
+                                                                <SolidColorBrush Color="#F98E3C"/>
+                                                                <SolidColorBrush Color="#FFDEFF87"/>
+                                                                <SolidColorBrush Color="#FF87FFB8"/>
+                                                                <SolidColorBrush Color="#FF87C3FF"/>
+                                                                <SolidColorBrush Color="#FF5949FF"/>
+                                                                <SolidColorBrush Color="#FFFF87E9"/>
+                                                                <SolidColorBrush Color="#FFBB275D"/>
+                                                                <SolidColorBrush Color="#FF5DFF00"/>
+                                                            </syncfusion:ChartColorModel.CustomBrushes>
+                                                        </syncfusion:ChartColorModel>
+                                                    </syncfusion:PieSeries.ColorModel>
+                                                </syncfusion:PieSeries>
+
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseMove">
+                                                        <i:InvokeCommandAction Command="{Binding Path=ClickMouseP}" CommandParameter="{Binding ElementName=sInner, Path=SelectedIndex}"/>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                                <syncfusion:SfChart.Behaviors>
+                                                    <syncfusion:ChartSelectionBehavior SelectionCursor="Hand" SelectionMode="MouseMove"/>
+                                                </syncfusion:SfChart.Behaviors>
+                                            </syncfusion:SfChart>
+
+                                            <syncfusion:SfChart x:Name="cMidder" AreaBorderThickness="0" Background="{x:Null}" IsHitTestVisible="False" >
+                                                <syncfusion:DoughnutSeries x:Name="doughnutSeries2" Background="{x:Null}"
+                                                   DoughnutCoefficient="0.5" DoughnutSize="0.8" ClipToBounds="False" 
+                                                   EnableSmartLabels="True" LabelPosition="Outside"  ShowTooltip="True" 
+                                                   XBindingPath="Name" SegmentSelectionBrush="White"
+                                                   YBindingPath="Value" Style="{StaticResource StyleDSeries}" 
+                                                   ItemsSource="{Binding DiagrammValueCollection}">
+                                                    <syncfusion:DoughnutSeries.ColorModel>
+                                                        <syncfusion:ChartColorModel>
+                                                            <syncfusion:ChartColorModel.CustomBrushes>
+                                                                <SolidColorBrush Color="Red"/>
+                                                                <SolidColorBrush Color="#FFC087"/>
+                                                                <SolidColorBrush Color="#F98E3C"/>
+                                                                <SolidColorBrush Color="#FFDEFF87"/>
+                                                                <SolidColorBrush Color="#FF87FFB8"/>
+                                                                <SolidColorBrush Color="#FF87C3FF"/>
+                                                                <SolidColorBrush Color="#FF5949FF"/>
+                                                                <SolidColorBrush Color="#FFFF87E9"/>
+                                                                <SolidColorBrush Color="#FFBB275D"/>
+                                                                <SolidColorBrush Color="#FF5DFF00"/>
+                                                            </syncfusion:ChartColorModel.CustomBrushes>
+                                                        </syncfusion:ChartColorModel>
+                                                    </syncfusion:DoughnutSeries.ColorModel>
+                                                    <syncfusion:DoughnutSeries.AdornmentsInfo>
+                                                        <syncfusion:ChartAdornmentInfo x:Name="vvv" LabelTemplate="{StaticResource LabelTemplate}"
+                                                               ShowLabel="True" ShowConnectorLine="True" ConnectorHeight="30" 
+                                                               AdornmentsPosition="Bottom" HorizontalAlignment="Center" 
+                                                               VerticalAlignment="Center" ConnectorLineStyle="{DynamicResource StyleLine}" 
+                                                               SegmentLabelContent="LabelContentPath" LabelPosition="Outer" UseSeriesPalette="True" />
+                                                    </syncfusion:DoughnutSeries.AdornmentsInfo>
+                                                </syncfusion:DoughnutSeries>
+                                                <syncfusion:SfChart.Behaviors>
+                                                    <syncfusion:ChartSelectionBehavior SelectionCursor="Hand"  SelectionMode="MouseMove"/>
+                                                </syncfusion:SfChart.Behaviors>
+                                            </syncfusion:SfChart>
+
+                                            <syncfusion:SfChart x:Name="cOuter" AreaBorderThickness="0"
+                            Background="{x:Null}" IsHitTestVisible="False" >
+                                                <syncfusion:DoughnutSeries x:Name="doughnutSeries3" Style="{StaticResource StyleDSeries}"
+                                                   SegmentSelectionBrush="White" ShowTooltip="True"
+                                                   Label="Outer" DoughnutCoefficient="0.4" DoughnutSize="1" 
+                                                   LabelPosition="Inside" XBindingPath="Name" YBindingPath="Value" 
+                                                   ItemsSource="{Binding RiskActivesCollection}">
+                                                    <syncfusion:DoughnutSeries.ColorModel>
+                                                        <syncfusion:ChartColorModel>
+                                                            <syncfusion:ChartColorModel.CustomBrushes>
+                                                                <SolidColorBrush Color="#FFC087"/>
+                                                                <SolidColorBrush Color="Red"/>
+                                                                <SolidColorBrush Color="#F98E3C"/>
+                                                                <SolidColorBrush Color="#FFDEFF87"/>
+                                                                <SolidColorBrush Color="#FF87FFB8"/>
+                                                                <SolidColorBrush Color="#FF87C3FF"/>
+                                                                <SolidColorBrush Color="#FF5949FF"/>
+                                                                <SolidColorBrush Color="#FFFF87E9"/>
+                                                                <SolidColorBrush Color="#FFBB275D"/>
+                                                                <SolidColorBrush Color="#FF5DFF00"/>
+                                                            </syncfusion:ChartColorModel.CustomBrushes>
+                                                        </syncfusion:ChartColorModel>
+                                                    </syncfusion:DoughnutSeries.ColorModel>
+
+                                                    <syncfusion:DoughnutSeries.AdornmentsInfo>
+                                                        <syncfusion:ChartAdornmentInfo SegmentLabelContent="LabelContentPath" ShowLabel="True" 
+                                                               LabelTemplate= "{StaticResource LabelTemplate2}"   
+                                                               HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                                               AdornmentsPosition="Bottom" ConnectorHeight="50" LabelPosition="Auto"/>
+                                                    </syncfusion:DoughnutSeries.AdornmentsInfo>
+
+                                                </syncfusion:DoughnutSeries>
+                                                <syncfusion:SfChart.Behaviors>
+                                                    <syncfusion:ChartSelectionBehavior SelectionCursor="Hand" SelectionMode="MouseMove"  />
+                                                </syncfusion:SfChart.Behaviors>
+                                            </syncfusion:SfChart>
+                                        </Grid>
+
+                                        <Grid Grid.Column="1" x:Name="Legeng">
+                                            <ScrollViewer  Margin="10">
+                                                <ItemsControl Name="iLegend" >
+                                                    <ItemsControl.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <Rectangle Fill="{Binding Value}" Width="8" Height="8"></Rectangle>
+                                                                <TextBlock Text="{Binding Key.Name}" Margin="5,0,0,0" Foreground="{StaticResource Gray86}"></TextBlock>
+                                                            </StackPanel>
+                                                        </DataTemplate>
+                                                    </ItemsControl.ItemTemplate>
+                                                </ItemsControl>
+                                            </ScrollViewer>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+
+                        </Grid>
+
+                    </Grid>
+
+                    <Grid Grid.Row="4" Name="Moreinformation">
+                        <pages:More_Info/>
+                    </Grid>
+
+                    <Grid Grid.Row="6">
+                        <Border Style="{StaticResource StyleMainBorder}" Grid.Column="2">
+                            <DockPanel Name="InvestDetails" >
+                                <Label Content="INVESTMENT DETAILS" Style="{StaticResource StyleTableHeader}" DockPanel.Dock="Top" />
+                                <Border BorderThickness="1,1,1,0" BorderBrush="#262626" Padding="0,2,0,0">
+                                    <pages:Investment_Details Height="auto"/>
+                                </Border>
+                            </DockPanel>
+                        </Border>
+                    </Grid>
+
+                    <Grid Grid.Row="8" x:Name="Chart">
+                        <Border Style="{StaticResource StyleMainBorder}">
+                            <Border Style="{StaticResource  StyleBackground}">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="45"/>
+                                        <RowDefinition Height="305"/>
+                                        <RowDefinition Height="auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid Grid.Row="1" >
+                                        <Grid x:Name="actives" Visibility="{Binding ElementName=ActivesRBTN, Path=IsChecked, Converter={StaticResource B2V}}">
+                                             
+                                            <chart:SfChart Palette="Custom" Grid.Row="1" Margin="0,5,10,0" 
+                                   AreaBorderBrush="{StaticResource Gray46}" HorizontalAlignment="Center" 
+                                   Foreground="#FFD43030" HorizontalContentAlignment="Stretch">
+                                                <chart:SfChart.Resources>
+                                                    
+                                                    <DataTemplate x:Key="InvestBondsTooltipTemplate">
+                                                        <Border Height="40" Background="White" Width="120" 
+                                                            CornerRadius="4" BorderThickness="1" BorderBrush="Black">
+                                                            <Grid Margin="5,0">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="1*"/>
+                                                                    <RowDefinition Height="1*"/>
+                                                                </Grid.RowDefinitions>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="20"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBlock Text="Investment-Grade Bonds" Grid.Row="0" Foreground="Black" FontFamily="{StaticResource MainFont}"/>
+                                                                <TextBlock Text="{Binding YData}" Grid.Row="1"
+                                                                           FontFamily="{StaticResource MainFont}">
+                                                                    <TextBlock.Style>
+                                                                        <Style TargetType="TextBlock">
+                                                                            <Setter Property="Foreground" 
+                                                                                    Value="{Binding Converter={StaticResource txtConvert}}"/>
+                                                                        </Style>
+                                                                    </TextBlock.Style>
+                                                                </TextBlock>
+                                                                <Image Grid.Row="1" Grid.Column="1" Tag="{Binding ElementName=TotPortxt, Path=Text}"
+                                       Height="20" Width="20">
+                                                                    <Image.Resources>
+                                                                        <convert:TagToImageSourceConverter x:Key="imgConv"/>
+                                                                    </Image.Resources>
+                                                                    <Image.Style>
+                                                                        <Style TargetType="Image">
+                                                                            <Setter Property="Source" Value="{Binding Converter={StaticResource imgConv}}"/>
+                                                                        </Style>
+                                                                    </Image.Style>
+                                                                </Image>
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
+
+                                                    <DataTemplate x:Key="Speculative-GradeBondsTooltipTemplate">
+                                                        <Border Height="40" Background="White" Width="120" 
+                                                            CornerRadius="4" BorderThickness="1" BorderBrush="Black">
+                                                            <Grid Margin="5,0">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="1*"/>
+                                                                    <RowDefinition Height="1*"/>
+                                                                </Grid.RowDefinitions>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="20"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBlock Text="Speculative-Grade Bonds" Grid.Row="0" Grid.Column="0"
+                                                                           Foreground="Black" FontFamily="{StaticResource MainFont}"/>
+                                                                <TextBlock Text="{Binding YData}" Grid.Row="1" Grid.Column="0"
+                                                                           FontFamily="{StaticResource MainFont}">
+                                                                    <TextBlock.Style>
+                                                                        <Style TargetType="TextBlock">
+                                                                            <Setter Property="Foreground" 
+                                                                                    Value="{Binding Converter={StaticResource txtConvert}}"/>
+                                                                        </Style>
+                                                                    </TextBlock.Style>
+                                                                </TextBlock>
+                                                                <Image Grid.Row="1" Grid.Column="1" Tag="{Binding ElementName=TotPortxt, Path=Text}"
+                                                                    Height="20" Width="20">
+                                                                    <Image.Resources>
+                                                                        <convert:TagToImageSourceConverter x:Key="imgConv"/>
+                                                                    </Image.Resources>
+                                                                    <Image.Style>
+                                                                        <Style TargetType="Image">
+                                                                            <Setter Property="Source" Value="{Binding Converter={StaticResource imgConv}}"/>
+                                                                        </Style>
+                                                                    </Image.Style>
+                                                                </Image>
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
+
+                                                    <DataTemplate x:Key="CreditLinkedNotesTooltipTemplate">
+                                                        <Border Height="40" Background="White" Width="120" 
+                                                            CornerRadius="4" BorderThickness="1" BorderBrush="Black">
+                                                            <Grid Margin="5,0">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="1*"/>
+                                                                    <RowDefinition Height="1*"/>
+                                                                </Grid.RowDefinitions>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="20"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBlock Text="Credit Linked Notes" Grid.Row="0" Grid.Column="0"
+                                                                           Foreground="Black" FontFamily="{StaticResource MainFont}"/>
+                                                                <TextBlock Text="{Binding YData}" Grid.Row="1" Grid.Column="0"
+                                                                           FontFamily="{StaticResource MainFont}">
+                                                                    <TextBlock.Style>
+                                                                        <Style TargetType="TextBlock">
+                                                                            <Setter Property="Foreground" Value="{Binding Converter={StaticResource txtConvert}}"/>
+                                                                        </Style>
+                                                                    </TextBlock.Style>
+                                                                </TextBlock>
+                                                                <Image Grid.Row="1" Grid.Column="1" Tag="{Binding ElementName=TotPortxt, Path=Text}"
+                                                                Height="20" Width="20">
+                                                                    <Image.Resources>
+                                                                        <convert:TagToImageSourceConverter x:Key="imgConv"/>
+                                                                    </Image.Resources>
+                                                                    <Image.Style>
+                                                                        <Style TargetType="Image">
+                                                                            <Setter Property="Source" Value="{Binding Converter={StaticResource imgConv}}"/>
+                                                                        </Style>
+                                                                    </Image.Style>
+                                                                </Image>
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
+
+                                                    <DataTemplate x:Key="SNGCTooltipTemplate">
+                                                        <Border Height="40" Background="White" Width="170" 
+                                                            CornerRadius="4" BorderThickness="1" BorderBrush="Black">
+                                                            <Grid Margin="5,0">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="1*"/>
+                                                                    <RowDefinition Height="1*"/>
+                                                                </Grid.RowDefinitions>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="20"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBlock Text="Structured Notes with guaranteed coupon" Grid.Column="0"
+                                                                           Grid.Row="0" Foreground="Black" FontFamily="{StaticResource MainFont}"/>
+                                                                <TextBlock Text="{Binding YData}" Grid.Row="1" Grid.Column="0"
+                                                                           FontFamily="{StaticResource MainFont}">
+                                                                    <TextBlock.Style>
+                                                                        <Style TargetType="TextBlock">
+                                                                            <Setter Property="Foreground" Value="{Binding Converter={StaticResource txtConvert}}"/>
+                                                                        </Style>
+                                                                    </TextBlock.Style>
+                                                                </TextBlock>
+                                                                <Image Grid.Row="1" Grid.Column="1" Tag="{Binding ElementName=TotPortxt, Path=Text}"
+                                                                Height="20" Width="20">
+                                                                    <Image.Resources>
+                                                                        <convert:TagToImageSourceConverter x:Key="imgConv"/>
+                                                                    </Image.Resources>
+                                                                    <Image.Style>
+                                                                        <Style TargetType="Image">
+                                                                            <Setter Property="Source" Value="{Binding Converter={StaticResource imgConv}}"/>
+                                                                        </Style>
+                                                                    </Image.Style>
+                                                                </Image>
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
+
+                                                    <DataTemplate x:Key="SNCCTooltipTemplate">
+                                                        <Border Height="40" Background="White" Width="170" 
+                                                            CornerRadius="4" BorderThickness="1" BorderBrush="Black">
+                                                            <Grid Margin="5,0">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="1*"/>
+                                                                    <RowDefinition Height="1*"/>
+                                                                </Grid.RowDefinitions>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="20"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBlock Text="Structured Notes with conditional coupon" Grid.Column="0"
+                                                                           Grid.Row="0" Foreground="Black" FontFamily="{StaticResource MainFont}"/>
+                                                                <TextBlock Text="{Binding YData}" Grid.Row="1" Grid.Column="0"
+                                                                            FontFamily="{StaticResource MainFont}">
+                                                                    <TextBlock.Style>
+                                                                        <Style TargetType="TextBlock">
+                                                                            <Setter Property="Foreground" Value="{Binding Converter={StaticResource txtConvert}}"/>
+                                                                        </Style>
+                                                                    </TextBlock.Style>
+                                                                </TextBlock>
+                                                                <Image Grid.Row="1" Grid.Column="1" Tag="{Binding ElementName=TotPortxt, Path=Text}"
+                                                                Height="20" Width="20">
+                                                                    <Image.Resources>
+                                                                        <convert:TagToImageSourceConverter x:Key="imgConv"/>
+                                                                    </Image.Resources>
+                                                                    <Image.Style>
+                                                                        <Style TargetType="Image">
+                                                                            <Setter Property="Source" Value="{Binding Converter={StaticResource imgConv}}"/>
+                                                                        </Style>
+                                                                    </Image.Style>
+                                                                </Image>
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
+
+                                                    <DataTemplate x:Key="SNRSTooltipTemplate">
+                                                        <Border Height="40" Background="White" Width="170" 
+                                                            CornerRadius="4" BorderThickness="1" BorderBrush="Black">
+                                                            <Grid Margin="5,0">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="1*"/>
+                                                                    <RowDefinition Height="1*"/>
+                                                                </Grid.RowDefinitions>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="20"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBlock Text="Structured Notes with recovery structure" 
+                                                                           Grid.Row="0" Foreground="Black" Grid.Column="0"
+                                                                           FontFamily="{StaticResource MainFont}"/>
+                                                                <TextBlock Text="{Binding YData}" Grid.Row="1" Grid.Column="0"
+                                                                           FontFamily="{StaticResource MainFont}">
+                                                                    <TextBlock.Style>
+                                                                        <Style TargetType="TextBlock">
+                                                                            <Setter Property="Foreground" Value="{Binding Converter={StaticResource txtConvert}}"/>
+                                                                        </Style>
+                                                                    </TextBlock.Style>
+                                                                </TextBlock>
+                                                                <Image Grid.Row="1" Grid.Column="1" Tag="{Binding ElementName=TotPortxt, Path=Text}"
+                                                                Height="20" Width="20">
+                                                                    <Image.Resources>
+                                                                        <convert:TagToImageSourceConverter x:Key="imgConv"/>
+                                                                    </Image.Resources>
+                                                                    <Image.Style>
+                                                                        <Style TargetType="Image">
+                                                                            <Setter Property="Source" Value="{Binding Converter={StaticResource imgConv}}"/>
+                                                                        </Style>
+                                                                    </Image.Style>
+                                                                </Image>
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
+
+                                                    <DataTemplate x:Key="High-CapEquitiesTooltipTemplate">
+                                                        <Border Height="40" Background="White" Width="120" 
+                                                            CornerRadius="4" BorderThickness="1" BorderBrush="Black">
+                                                            <Grid Margin="5,0">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="1*"/>
+                                                                    <RowDefinition Height="1*"/>
+                                                                </Grid.RowDefinitions>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="20"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBlock Text="High-Cap Equities" Grid.Row="0" Grid.Column="0"
+                                                                           Foreground="Black" FontFamily="{StaticResource MainFont}"/>
+                                                                <TextBlock Text="{Binding YData}" Grid.Row="1" Grid.Column="0"
+                                                                            FontFamily="{StaticResource MainFont}">
+                                                                    <TextBlock.Style>
+                                                                        <Style TargetType="TextBlock">
+                                                                            <Setter Property="Foreground"
+                                                                                    Value="{Binding Converter={StaticResource txtConvert}}"/>
+                                                                        </Style>
+                                                                    </TextBlock.Style>
+                                                                </TextBlock>
+                                                                <Image Grid.Row="1" Grid.Column="1" Tag="{Binding ElementName=TotPortxt, Path=Text}"
+                                                                Height="20" Width="20">
+                                                                    <Image.Resources>
+                                                                        <convert:TagToImageSourceConverter x:Key="imgConv"/>
+                                                                    </Image.Resources>
+                                                                    <Image.Style>
+                                                                        <Style TargetType="Image">
+                                                                            <Setter Property="Source" Value="{Binding Converter={StaticResource imgConv}}"/>
+                                                                        </Style>
+                                                                    </Image.Style>
+                                                                </Image>
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
+
+                                                    <DataTemplate x:Key="EmergingMarketsTooltipTemplate">
+                                                        <Border Height="40" Background="White" Width="120" 
+                                                            CornerRadius="4" BorderThickness="1" BorderBrush="Black">
+                                                            <Grid Margin="5,0">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="1*"/>
+                                                                    <RowDefinition Height="1*"/>
+                                                                </Grid.RowDefinitions>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="20"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBlock Text="Emerging Markets" Grid.Row="0"  Grid.Column="0"
+                                                                           Foreground="Black" FontFamily="{StaticResource MainFont}"/>
+                                                                <TextBlock Text="{Binding YData}" Grid.Row="1" Grid.Column="0"
+                                                                            FontFamily="{StaticResource MainFont}">
+                                                                    <TextBlock.Style>
+                                                                        <Style TargetType="TextBlock">
+                                                                            <Setter Property="Foreground" Value="{Binding Converter={StaticResource txtConvert}}"/>
+                                                                        </Style>
+                                                                    </TextBlock.Style>
+                                                                </TextBlock>
+                                                                <Image Grid.Row="1" Grid.Column="1" Tag="{Binding ElementName=TotPortxt, Path=Text}"
+                                                                Height="20" Width="20">
+                                                                    <Image.Resources>
+                                                                        <convert:TagToImageSourceConverter x:Key="imgConv"/>
+                                                                    </Image.Resources>
+                                                                    <Image.Style>
+                                                                        <Style TargetType="Image">
+                                                                            <Setter Property="Source" Value="{Binding Converter={StaticResource imgConv}}"/>
+                                                                        </Style>
+                                                                    </Image.Style>
+                                                                </Image>
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
+
+                                                    <DataTemplate x:Key="Mid-CapEquitiesTooltipTemplate">
+                                                        <Border Height="40" Background="White" Width="120" 
+                                                            CornerRadius="4" BorderThickness="1" BorderBrush="Black">
+                                                            <Grid Margin="5,0">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="1*"/>
+                                                                    <RowDefinition Height="1*"/>
+                                                                </Grid.RowDefinitions>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="20"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBlock Text="Mid-Cap Equities" Grid.Row="0" Grid.Column="0"
+                                                                           Foreground="Black" FontFamily="{StaticResource MainFont}"/>
+                                                                <TextBlock Text="{Binding YData}" Grid.Row="1" Grid.Column="0"
+                                                                           FontFamily="{StaticResource MainFont}">
+                                                                    <TextBlock.Style>
+                                                                        <Style TargetType="TextBlock">
+                                                                            <Setter Property="Foreground" Value="{Binding Converter={StaticResource txtConvert}}"/>
+                                                                        </Style>
+                                                                    </TextBlock.Style>
+                                                                </TextBlock>
+                                                                <Image Grid.Row="1" Grid.Column="1" Tag="{Binding ElementName=TotPortxt, Path=Text}"
+                                                                Height="20" Width="20">
+                                                                    <Image.Resources>
+                                                                        <convert:TagToImageSourceConverter x:Key="imgConv"/>
+                                                                    </Image.Resources>
+                                                                    <Image.Style>
+                                                                        <Style TargetType="Image">
+                                                                            <Setter Property="Source" Value="{Binding Converter={StaticResource imgConv}}"/>
+                                                                        </Style>
+                                                                    </Image.Style>
+                                                                </Image>
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
+
+                                                    <DataTemplate x:Key="Small-CapEquitiesTooltipTemplate">
+                                                        <Border Height="40" Background="White" Width="120" 
+                                                            CornerRadius="4" BorderThickness="1" BorderBrush="Black">
+                                                            <Grid Margin="5,0">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="1*"/>
+                                                                    <RowDefinition Height="1*"/>
+                                                                </Grid.RowDefinitions>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="20"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBlock Text="Small-Cap Equities" Grid.Row="0" Grid.Column="0"
+                                                                           Foreground="Black" FontFamily="{StaticResource MainFont}"/>
+                                                                <TextBlock Text="{Binding YData}" Grid.Row="1" Grid.Column="0"
+                                                                            FontFamily="{StaticResource MainFont}">
+                                                                    <TextBlock.Style>
+                                                                        <Style TargetType="TextBlock">
+                                                                            <Setter Property="Foreground" Value="{Binding Converter={StaticResource txtConvert}}"/>
+                                                                        </Style>
+                                                                    </TextBlock.Style>
+                                                                </TextBlock>
+                                                                <Image Grid.Row="1" Grid.Column="1" Tag="{Binding ElementName=TotPortxt, Path=Text}"
+                                                                Height="20" Width="20">
+                                                                    <Image.Resources>
+                                                                        <convert:TagToImageSourceConverter x:Key="imgConv"/>
+                                                                    </Image.Resources>
+                                                                    <Image.Style>
+                                                                        <Style TargetType="Image">
+                                                                            <Setter Property="Source" Value="{Binding Converter={StaticResource imgConv}}"/>
+                                                                        </Style>
+                                                                    </Image.Style>
+                                                                </Image>
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
+
+                                                    <DataTemplate x:Key="OptionsTooltipTemplate">
+                                                        <Border Height="40" Background="White" Width="120" 
+                                                            CornerRadius="4" BorderThickness="1" BorderBrush="Black">
+                                                            <Grid Margin="5,0">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="1*"/>
+                                                                    <RowDefinition Height="1*"/>
+                                                                </Grid.RowDefinitions>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="20"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBlock Text="Options" Grid.Row="0" Grid.Column="0"
+                                                                           Foreground="Black" FontFamily="{StaticResource MainFont}"/>
+                                                                <TextBlock Text="{Binding YData}" Grid.Row="1" Grid.Column="0"
+                                                                           FontFamily="{StaticResource MainFont}">
+                                                                    <TextBlock.Style>
+                                                                        <Style TargetType="TextBlock">
+                                                                            <Setter Property="Foreground" Value="{Binding Converter={StaticResource txtConvert}}"/>
+                                                                        </Style>
+                                                                    </TextBlock.Style>
+                                                                </TextBlock>
+                                                                <Image Grid.Row="1" Grid.Column="1" Tag="{Binding ElementName=TotPortxt, Path=Text}"
+                                                                Height="20" Width="20">
+                                                                    <Image.Resources>
+                                                                        <convert:TagToImageSourceConverter x:Key="imgConv"/>
+                                                                    </Image.Resources>
+                                                                    <Image.Style>
+                                                                        <Style TargetType="Image">
+                                                                            <Setter Property="Source" Value="{Binding Converter={StaticResource imgConv}}"/>
+                                                                        </Style>
+                                                                    </Image.Style>
+                                                                </Image>
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
+
+                                                    <DataTemplate x:Key="FuturesTooltipTemplate">
+                                                        <Border Height="40" Background="White" Width="120" 
+                                                            CornerRadius="4" BorderThickness="1" BorderBrush="Black">
+                                                            <Grid Margin="5,0">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="1*"/>
+                                                                    <RowDefinition Height="1*"/>
+                                                                </Grid.RowDefinitions>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="20"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBlock Text="Futures" Grid.Row="0" Grid.Column="0"
+                                                                           Foreground="Black" FontFamily="{StaticResource MainFont}"/>
+                                                                <TextBlock Text="{Binding YData}" Grid.Row="1" Grid.Column="0"
+                                                                           FontFamily="{StaticResource MainFont}">
+                                                                    <TextBlock.Style>
+                                                                        <Style TargetType="TextBlock">
+                                                                            <Setter Property="Foreground" Value="{Binding Converter={StaticResource txtConvert}}"/>
+                                                                        </Style>
+                                                                    </TextBlock.Style>
+                                                                </TextBlock>
+                                                                <Image Grid.Row="1" Grid.Column="1" Tag="{Binding ElementName=TotPortxt, Path=Text}"
+                                                                Height="20" Width="20">
+                                                                    <Image.Resources>
+                                                                        <convert:TagToImageSourceConverter x:Key="imgConv"/>
+                                                                    </Image.Resources>
+                                                                    <Image.Style>
+                                                                        <Style TargetType="Image">
+                                                                            <Setter Property="Source" Value="{Binding Converter={StaticResource imgConv}}"/>
+                                                                        </Style>
+                                                                    </Image.Style>
+                                                                </Image>
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
+
+                                                    <DataTemplate x:Key="LeveragedETFTooltipTemplate">
+                                                        <Border Height="40" Background="White" Width="120" 
+                                                            CornerRadius="4" BorderThickness="1" BorderBrush="Black">
+                                                            <Grid Margin="5,0">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="1*"/>
+                                                                    <RowDefinition Height="1*"/>
+                                                                </Grid.RowDefinitions>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="20"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBlock Text="Leveraged ETF" Grid.Row="0" Grid.Column="0"
+                                                                           Foreground="Black" FontFamily="{StaticResource MainFont}"/>
+                                                                <TextBlock Text="{Binding YData}" Grid.Row="1" Grid.Column="0" 
+                                                                           FontFamily="{StaticResource MainFont}">
+                                                                    <TextBlock.Style>
+                                                                        <Style TargetType="TextBlock">
+                                                                            <Setter Property="Foreground" Value="{Binding Converter={StaticResource txtConvert}}"/>
+                                                                        </Style>
+                                                                    </TextBlock.Style>
+                                                                </TextBlock>
+                                                                <Image Grid.Row="1" Grid.Column="1" Tag="{Binding ElementName=TotPortxt, Path=Text}"
+                                                                Height="20" Width="20">
+                                                                    <Image.Resources>
+                                                                        <convert:TagToImageSourceConverter x:Key="imgConv"/>
+                                                                    </Image.Resources>
+                                                                    <Image.Style>
+                                                                        <Style TargetType="Image">
+                                                                            <Setter Property="Source" Value="{Binding Converter={StaticResource imgConv}}"/>
+                                                                        </Style>
+                                                                    </Image.Style>
+                                                                </Image>
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
+
+                                                    <DataTemplate x:Key="MutualFundsTooltipTemplate">
+                                                        <Border Height="40" Background="White" Width="120" 
+                                                            CornerRadius="4" BorderThickness="1" BorderBrush="Black">
+                                                            <Grid Margin="5,0">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="1*"/>
+                                                                    <RowDefinition Height="1*"/>
+                                                                </Grid.RowDefinitions>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="20"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBlock Text="Mutual Funds" Grid.Row="0" Grid.Column="0"
+                                                                           Foreground="Black" FontFamily="{StaticResource MainFont}"/>
+                                                                <TextBlock Text="{Binding YData}" Grid.Row="1" Grid.Column="0"
+                                                                           FontFamily="{StaticResource MainFont}">
+                                                                    <TextBlock.Style>
+                                                                        <Style TargetType="TextBlock">
+                                                                            <Setter Property="Foreground" Value="{Binding Converter={StaticResource txtConvert}}"/>
+                                                                        </Style>
+                                                                    </TextBlock.Style>
+                                                                </TextBlock>
+                                                                <Image Grid.Row="1" Grid.Column="1" Tag="{Binding ElementName=TotPortxt, Path=Text}"
+                                                                Height="20" Width="20">
+                                                                    <Image.Resources>
+                                                                        <convert:TagToImageSourceConverter x:Key="imgConv"/>
+                                                                    </Image.Resources>
+                                                                    <Image.Style>
+                                                                        <Style TargetType="Image">
+                                                                            <Setter Property="Source" Value="{Binding Converter={StaticResource imgConv}}"/>
+                                                                        </Style>
+                                                                    </Image.Style>
+                                                                </Image>
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
+
+                                                    <DataTemplate x:Key="ResidentialPropertiesTooltipTemplate">
+                                                        <Border Height="40" Background="White" Width="120" 
+                                                            CornerRadius="4" BorderThickness="1" BorderBrush="Black">
+                                                            <Grid Margin="5,0">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="1*"/>
+                                                                    <RowDefinition Height="1*"/>
+                                                                </Grid.RowDefinitions>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="20"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBlock Text="Residential Properties" Grid.Row="0" Grid.Column="0"
+                                                                           Foreground="Black" FontFamily="{StaticResource MainFont}"/>
+                                                                <TextBlock Text="{Binding YData}" Grid.Row="1"  Grid.Column="0"
+                                                                           FontFamily="{StaticResource MainFont}">
+                                                                    <TextBlock.Style>
+                                                                        <Style TargetType="TextBlock">
+                                                                            <Setter Property="Foreground" Value="{Binding Converter={StaticResource txtConvert}}"/>
+                                                                        </Style>
+                                                                    </TextBlock.Style>
+                                                                </TextBlock>
+                                                                <Image Grid.Row="1" Grid.Column="1" Tag="{Binding ElementName=TotPortxt, Path=Text}"
+                                                                Height="20" Width="20">
+                                                                    <Image.Resources>
+                                                                        <convert:TagToImageSourceConverter x:Key="imgConv"/>
+                                                                    </Image.Resources>
+                                                                    <Image.Style>
+                                                                        <Style TargetType="Image">
+                                                                            <Setter Property="Source" Value="{Binding Converter={StaticResource imgConv}}"/>
+                                                                        </Style>
+                                                                    </Image.Style>
+                                                                </Image>
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
+
+                                                    <DataTemplate x:Key="CommercialPropertyTooltipTemplate">
+                                                        <Border Height="40" Background="White" Width="120" 
+                                                            CornerRadius="4" BorderThickness="1" BorderBrush="Black">
+                                                            <Grid Margin="5,0">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="1*"/>
+                                                                    <RowDefinition Height="1*"/>
+                                                                </Grid.RowDefinitions>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="20"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBlock Text="Commercial Property" Grid.Row="0" Grid.Column="0"
+                                                                           Foreground="Black" FontFamily="{StaticResource MainFont}"/>
+                                                                <TextBlock Text="{Binding YData}" Grid.Row="1" Grid.Column="0"
+                                                                           FontFamily="{StaticResource MainFont}">
+                                                                    <TextBlock.Style>
+                                                                        <Style TargetType="TextBlock">
+                                                                            <Setter Property="Foreground" Value="{Binding Converter={StaticResource txtConvert}}"/>
+                                                                        </Style>
+                                                                    </TextBlock.Style>
+                                                                </TextBlock>
+                                                                <Image Grid.Row="1" Grid.Column="1" Tag="{Binding ElementName=TotPortxt, Path=Text}"
+                                                                Height="20" Width="20">
+                                                                    <Image.Resources>
+                                                                        <convert:TagToImageSourceConverter x:Key="imgConv"/>
+                                                                    </Image.Resources>
+                                                                    <Image.Style>
+                                                                        <Style TargetType="Image">
+                                                                            <Setter Property="Source" Value="{Binding Converter={StaticResource imgConv}}"/>
+                                                                        </Style>
+                                                                    </Image.Style>
+                                                                </Image>
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
+
+                                                    <DataTemplate x:Key="ClassicsArtTooltipTemplate">
+                                                        <Border Height="40" Background="White" Width="120" 
+                                                            CornerRadius="4" BorderThickness="1" BorderBrush="Black">
+                                                            <Grid Margin="5,0">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="1*"/>
+                                                                    <RowDefinition Height="1*"/>
+                                                                </Grid.RowDefinitions>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="20"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBlock Text="Classics Art" Grid.Row="0" Grid.Column="0"
+                                                                           Foreground="Black" FontFamily="{StaticResource MainFont}"/>
+                                                                <TextBlock Text="{Binding YData}" Grid.Row="1" Grid.Column="0"
+                                                                           FontFamily="{StaticResource MainFont}">
+                                                                    <TextBlock.Style>
+                                                                        <Style TargetType="TextBlock">
+                                                                            <Setter Property="Foreground" Value="{Binding Converter={StaticResource txtConvert}}"/>
+                                                                        </Style>
+                                                                    </TextBlock.Style>
+                                                                </TextBlock>
+                                                                <Image Grid.Row="1" Grid.Column="1" Tag="{Binding ElementName=TotPortxt, Path=Text}"
+                                                                Height="20" Width="20">
+                                                                    <Image.Resources>
+                                                                        <convert:TagToImageSourceConverter x:Key="imgConv"/>
+                                                                    </Image.Resources>
+                                                                    <Image.Style>
+                                                                        <Style TargetType="Image">
+                                                                            <Setter Property="Source" Value="{Binding Converter={StaticResource imgConv}}"/>
+                                                                        </Style>
+                                                                    </Image.Style>
+                                                                </Image>
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
+
+                                                    <DataTemplate x:Key="ModernArtTooltipTemplate">
+                                                        <Border Height="40" Background="White" Width="120" 
+                                                            CornerRadius="4" BorderThickness="1" BorderBrush="Black">
+                                                            <Grid Margin="5,0">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="1*"/>
+                                                                    <RowDefinition Height="1*"/>
+                                                                </Grid.RowDefinitions>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="20"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBlock Text="Modern Art" Grid.Row="0" Grid.Column="0"
+                                                                           Foreground="Black" FontFamily="{StaticResource MainFont}"/>
+                                                                <TextBlock Text="{Binding YData}" Grid.Row="1" Grid.Column="0"
+                                                                           FontFamily="{StaticResource MainFont}">
+                                                                    <TextBlock.Style>
+                                                                        <Style TargetType="TextBlock">
+                                                                            <Setter Property="Foreground" Value="{Binding Converter={StaticResource txtConvert}}"/>
+                                                                        </Style>
+                                                                    </TextBlock.Style>
+                                                                </TextBlock>
+                                                                <Image Grid.Row="1" Grid.Column="1" Tag="{Binding ElementName=TotPortxt, Path=Text}"
+                                                                Height="20" Width="20">
+                                                                    <Image.Resources>
+                                                                        <convert:TagToImageSourceConverter x:Key="imgConv"/>
+                                                                    </Image.Resources>
+                                                                    <Image.Style>
+                                                                        <Style TargetType="Image">
+                                                                            <Setter Property="Source" Value="{Binding Converter={StaticResource imgConv}}"/>
+                                                                        </Style>
+                                                                    </Image.Style>
+                                                                </Image>
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
+
+                                                    <DataTemplate x:Key="StampsTooltipTemplate">
+                                                        <Border Height="40" Background="White" Width="120" 
+                                                            CornerRadius="4" BorderThickness="1" BorderBrush="Black">
+                                                            <Grid Margin="5,0">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="1*"/>
+                                                                    <RowDefinition Height="1*"/>
+                                                                </Grid.RowDefinitions>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="20"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBlock Text="Stamps, Coins" Grid.Row="0" Grid.Column="0"
+                                                                           Foreground="Black" FontFamily="{StaticResource MainFont}"/>
+                                                                <TextBlock Text="{Binding YData}" Grid.Row="1"  Grid.Column="0"
+                                                                            FontFamily="{StaticResource MainFont}">
+                                                                    <TextBlock.Style>
+                                                                        <Style TargetType="TextBlock">
+                                                                            <Setter Property="Foreground" Value="{Binding Converter={StaticResource txtConvert}}"/>
+                                                                        </Style>
+                                                                    </TextBlock.Style>
+                                                                </TextBlock>
+                                                                <Image Grid.Row="1" Grid.Column="1" Tag="{Binding ElementName=TotPortxt, Path=Text}"
+                                                                Height="20" Width="20">
+                                                                    <Image.Resources>
+                                                                        <convert:TagToImageSourceConverter x:Key="imgConv"/>
+                                                                    </Image.Resources>
+                                                                    <Image.Style>
+                                                                        <Style TargetType="Image">
+                                                                            <Setter Property="Source" Value="{Binding Converter={StaticResource imgConv}}"/>
+                                                                        </Style>
+                                                                    </Image.Style>
+                                                                </Image>
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
+
+                                                    <DataTemplate x:Key="WineTooltipTemplate">
+                                                        <Border Height="40" Background="White" Width="120" 
+                                                            CornerRadius="4" BorderThickness="1" BorderBrush="Black">
+                                                            <Grid Margin="5,0">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="1*"/>
+                                                                    <RowDefinition Height="1*"/>
+                                                                </Grid.RowDefinitions>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="20"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBlock Text="Wine, Spirits" Grid.Row="0" Grid.Column="0"
+                                                                           Foreground="Black" FontFamily="{StaticResource MainFont}"/>
+                                                                <TextBlock Text="{Binding YData}" Grid.Row="1" Grid.Column="0"
+                                                                           FontFamily="{StaticResource MainFont}">
+                                                                    <TextBlock.Style>
+                                                                        <Style TargetType="TextBlock">
+                                                                            <Setter Property="Foreground" Value="{Binding Converter={StaticResource txtConvert}}"/>
+                                                                        </Style>
+                                                                    </TextBlock.Style>
+                                                                </TextBlock>
+                                                                <Image Grid.Row="1" Grid.Column="1" Tag="{Binding ElementName=TotPortxt, Path=Text}"
+                                                                Height="20" Width="20">
+                                                                    <Image.Resources>
+                                                                        <convert:TagToImageSourceConverter x:Key="imgConv"/>
+                                                                    </Image.Resources>
+                                                                    <Image.Style>
+                                                                        <Style TargetType="Image">
+                                                                            <Setter Property="Source" Value="{Binding Converter={StaticResource imgConv}}"/>
+                                                                        </Style>
+                                                                    </Image.Style>
+                                                                </Image>
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
+
+                                                </chart:SfChart.Resources>
+                                                
+                                                <chart:SfChart.Behaviors>
+                                                    <chart:ChartZoomPanBehavior>
+                                                    </chart:ChartZoomPanBehavior>
+                                                </chart:SfChart.Behaviors>
+
+                                                <chart:SfChart.PrimaryAxis>
+                                                    <chart:CategoryAxis AxisLineOffset="1000000" PlotOffset="15" 
+                                                Foreground="#868686" MajorTickLineStyle="{DynamicResource StyleLine2}"
+                                                TickLineSize="20"  MaximumLabels="80" FontSize="12" ShowGridLines="False" 
+                                                                        TickLinesPosition="Inside"  />
+                                                </chart:SfChart.PrimaryAxis>
+
+                                                <chart:SfChart.SecondaryAxis>
+                                                    <chart:NumericalAxis AxisLineOffset="1000000" RangePadding="Round" Header="%" Foreground="#868686"
+                                                 TickLinesPosition="Inside" IsEnabled="True" Name="TTT"
+                                                 ShowGridLines="False" FontSize="12" MajorTickLineStyle="{DynamicResource StyleLine2}" />
+                                                </chart:SfChart.SecondaryAxis>
+
+                                                <chart:LineSeries Visibility="{Binding IsChecked, ElementName=Port_investment_bonds, Converter={StaticResource B2V}}"
+                                                                  ItemsSource="{Binding ChartCollectionInvestment}"
+                                                                  Interior="{Binding Path=Colors.Investment_bonds_color}"
+                                                                  TooltipTemplate="{StaticResource InvestBondsTooltipTemplate}" 
+                                                                  StrokeThickness="3"  
+                                                                  XBindingPath="chartDate" YBindingPath="chartVal"
+                                                                  EnableAnimation="True" ShowTooltip="True" 
+                                                                  chart:ChartTooltip.ShowDuration="100000"
+                                                                  chart:ChartTooltip.EnableAnimation="True" Background="Black" />
+
+                                                <chart:LineSeries Visibility="{Binding IsChecked, ElementName=Port_speculation_bonds, Converter={StaticResource B2V}}" 
+                                                                  ItemsSource="{Binding ChartCollectionSpeculation}"
+                                                                  TooltipTemplate="{StaticResource Speculative-GradeBondsTooltipTemplate}"
+                                                                  Interior="{Binding Path=Colors.Speculation_bonds_color}" 
+                                                                  StrokeThickness="3"  XBindingPath="chartDate" 
+                                                                  chart:ChartTooltip.ShowDuration="100000"
+                                                                  YBindingPath="chartVal"
+                                                                  EnableAnimation="True" ShowTooltip="True"
+                                                                  chart:ChartTooltip.EnableAnimation="True" Background="Black" />
+
+                                                <chart:LineSeries Visibility="{Binding IsChecked, ElementName=Port_Credit_Linked_Notes, Converter={StaticResource B2V}}" 
+                                                                  ItemsSource="{Binding ChartCollectionCreditLinkNotes}"
+                                                                  Interior="{Binding Path=Colors.Credit_Linked_Notes_color}" 
+                                                                  StrokeThickness="3"  XBindingPath="chartDate"
+                                                                  YBindingPath="chartVal"
+                                                                  chart:ChartTooltip.ShowDuration="100000"
+                                                                  EnableAnimation="True" ShowTooltip="True" 
+                                                                  chart:ChartTooltip.EnableAnimation="True" 
+                                                                  TooltipTemplate="{StaticResource CreditLinkedNotesTooltipTemplate}"/>
+
+                                                <chart:LineSeries Visibility="{Binding IsChecked, ElementName=Port_SNGC, Converter={StaticResource B2V}}" 
+                                                                  ItemsSource="{Binding ChartCollectionSNGC}" 
+                                                                  Interior="{Binding Path=Colors.SNGC_color}" 
+                                                                  StrokeThickness="3"  
+                                                                  chart:ChartTooltip.ShowDuration="100000"
+                                                                  XBindingPath="chartDate" YBindingPath="chartVal" 
+                                                                  TooltipTemplate="{StaticResource SNGCTooltipTemplate}"
+                                                                    EnableAnimation="True" ShowTooltip="True" 
+                                                                  chart:ChartTooltip.EnableAnimation="True" Background="#FF9B3030" />
+
+                                                <chart:LineSeries Visibility="{Binding IsChecked, ElementName=Port_SNCC, Converter={StaticResource B2V}}"
+                                                                    ItemsSource="{Binding ChartCollectionSNCC}"
+                                                                  Interior="{Binding Path=Colors.SNCC_color}" 
+                                                                  TooltipTemplate="{StaticResource SNCCTooltipTemplate}"
+                                                                  StrokeThickness="3"  XBindingPath="chartDate" YBindingPath="chartVal" 
+                                                                  EnableAnimation="True"
+                                                                  chart:ChartTooltip.ShowDuration="100000"
+                                                                  ShowTooltip="True" chart:ChartTooltip.EnableAnimation="True" Background="#FFE43E3E" />
+
+                                                <chart:LineSeries Visibility="{Binding IsChecked, ElementName=Port_SNRS, Converter={StaticResource B2V}}" 
+                                                                    ItemsSource="{Binding ChartCollectionSNRS}" Interior="{Binding Path=Colors.SNRS_color}" 
+                                                                  StrokeThickness="3" 
+                                                                  chart:ChartTooltip.ShowDuration="100000"
+                                                                  XBindingPath="chartDate" YBindingPath="chartVal" EnableAnimation="True"
+                                                                  TooltipTemplate="{StaticResource SNRSTooltipTemplate}"
+                                                                  ShowTooltip="True" chart:ChartTooltip.EnableAnimation="True" />
+
+                                                <chart:LineSeries Visibility="{Binding IsChecked, ElementName=Port_Hi_cap_share, Converter={StaticResource B2V}}"
+                                                                  ItemsSource="{Binding ChartCollectionHi_cap_share}"
+                                                                  TooltipTemplate="{StaticResource High-CapEquitiesTooltipTemplate}"
+                                                                  Interior="{Binding Path=Colors.Hi_cap_share_color}"
+                                                                  StrokeThickness="3"  XBindingPath="chartDate" 
+                                                                  chart:ChartTooltip.ShowDuration="100000"
+                                                                  YBindingPath="chartVal" 
+                                                                  EnableAnimation="True" ShowTooltip="True" 
+                                                                  chart:ChartTooltip.EnableAnimation="True" />
+
+                                                <chart:LineSeries Visibility="{Binding IsChecked, ElementName=Port_emerging_markets, Converter={StaticResource B2V}}" 
+                                                                  ItemsSource="{Binding ChartCollectionEmerging_markets}"
+                                                                  TooltipTemplate="{StaticResource EmergingMarketsTooltipTemplate}"
+                                                                  Interior="{Binding Path=Colors.emerging_markets_color}"
+                                                                  StrokeThickness="3"  XBindingPath="chartDate" 
+                                                                  chart:ChartTooltip.ShowDuration="100000"
+                                                                  YBindingPath="chartVal" 
+                                                                  EnableAnimation="True" ShowTooltip="True" 
+                                                                  chart:ChartTooltip.EnableAnimation="True" />
+
+                                                <chart:LineSeries Visibility="{Binding IsChecked, ElementName=Port_mid_cap_share, Converter={StaticResource B2V}}" 
+                                                                  ItemsSource="{Binding ChartCollectionMid_cap_share}" 
+                                                                  TooltipTemplate="{StaticResource Mid-CapEquitiesTooltipTemplate}"
+                                                                  Interior="{Binding Path=Colors.mid_cap_share_color}" 
+                                                                  StrokeThickness="3"  XBindingPath="chartDate" 
+                                                                  YBindingPath="chartVal" 
+                                                                  EnableAnimation="True"
+                                                                  ShowTooltip="True" 
+                                                                  chart:ChartTooltip.ShowDuration="100000"
+                                                                  chart:ChartTooltip.EnableAnimation="True" />
+
+                                                <chart:LineSeries Visibility="{Binding IsChecked, ElementName=Port_lo_cap, Converter={StaticResource B2V}}"
+                                                                  ItemsSource="{Binding ChartCollectionLo_cap}"
+                                                                  Interior="{Binding Path=Colors.lo_cap_color}" 
+                                                                  StrokeThickness="3"  XBindingPath="chartDate" 
+                                                                  YBindingPath="chartVal" 
+                                                                  EnableAnimation="True" 
+                                                                  chart:ChartTooltip.ShowDuration="100000"
+                                                                  TooltipTemplate="{StaticResource Small-CapEquitiesTooltipTemplate}"
+                                                                  ShowTooltip="True" chart:ChartTooltip.EnableAnimation="True" />
+
+                                                <chart:LineSeries Visibility="{Binding IsChecked, ElementName=Port_options, Converter={StaticResource B2V}}" 
+                                                                  ItemsSource="{Binding ChartCollectionOptions}" 
+                                                                  Interior="{Binding Path=Colors.options_color}" 
+                                                                  TooltipTemplate="{StaticResource OptionsTooltipTemplate}"
+                                                                  StrokeThickness="3"  XBindingPath="chartDate" 
+                                                                  YBindingPath="chartVal" 
+                                                                  chart:ChartTooltip.ShowDuration="100000"
+                                                                  EnableAnimation="True"
+                                                                  ShowTooltip="True"
+                                                                  chart:ChartTooltip.EnableAnimation="True" />
+
+                                                <chart:LineSeries Visibility="{Binding IsChecked, ElementName=Port_futures, Converter={StaticResource B2V}}"
+                                                                  ItemsSource="{Binding ChartCollectionFutures}" 
+                                                                  Interior="{Binding Path=Colors.futures_color}"
+                                                                  StrokeThickness="3"  
+                                                                  TooltipTemplate="{StaticResource FuturesTooltipTemplate}"
+                                                                  XBindingPath="chartDate"
+                                                                  chart:ChartTooltip.ShowDuration="100000"
+                                                                  YBindingPath="chartVal"
+                                                                  EnableAnimation="True" ShowTooltip="True" 
+                                                                  chart:ChartTooltip.EnableAnimation="True" />
+
+                                                <chart:LineSeries Visibility="{Binding IsChecked, ElementName=Port_leveraged_ETF, Converter={StaticResource B2V}}"
+                                      ItemsSource="{Binding ChartCollectionLeveraged_ETF}"
+                                                                  Interior="{Binding Path=Colors.leveraged_ETF_color}" 
+                                                                  StrokeThickness="3"  XBindingPath="chartDate"
+                                                                  YBindingPath="chartVal" 
+                                                                  EnableAnimation="True"  
+                                                                  chart:ChartTooltip.ShowDuration="100000"
+                                                                  TooltipTemplate="{StaticResource LeveragedETFTooltipTemplate}"
+                                                                  ShowTooltip="True" 
+                                                                  chart:ChartTooltip.EnableAnimation="True" />
+
+                                                <chart:LineSeries Visibility="{Binding IsChecked, ElementName=Port_mutual_funds, Converter={StaticResource B2V}}"
+                                      ItemsSource="{Binding ChartCollectionMutual_funds}" 
+                                                                  Interior="{Binding Path=Colors.mutual_funds_color}" 
+                                                                  StrokeThickness="3"  XBindingPath="chartDate"
+                                                                  YBindingPath="chartVal"
+                                                                  TooltipTemplate="{StaticResource MutualFundsTooltipTemplate}"
+                                                                  EnableAnimation="True" 
+                                                                  ShowTooltip="True"      
+                                                                  chart:ChartTooltip.ShowDuration="100000"
+                                                                  chart:ChartTooltip.EnableAnimation="True" />
+
+                                                <chart:LineSeries Visibility="{Binding IsChecked, ElementName=Port_residential_properties, Converter={StaticResource B2V}}" 
+                                      ItemsSource="{Binding ChartCollectionResidential_properties}" 
+                                                                  TooltipTemplate="{StaticResource ResidentialPropertiesTooltipTemplate}"
+                                                                  Interior="{Binding Path=Colors.residential_properties_color}"
+                                                                  StrokeThickness="3"  XBindingPath="chartDate"
+                                                                  YBindingPath="chartVal" 
+                                                                  EnableAnimation="True" 
+                                                                  ShowTooltip="True"      
+                                                                  chart:ChartTooltip.ShowDuration="100000"
+                                                                  chart:ChartTooltip.EnableAnimation="True" />
+
+                                                <chart:LineSeries Visibility="{Binding IsChecked, ElementName=Port_commercial_property, Converter={StaticResource B2V}}" 
+                                      ItemsSource="{Binding ChartCollectionCommercial_property}" 
+                                                                  TooltipTemplate="{StaticResource CommercialPropertyTooltipTemplate}"
+                                                                  Interior="{Binding Path=Colors.commercial_property_color}"
+                                                                  StrokeThickness="3"  XBindingPath="chartDate" 
+                                                                  YBindingPath="chartVal"
+                                                                  EnableAnimation="True" 
+                                                                  ShowTooltip="True"     
+                                                                  chart:ChartTooltip.ShowDuration="100000"
+                                                                  chart:ChartTooltip.EnableAnimation="True" />
+
+                                                <chart:LineSeries Visibility="{Binding IsChecked, ElementName=Port_classics_pictures, Converter={StaticResource B2V}}" 
+                                                                  ItemsSource="{Binding ChartCollectionClassics_pictures}" 
+                                                                  TooltipTemplate="{StaticResource ClassicsArtTooltipTemplate}"
+                                                                  Interior="{Binding Path=Colors.classics_pictures_color}" 
+                                                                  StrokeThickness="3"  
+                                                                  XBindingPath="chartDate"
+                                                                  YBindingPath="chartVal"
+                                                                  EnableAnimation="True" 
+                                                                  chart:ChartTooltip.ShowDuration="100000"
+                                                                  ShowTooltip="True" chart:ChartTooltip.EnableAnimation="True" />
+
+                                                <chart:LineSeries Visibility="{Binding IsChecked, ElementName=Port_modern_pictures, Converter={StaticResource B2V}}"
+                                                                  ItemsSource="{Binding ChartCollectionModern_pictures}"
+                                                                  Interior="{Binding Path=Colors.modern_pictures_color}" 
+                                                                  StrokeThickness="3"  
+                                                                  XBindingPath="chartDate" 
+                                                                  TooltipTemplate="{StaticResource ModernArtTooltipTemplate}"
+                                                                  YBindingPath="chartVal" 
+                                                                  EnableAnimation="True" 
+                                                                  ShowTooltip="True"     
+                                                                  chart:ChartTooltip.ShowDuration="100000"
+                                                                  chart:ChartTooltip.EnableAnimation="True" />
+
+                                                <chart:LineSeries Visibility="{Binding IsChecked, ElementName=Port_marks, Converter={StaticResource B2V}}"
+                                      ItemsSource="{Binding ChartCollectionMarks}" 
+                                                                  Interior="{Binding Path=Colors.marks_color}" 
+                                                                  StrokeThickness="3"  
+                                                                  TooltipTemplate="{StaticResource StampsTooltipTemplate}"
+                                                                  XBindingPath="chartDate" 
+                                                                  YBindingPath="chartVal"
+                                                                  EnableAnimation="True" 
+                                                                  ShowTooltip="True"     
+                                                                  chart:ChartTooltip.ShowDuration="100000"
+                                                                  chart:ChartTooltip.EnableAnimation="True" />
+
+                                                <chart:LineSeries Visibility="{Binding IsChecked, ElementName=Port_wine, Converter={StaticResource B2V}}" 
+                                                                  ItemsSource="{Binding ChartCollectionWine}" 
+                                                                  TooltipTemplate="{StaticResource WineTooltipTemplate}"
+                                                                  Interior="#FF5DFF00" StrokeThickness="3"  
+                                                                  XBindingPath="chartDate"
+                                                                  YBindingPath="chartVal" 
+                                                                  EnableAnimation="True"
+                                                                  ShowTooltip="True"     
+                                                                  chart:ChartTooltip.ShowDuration="100000"
+                                                                  chart:ChartTooltip.EnableAnimation="True" />
+                                            </chart:SfChart>
+                                        </Grid>
+                                        <Grid x:Name="dynamic" Visibility="{Binding ElementName=TotalRBTN, Path=IsChecked, Converter={StaticResource B2V}}">
+
+                                            <chart:SfChart Palette="Custom" Grid.Row="1" Margin="0,5,10,0" 
+                                   AreaBorderBrush="#8e8e8e" AreaBorderThickness="1,0,1,1" HorizontalAlignment="Center" 
+                                   Foreground="#FFD43030" HorizontalContentAlignment="Stretch">
+                                                
+                                                <chart:SfChart.Resources>
+                                                    <DataTemplate x:Key="TotalPortTooltipTemplate">
+                                                        <Border Height="40" Background="White" Width="120" 
+                                                        CornerRadius="4" BorderThickness="1" BorderBrush="Black">
+                                                            <Grid Margin="5,0">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="1*"/>
+                                                                    <RowDefinition Height="1*"/>
+                                                                </Grid.RowDefinitions>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="20"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBlock Text="Portfolio Dynamic" Grid.Column="0"
+                                                                           Grid.Row="0" Foreground="Black" FontFamily="{StaticResource MainFont}"/>
+                                                                <TextBlock Text="{Binding YData}" Grid.Column="0"
+                                                                           Grid.Row="1" FontFamily="{StaticResource MainFont}">
+                                                                    <TextBlock.Style>
+                                                                        <Style TargetType="TextBlock">
+                                                                            <Setter Property="Foreground" Value="{Binding Converter={StaticResource txtConvert}}"/>
+                                                                        </Style>
+                                                                    </TextBlock.Style>
+                                                                </TextBlock>
+                                                                <Image Grid.Row="1" Grid.Column="1" Tag="{Binding ElementName=TotPortxt, Path=Text}"
+                                                                Height="20" Width="20">
+                                                                    <Image.Resources>
+                                                                        <convert:TagToImageSourceConverter x:Key="imgConv"/>
+                                                                    </Image.Resources>
+                                                                    <Image.Style>
+                                                                        <Style TargetType="Image">
+                                                                            <Setter Property="Source" Value="{Binding Converter={StaticResource imgConv}}"/>
+                                                                        </Style>
+                                                                    </Image.Style>
+                                                                </Image>
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
+                                                </chart:SfChart.Resources>
+                                                <chart:LineSeries  
+                                                    Visibility="{Binding IsChecked, ElementName=total, Converter={StaticResource B2V}}"
+                                                    ItemsSource="{Binding ChartCollectionTotal}" Interior="#FF0000" StrokeThickness="3" 
+                                                                   XBindingPath="chartDate" YBindingPath="chartVal"
+                                                                   EnableAnimation="True" ShowTooltip="True" chart:ChartTooltip.ShowDuration="100000"
+                                                                   chart:ChartTooltip.EnableAnimation="True" Background="Black" 
+                                                                   TooltipTemplate="{StaticResource TotalPortTooltipTemplate}"/>
+                                                
+                                                <chart:SfChart.Behaviors>
+                                                    <chart:ChartZoomPanBehavior></chart:ChartZoomPanBehavior>
+                                                </chart:SfChart.Behaviors>
+
+                                                <chart:SfChart.PrimaryAxis>
+                                                    <chart:CategoryAxis AxisLineOffset="1000000" PlotOffset="15" Foreground="#868686" MajorTickLineStyle="{DynamicResource StyleLine2}"  
+                                TickLineSize="20" MaximumLabels="80" ShowGridLines="False" FontSize="12" TickLinesPosition="Inside" />
+                                                </chart:SfChart.PrimaryAxis>
+
+                                                <chart:SfChart.SecondaryAxis>
+                                                    <chart:NumericalAxis AxisLineOffset="1000000" RangePadding="Round" Header="%" FontSize="12" Foreground="#868686" TickLinesPosition="Inside"
+                                 ShowGridLines="False" MajorTickLineStyle="{DynamicResource StyleLine2}" />
+                                                </chart:SfChart.SecondaryAxis>
+                                                
+                                            </chart:SfChart>
+                                        </Grid >
+
+                                    </Grid>
+
+                                    <StackPanel Grid.Row="1" Background="{StaticResource Gray36}" Margin="302,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" >
+                                        <StackPanel Orientation="Horizontal" Margin="10,0" >
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="MouseLeave">
+                                                    <i:InvokeCommandAction Command="{Binding MouseMoveVisible}"/>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+
+                                            <Calendar  x:Name="CalendarFrom" Visibility="{Binding CalenVisible, Converter={StaticResource B2V}}" 
+                                                   SelectedDate="{Binding dateFrom}" Style="{DynamicResource CalendarStyle}"
+                                                   CalendarDayButtonStyle="{DynamicResource CalendarDayButtonStyle}" >
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger  EventName="SelectedDatesChanged">
+                                                        <i:InvokeCommandAction Command="{Binding ChartChange}"/>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Calendar>
+
+                                            <Calendar x:Name="CalendarTo" Visibility="{Binding CalenVisible, Converter={StaticResource B2V}}"  
+                                                  SelectedDate="{Binding todate}" Style="{DynamicResource CalendarStyle}" 
+                                                  CalendarDayButtonStyle="{DynamicResource CalendarDayButtonStyle}" >
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="SelectedDatesChanged">
+                                                        <i:InvokeCommandAction Command="{Binding ChartChange}"/>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Calendar>
+                                        </StackPanel>
+                                    </StackPanel>
+
+                                    <Border Grid.Row="0" Background="{StaticResource Gray36}" Style="{StaticResource StyleInnerBorder}" >
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="8" Grid.Row="0">
+                                            <Button Style="{StaticResource StyleCalendarButton}" Name="m1" Content="1m"  Template="{StaticResource ButtonControlTemplate}"
+                                    Command="{Binding ChartConstDayChange}" CommandParameter="{Binding ElementName=max, Path=Name}"/>
+                                            <Button Style="{StaticResource StyleCalendarButton}" Name="m3" Content="3m"  Template="{StaticResource ButtonControlTemplate}" 
+                                    Command="{Binding ChartConstDayChange}" CommandParameter="{Binding ElementName=max, Path=Name}"/>
+                                            <Button Style="{StaticResource StyleCalendarButton}" Name="m4" Content="4m"  Template="{StaticResource ButtonControlTemplate}"
+                                    Command="{Binding ChartConstDayChange}" CommandParameter="{Binding ElementName=max, Path=Name}"/>
+                                            <Button Style="{StaticResource StyleCalendarButton}" Name="y1" Content="1y"  Template="{StaticResource ButtonControlTemplate}"
+                                    Command="{Binding ChartConstDayChange}" CommandParameter="{Binding ElementName=max, Path=Name}"/>
+                                            <Button Style="{StaticResource StyleCalendarButton}" Name="y2" Content="2y"  Template="{StaticResource ButtonControlTemplate}" 
+                                    Command="{Binding ChartConstDayChange}" CommandParameter="{Binding ElementName=max, Path=Name}" />
+                                            <Button Style="{StaticResource StyleCalendarButton}" Name="max" Content="max"  Template="{StaticResource ButtonControlTemplate}"
+                            Command="{Binding ChartConstDayChange}" CommandParameter="{Binding ElementName=max, Path=Name}"/>
+
+                                            <Button Style="{StaticResource StyleCalendarButton}"  Template="{StaticResource ButtonControlTemplate}" Command="{Binding CalendarVisible}">
+                                                <Button.Content>
+                                                    <Image Source="pack://application:,,,/Resources/calendar.png" Stretch="None" />
+                                                </Button.Content>
+                                            </Button>
+
+
+                                            <RadioButton Height="13" Margin="10,0,0,0" Content="Full Portfolio" IsChecked="True" 
+                                       Style="{StaticResource StyleInput}"  Name="TotalRBTN" />
+
+                                            <RadioButton Height="13" Margin="10,0,0,0" Content="Activity" 
+                                       Style="{StaticResource StyleInput}"  Name="ActivesRBTN" />
+                                        </StackPanel>
+                                    </Border>
+
+                                    <Grid Grid.Row="2" Margin="10,5" Background="{StaticResource Gray26}" >
+                                        <Grid  Visibility="{Binding ElementName=ActivesRBTN, Path=IsChecked, Converter={StaticResource B2V}}">
+                                            <StackPanel Orientation="Vertical" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                     Width="1560" Margin="15">
+
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Ellipse Fill="{Binding Path=Colors.wine_color}" Width="10" Height="10" Margin="0,0,0,13"/>
+                                                    <CheckBox x:Name="Port_wine" Width="150" Content="Wine, Spirits"  Click="Resize_dynamic" Style="{StaticResource StyleInput}" Foreground="{StaticResource Gray86}" Template="{DynamicResource TemplateCheckBox}"/>
+                                                    <Ellipse Fill="{Binding Path=Colors.Investment_bonds_color}" Width="10" Height="10" Margin="0,0,0,13"/>
+                                                    <CheckBox x:Name="Port_investment_bonds" Width="150"  Click="Resize_dynamic" VerticalAlignment="Top"
+                                                              HorizontalAlignment="Left"   Content="Investment-GB" 
+                                                              Style="{StaticResource StyleInput}" Foreground="{StaticResource Gray86}" 
+                                                              Template="{DynamicResource TemplateCheckBox}">
+                                                        <CheckBox.ToolTip>
+                                                            <TextBlock>Investment-Grade Bonds</TextBlock>
+                                                        </CheckBox.ToolTip>
+                                                    </CheckBox>
+                                                    <Ellipse Fill="{Binding Path=Colors.Speculation_bonds_color}" Width="10" Height="10" Margin="0,0,0,13"/>
+                                                    <CheckBox x:Name="Port_speculation_bonds" Width="150"  
+                                                              Click="Resize_dynamic" VerticalAlignment="Top" HorizontalAlignment="Left"
+                                                              Content="Speculative-GB" Style="{StaticResource StyleInput}" 
+                                                              Foreground="{StaticResource Gray86}" 
+                                                              Template="{DynamicResource TemplateCheckBox}">
+                                                        <CheckBox.ToolTip>
+                                                            <TextBlock>Speculative-Grade Bonds</TextBlock>
+                                                        </CheckBox.ToolTip>
+                                                    </CheckBox>
+
+                                                    <Ellipse Fill="{Binding Path=Colors.Credit_Linked_Notes_color}" Width="10" Height="10" Margin="0,0,0,13"/>
+                                                    <CheckBox x:Name="Port_Credit_Linked_Notes" Width="150"  Click="Resize_dynamic" Content="Credit Linked Notes" Style="{StaticResource StyleInput}" Foreground="{StaticResource Gray86}" Template="{DynamicResource TemplateCheckBox}" />
+                                                    <Ellipse Fill="{Binding Path=Colors.SNGC_color}" Width="10" Height="10" Margin="0,0,0,13"/>
+                                                    <CheckBox x:Name="Port_SNGC" Content="SNGC" Width="150"  Click="Resize_dynamic"  Style="{StaticResource StyleInput}" 
+                                                              Foreground="{StaticResource Gray86}" Template="{DynamicResource TemplateCheckBox}">
+                                                        <CheckBox.ToolTip>
+                                                            <TextBlock>Structured Notes with guaranteed coupon</TextBlock>
+                                                        </CheckBox.ToolTip>
+                                                    </CheckBox>
+                                                </StackPanel>
+
+                                                <StackPanel Orientation="Horizontal" >
+                                                    <Ellipse Fill="{Binding Path=Colors.SNCC_color}" Width="10" Height="10" Margin="0,0,0,13"/>
+                                                    <CheckBox x:Name="Port_SNCC" Content="SNCC" Width="150"  Click="Resize_dynamic"  Style="{StaticResource StyleInput}" 
+                                                              Foreground="{StaticResource Gray86}" Template="{DynamicResource TemplateCheckBox}">
+                                                        <CheckBox.ToolTip>
+                                                            <TextBlock>Structured Notes with conditional coupon</TextBlock>
+                                                        </CheckBox.ToolTip>
+                                                    </CheckBox>
+                                                    <Ellipse Fill="{Binding Path=Colors.SNRS_color}" Width="10" Height="10" Margin="0,0,0,13"/>
+
+                                                    <CheckBox x:Name="Port_SNRS" Content="SNRS" Width="150"  Click="Resize_dynamic" 
+                                                              Style="{StaticResource StyleInput}" Foreground="{StaticResource Gray86}" 
+                                                              Template="{DynamicResource TemplateCheckBox}">
+                                                        <CheckBox.ToolTip>
+                                                            <TextBlock>Structured Notes with recovery structure</TextBlock>
+                                                        </CheckBox.ToolTip>
+                                                    </CheckBox>
+                                                    <Ellipse Fill="{Binding Path=Colors.Hi_cap_share_color}" Width="10" Height="10" Margin="0,0,0,13"/>
+                                                    <CheckBox x:Name="Port_Hi_cap_share" Content="High-Cap Equities" Width="150" Click="Resize_dynamic" Style="{StaticResource StyleInput}" Foreground="{StaticResource Gray86}" Template="{DynamicResource TemplateCheckBox}"/>
+                                                    <Ellipse Fill="{Binding Path=Colors.emerging_markets_color}" Width="10" Height="10" Margin="0,0,0,13"/>
+                                                    <CheckBox x:Name="Port_emerging_markets" Width="150"  Content="Emerging Markets" Click="Resize_dynamic"  Style="{StaticResource StyleInput}" Foreground="{StaticResource Gray86}" Template="{DynamicResource TemplateCheckBox}"/>
+                                                    <Ellipse Fill="{Binding Path=Colors.mid_cap_share_color}" Width="10" Height="10" Margin="0,0,0,13"/>
+                                                    <CheckBox x:Name="Port_mid_cap_share" Width="150"  Content="Mid-Cap Equities" Click="Resize_dynamic" Style="{StaticResource StyleInput}" Foreground="{StaticResource Gray86}" Template="{DynamicResource TemplateCheckBox}"/>
+                                                </StackPanel>
+
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Ellipse Fill="{Binding Path=Colors.lo_cap_color}" Width="10" Height="10" Margin="0,0,0,13"/>
+                                                    <CheckBox x:Name="Port_lo_cap" Width="150" Content="Small-Cap Equities" Click="Resize_dynamic"  Style="{StaticResource StyleInput}" Foreground="{StaticResource Gray86}" Template="{DynamicResource TemplateCheckBox}"/>
+                                                    <Ellipse Fill="{Binding Path=Colors.options_color}" Width="10" Height="10" Margin="0,0,0,13"/>
+                                                    <CheckBox x:Name="Port_options" Width="150" Content="Options" Click="Resize_dynamic"  Style="{StaticResource StyleInput}" Foreground="{StaticResource Gray86}" Template="{DynamicResource TemplateCheckBox}"/>
+                                                    <Ellipse Fill="{Binding Path=Colors.futures_color}" Width="10" Height="10" Margin="0,0,0,13"/>
+                                                    <CheckBox x:Name="Port_futures" Width="150" Content="Futures" Click="Resize_dynamic" Style="{StaticResource StyleInput}" Foreground="{StaticResource Gray86}" Template="{DynamicResource TemplateCheckBox}"/>
+                                                    <Ellipse Fill="{Binding Path=Colors.leveraged_ETF_color}" Width="10" Height="10" Margin="0,0,0,13"/>
+                                                    <CheckBox x:Name="Port_leveraged_ETF" Width="150"  Content="Leveraged ETF" Click="Resize_dynamic" Style="{StaticResource StyleInput}" Foreground="{StaticResource Gray86}" Template="{DynamicResource TemplateCheckBox}"/>
+                                                    <Ellipse Fill="{Binding Path=Colors.mutual_funds_color}" Width="10" Height="10" Margin="0,0,0,13"/>
+                                                    <CheckBox x:Name="Port_mutual_funds" Width="150"  Content="Mutual Funds" Click="Resize_dynamic"  Style="{StaticResource StyleInput}" Foreground="{StaticResource Gray86}" Template="{DynamicResource TemplateCheckBox}"/>
+                                                </StackPanel>
+
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Ellipse Fill="{Binding Path=Colors.residential_properties_color}" Width="10" Height="10" Margin="0,0,0,13"/>
+                                                    <CheckBox x:Name="Port_residential_properties" Width="150" Content="Residential Properties" Click="Resize_dynamic"  Style="{StaticResource StyleInput}" Foreground="{StaticResource Gray86}" Template="{DynamicResource TemplateCheckBox}"/>
+                                                    <Ellipse Fill="{Binding Path=Colors.commercial_property_color}" Width="10" Height="10" Margin="0,0,0,13"/>
+                                                    <CheckBox x:Name="Port_commercial_property" Width="150" Content="Commercial Property"  Click="Resize_dynamic" Style="{StaticResource StyleInput}" Foreground="{StaticResource Gray86}" Template="{DynamicResource TemplateCheckBox}"/>
+                                                    <Ellipse Fill="{Binding Path=Colors.classics_pictures_color}" Width="10" Height="10" Margin="0,0,0,13"/>
+                                                    <CheckBox x:Name="Port_classics_pictures" Width="150"  Content="Classics Art" Click="Resize_dynamic" Style="{StaticResource StyleInput}" Foreground="{StaticResource Gray86}" Template="{DynamicResource TemplateCheckBox}"/>
+                                                    <Ellipse Fill="{Binding Path=Colors.modern_pictures_color}" Width="10" Height="10" Margin="0,0,0,13"/>
+                                                    <CheckBox x:Name="Port_modern_pictures" Width="150"  Content="Modern Art" Click="Resize_dynamic" Style="{StaticResource StyleInput}" Foreground="{StaticResource Gray86}" Template="{DynamicResource TemplateCheckBox}"/>
+                                                    <Ellipse Fill="{Binding Path=Colors.marks_color}" Width="10" Height="10" Margin="0,0,0,13"/>
+                                                    <CheckBox x:Name="Port_marks" Width="150" Content="Stamps, Coins"  Click="Resize_dynamic"  Style="{StaticResource StyleInput}" Foreground="{StaticResource Gray86}" Template="{DynamicResource TemplateCheckBox}"/>
+                                                </StackPanel>
+
+
+                                            </StackPanel>
+                                        </Grid>
+
+                                        <Grid Visibility="{Binding ElementName=TotalRBTN, Path=IsChecked, Converter={StaticResource B2V}}">
+                                            <StackPanel Orientation="Horizontal" Margin="15">
+                                                <Ellipse Fill="{Binding Path=Colors.Totaal_POrtfel_color}" Width="10" Height="10" Margin="0,0,0,13"/>
+                                                <CheckBox x:Name="total" Content="Total Portfolio" Width="150" IsChecked="True" Style="{StaticResource StyleInput}" Foreground="{StaticResource Gray86}" Template="{DynamicResource TemplateCheckBox}" />
+                                            </StackPanel>
+                                        </Grid>
+                                    </Grid>
+
+
+
+                                </Grid>
+                            </Border>
+                        </Border>
+                    </Grid>
+
+                    <Grid Grid.Row="10" x:Name="Onflo_Outflow">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Style="{StaticResource StyleMainBorder}" Grid.Column="0">
+                            <Grid>
+                                <Label Content="INFLOW OPERATIONS" Margin="5" Height="34" Width="140" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                <Border Margin="5,30,5,5" Style="{StaticResource StyleBorder86}">
+                                    <DataGrid ItemsSource="{Binding InflowDetailsCollection}"  
+                                                  AutoGenerateColumns="False" x:Name="FundingTools" 
+                                                  Style="{StaticResource StyleTable}" >
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="Title" MinWidth="100" Width="*" Binding="{Binding CashAccount}">
+                                            </DataGridTextColumn>
+                                            <DataGridTextColumn Header="Security" Binding="{Binding aqprice}" Width="*">
+                                            </DataGridTextColumn>
+                                            <DataGridTextColumn Header="ISIN" Binding="{Binding CashAccSumm}" Width="*">
+                                            </DataGridTextColumn>
+                                            <DataGridTextColumn Header="Aq. Price" Binding="{Binding countPaper}" Width="*">
+                                            </DataGridTextColumn>
+                                            <DataGridTextColumn Header="Units" Binding="{Binding Isin}" Width="*">
+                                            </DataGridTextColumn>
+                                            <DataGridTextColumn Header="Data" Binding="{Binding date}" Width="*">
+                                            </DataGridTextColumn>
+                                            <DataGridTextColumn Header="Security" Binding="{Binding security}" Width="*">
+                                            </DataGridTextColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </Border>
+                            </Grid>
+                        </Border>
+                        <GridSplitter Grid.Column="1" Width="10" Style="{StaticResource StyleSplitter}" HorizontalAlignment="Stretch"  />
+                        <Border Style="{StaticResource StyleMainBorder}" Grid.Column="3">
+                            <Grid>
+                                <Label Content="OUTFLOW OPERATIONS" Height="34" Margin="5" Width="148" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                <Border Style="{StaticResource StyleBorder86}" Margin="5,30,5,5">
+                                    <DataGrid x:Name="DGWithdraw" ItemsSource="{Binding WithdrawDetailsCollection}" 
+                                              AutoGenerateColumns="False"
+                                              Style="{StaticResource StyleTable}">
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="Summary" Binding="{Binding Summ}" Width="240" />
+                                            <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="*"/>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </Grid>
+
+                    <Border x:Name="Statements"  Grid.Row="12" Style="{StaticResource StyleMainBorder}">
+                        <Grid x:Name="Statement" Height="Auto">
+                            <Label Content="STATEMENT" HorizontalAlignment="Center" VerticalAlignment="Top" Height="22" Width="140"/>
+                            <Label Content="{Binding FromDat}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,32,55,1" Height="22" Width="140"/>
+                            <Label Content="{Binding ToDat}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,32,-100,1" Height="22" Width="140"/>
+
+                            <Border Style="{StaticResource StyleBorder86}" Margin="0,50,0,0">
+
+                                <DataGrid Margin="5" x:Name="StatementDG" ItemsSource="{Binding OperationsCollection}" 
+                                               AutoGenerateColumns="False" Height="Auto" IsReadOnly="True"
+                                               Style="{StaticResource StyleTable}">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="240" />
+                                        <DataGridTextColumn Header="ISIN" Binding="{Binding isin}" Width="200"/>
+                                        <DataGridTextColumn Header="Currency" Binding="{Binding value}" Width="100"/>
+                                        <DataGridTextColumn Header="Value" Binding="{Binding money}" Width="100"/>
+
+                                        <DataGridTextColumn Header="Aq. Price" Binding="{Binding Aqprice}" Width="100"/>
+                                        <DataGridTextColumn Header="Units" Binding="{Binding Units}" Width="100"/>
+
+                                        <DataGridTextColumn Header="Data" Binding="{Binding date}" Width="*"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Border>
+                        </Grid>
+                    </Border>
+
+                </Grid>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</UserControl>

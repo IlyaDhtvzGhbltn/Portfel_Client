@@ -1,0 +1,146 @@
+﻿<UserControl x:Class="Custodian.Portfel"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Custodian"
+      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="1200" >
+
+    <UserControl.Resources>
+        <Style x:Key="TextFont">
+            <Setter Property="Control.FontSize" Value="12"/>
+            <Setter Property="Control.FontFamily" Value="Comic Sans MS"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Background="#FFE5E5E5" Margin="10,10,0,0">
+        <Grid Name="Summar" Margin="0,0,560,0" >
+            <Grid x:Name="OrderDetails" Width="230" Height="320" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource TextFont}" Background="Azure">
+                <Label Content="Summary" FontSize="18"  Margin="0,0,0,283" />
+                <Label Content="Cell Details" FontSize="16" Margin="0,32,0,250"/>
+                <Label Content="{Binding Order}" Margin="0,65,0,225"/>
+                <Label Content="Currency" Margin="0,95,150,190"/>
+                <Label Content="{Binding Value}" Margin="80,95,0,190"/>
+                <Label Content="Status"  Margin="0,130,0,150"/>
+                <Label Content="{Binding Status}" Margin="80,130,0,150"/>
+                <Label Content="{Binding DateReg}" Margin="0,165,0,125"/>
+                <Label Content="Adviser :"  Margin="0,194,0,91"/>
+                <Label Content="{Binding Adviser}" Margin="0,224,0,66"/>
+                <Label Content="{Binding Company}" Margin="0,254,0,36"/>
+            </Grid>
+            <Grid x:Name="Details" Width="230" Height="147" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource TextFont}" Background="BlanchedAlmond" Margin="0,320,0,0">
+                <Label Content="Client Details" FontSize="16" Margin="0,0,65,65" />
+                <Label Content="Name" Margin="0,25,110,93"/>
+                <Label Content="{Binding FIO}" Margin="125,25,0,93"/>
+                <Label Content="Date of Birth" Margin="0,54,110,60"/>
+                <Label Content="{Binding DateofBirth}" Margin="120,54,0,60" HorizontalAlignment="Left" Width="100" />
+                <!--<Button x:Name="btn_Library" Margin="0,149,0,-48" Content="Library" Click="btn_Library_Click" />-->
+            </Grid>
+        </Grid>
+        <Grid Name="FondSumm"  Style="{StaticResource TextFont}" Margin="252,0,0,0" Background="#FFEBE0FF" VerticalAlignment="Top" Height="320">
+            <Label Content="Cell Summary" FontSize="18" Margin="0,0,0,270"/>
+            <TabControl Margin="0,40,0,124" HorizontalAlignment="Left" Width="755">
+                <TabItem Header="Details">
+                    <DataGrid  ItemsSource="{Binding Collection}" AutoGenerateColumns="False" RowHeight="24" RowBackground="#FFDCD58C" Margin="0,0,-23,0">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Type"  IsReadOnly="True" Width="*" Binding="{Binding Type}"/>
+                            <DataGridTextColumn Header="Balance" IsReadOnly="True"  MaxWidth="200" MinWidth="200" Binding="{Binding Balance}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+            </TabControl>
+            <Grid Margin="760,60,15,124" Background="Bisque" Width="Auto">
+                <Label Content="Information about :" Height="25" Width="130" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Label Content="{Binding activeInfoString, Mode=TwoWay}" Margin="0,26,0,0" Height="24" Width="218" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Button Content="From Yahoo FINANCE" Height="25" HorizontalAlignment="Left" Width="150" Command="{Binding GetInfoInNew}"/>
+            </Grid>
+        </Grid>
+        <Grid Name="InvestDetails" Margin="252,209,0,10" Background="#FF9AACFF">
+            <Label Content="Investment Details" FontSize="18" Margin="0,10,0,331"/>
+
+
+            <TabControl Margin="0,40,0,0">
+                <TabItem Header="Investments">
+                    <Grid>
+                        <DataGrid x:Name="DGInvestmentDetails" ItemsSource="{Binding InvestCollection}" AutoGenerateColumns="False" RowHeight="32" IsReadOnly="True" VerticalAlignment="Top" Height="200" Margin="0,40,0,0" RowBackground="#FFB28C8C" 
+              CurrentCell="{Binding CellInfo, Mode=OneWayToSource}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseLeftButtonUp">
+                                    <i:InvokeCommandAction Command="{Binding SelectDetails}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Type" MinWidth="200" Width="*" Binding="{Binding Type}"/>
+                                <DataGridTextColumn  Header="Value" MinWidth="50" Binding="{Binding Value}"/>
+                                <DataGridTextColumn Header="Date" MinWidth="100" Binding="{Binding Date}"/>
+                                <DataGridTextColumn Header="Units" MinWidth="90" Binding="{Binding Units}"/>
+                                <DataGridTextColumn Header="Aq.Price" MinWidth="80" Binding="{Binding AqPr}"/>
+                                <DataGridTextColumn Header="Quote" MinWidth="80" Binding="{Binding Quote}"/>
+                                <DataGridTextColumn Header="Isin" MinWidth="50" Binding="{Binding Isin}"/>
+                                <DataGridTextColumn Header="Markedvalue" MinWidth="100" Binding="{Binding Markedvalue}" />
+                                <DataGridTextColumn Header="Market Value USD" MinWidth="100" Binding="{Binding MarkedvalueUSD}"/>
+                                <DataGridTextColumn Header="Profit USD" MinWidth="100" Binding="{Binding profit}"/>
+                                <DataGridTextColumn Header="Percent" MinWidth="80" Binding="{Binding Percent}" />
+                                <DataGridTextColumn Header="Valuation Date" MinWidth="100" Binding="{Binding currentDate}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <DataGrid MinHeight="140" VerticalAlignment="Top" Margin="0,260,0,0" ItemsSource="{Binding  TotalInvestCollection, Mode=TwoWay}" RowHeight="34" AutoGenerateColumns="False" RowBackground="#FFD8C096" IsReadOnly="True"  Background="#FFD8C096">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Operation" Width="*" Binding="{Binding Operation}">
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Title" Width="200" Binding="{Binding Title}">
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Isin" MinWidth="50" Width="100" Binding="{Binding Isin}">
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Value" MinWidth="50" Binding="{Binding value}">
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Units" MinWidth="90" Binding="{Binding Units}">
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Aq.Price" MinWidth="70" Binding="{Binding AqP, Mode=TwoWay}" >
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Date" MinWidth="70" Binding="{Binding Date}">
+                                </DataGridTextColumn>
+
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Inflow">
+                    <Grid>
+                        <DataGrid ItemsSource="{Binding InflowDetailsCollection}" AutoGenerateColumns="False" x:Name="FundingTools" Background="#FF9AACFF" RowHeight="35" RowBackground="AliceBlue" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Cash Account" Binding="{Binding CashAccount}" MinWidth="100" Width="*">
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Inflow Summ" Binding="{Binding CashAccSumm}" Width="100">
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="ISIN" Binding="{Binding Isin}"  MinWidth="60">
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Security" Binding="{Binding security}" MinWidth="60">
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Aq.Prise" Binding="{Binding aqprice}" MinWidth="60">
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Units" Binding="{Binding countPaper}" MinWidth="60">
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Data" Binding="{Binding date}" MinWidth="90">
+                                </DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Outflow">
+                    <DataGrid x:Name="DGWithdraw" ItemsSource="{Binding WithdrawDetailsCollection}" AutoGenerateColumns="False" RowHeight="30" RowBackground="#FFA28BB9" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Summ" Binding="{Binding Summ}" Width="240" />
+                            <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+            </TabControl>
+
+        </Grid>
+    </Grid>
+</UserControl>

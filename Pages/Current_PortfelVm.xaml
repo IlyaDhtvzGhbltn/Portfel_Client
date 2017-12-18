@@ -1,0 +1,145 @@
+﻿<UserControl x:Class="Custodian.Pages.Current_PortfelVm"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+      mc:Ignorable="d" 
+      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+      d:DesignHeight="340" d:DesignWidth="515" FontSize="10">
+
+    <Grid Background="{StaticResource Gray36}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="378*"/>
+            <ColumnDefinition Width="137*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid Grid.Column="0" Margin="20">
+            <syncfusion:SfChart x:Name="cInner" AreaBorderThickness="0" >
+                <syncfusion:PieSeries x:Name="sInner" EnableSmartLabels="True" Style="{StaticResource StyleDSeries}" 
+                                      SegmentSelectionBrush="White" ShowTooltip="True" 
+                                      XBindingPath="Name" YBindingPath="Value" 
+                                      ItemsSource="{Binding CurrentISINs}" >
+                    <syncfusion:PieSeries.ColorModel>
+                        <syncfusion:ChartColorModel>
+                            <syncfusion:ChartColorModel.CustomBrushes>
+                                <SolidColorBrush Color="#FFC087"/>
+                                <SolidColorBrush Color="Red"/>
+                                <SolidColorBrush Color="#F98E3C"/>
+                                <SolidColorBrush Color="#FFDEFF87"/>
+                                <SolidColorBrush Color="#FF87FFB8"/>
+                                <SolidColorBrush Color="#FF87C3FF"/>
+                                <SolidColorBrush Color="#FF5949FF"/>
+                                <SolidColorBrush Color="#FFFF87E9"/>
+                                <SolidColorBrush Color="#FFBB275D"/>
+                                <SolidColorBrush Color="#FF5DFF00"/>
+                            </syncfusion:ChartColorModel.CustomBrushes>
+                        </syncfusion:ChartColorModel>
+                    </syncfusion:PieSeries.ColorModel>
+                </syncfusion:PieSeries>
+
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseMove">
+                        <i:InvokeCommandAction Command="{Binding Path=ClickMouseP}" CommandParameter="{Binding ElementName=sInner, Path=SelectedIndex}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <!--<syncfusion:SfChart.Legend>
+                    <syncfusion:ChartLegend Width="120" DockPosition="Right" VerticalAlignment="Stretch"
+                                            Margin="10,10,20,0" Foreground="{StaticResource Gray86}" 
+                                            ScrollViewer.CanContentScroll="True" >
+                    </syncfusion:ChartLegend>
+                </syncfusion:SfChart.Legend>-->
+                <syncfusion:SfChart.Behaviors>
+                    <syncfusion:ChartSelectionBehavior SelectionCursor="Hand" SelectionMode="MouseMove"/>
+                </syncfusion:SfChart.Behaviors>
+            </syncfusion:SfChart>
+            <syncfusion:SfChart x:Name="cMidder" AreaBorderThickness="0" Background="{x:Null}" IsHitTestVisible="False" >
+                <!--IsHitTestVisible="False" -->
+                <syncfusion:DoughnutSeries x:Name="doughnutSeries2" Background="{x:Null}"
+                                                   DoughnutCoefficient="0.5" DoughnutSize="0.8" ClipToBounds="False" 
+                                                   EnableSmartLabels="True" LabelPosition="Outside"  ShowTooltip="True" 
+                                                   XBindingPath="Name" SegmentSelectionBrush="White"
+                                                   YBindingPath="Value" Style="{StaticResource StyleDSeries}" 
+                                                   ItemsSource="{Binding DiagrammValueCollection}">
+                    <syncfusion:DoughnutSeries.ColorModel>
+                        <syncfusion:ChartColorModel>
+                            <syncfusion:ChartColorModel.CustomBrushes>
+                                <SolidColorBrush Color="#FFC087"/>
+                                <SolidColorBrush Color="Red"/>
+                                <SolidColorBrush Color="#F98E3C"/>
+                                <SolidColorBrush Color="#FFDEFF87"/>
+                                <SolidColorBrush Color="#FF87FFB8"/>
+                                <SolidColorBrush Color="#FF87C3FF"/>
+                                <SolidColorBrush Color="#FF5949FF"/>
+                                <SolidColorBrush Color="#FFFF87E9"/>
+                                <SolidColorBrush Color="#FFBB275D"/>
+                                <SolidColorBrush Color="#FF5DFF00"/>
+                            </syncfusion:ChartColorModel.CustomBrushes>
+                        </syncfusion:ChartColorModel>
+                    </syncfusion:DoughnutSeries.ColorModel>
+                    <syncfusion:DoughnutSeries.AdornmentsInfo>
+                        <syncfusion:ChartAdornmentInfo x:Name="vvv" LabelTemplate="{StaticResource LabelTemplate}"
+                                                               ShowLabel="True" ShowConnectorLine="True" ConnectorHeight="30" 
+                                                               AdornmentsPosition="Bottom" HorizontalAlignment="Center" 
+                                                               VerticalAlignment="Center" ConnectorLineStyle="{DynamicResource StyleLine}" 
+                                                               SegmentLabelContent="LabelContentPath" LabelPosition="Outer" UseSeriesPalette="True" />
+                    </syncfusion:DoughnutSeries.AdornmentsInfo>
+                </syncfusion:DoughnutSeries>
+                <syncfusion:SfChart.Behaviors>
+                    <syncfusion:ChartSelectionBehavior SelectionCursor="Hand"  SelectionMode="MouseMove"/>
+                </syncfusion:SfChart.Behaviors>
+            </syncfusion:SfChart>
+            <syncfusion:SfChart x:Name="cOuter" AreaBorderThickness="0"
+                            Background="{x:Null}" IsHitTestVisible="False" >
+                <!--IsHitTestVisible="False" -->
+                <syncfusion:DoughnutSeries x:Name="doughnutSeries3" Style="{StaticResource StyleDSeries}"
+                                                   SegmentSelectionBrush="White" ShowTooltip="True"
+                                                   Label="Outer" DoughnutCoefficient="0.4" DoughnutSize="1" 
+                                                   LabelPosition="Inside" XBindingPath="Name" YBindingPath="Value" 
+                                                   ItemsSource="{Binding RiskActivesCollection}">
+                    <syncfusion:DoughnutSeries.ColorModel>
+                        <syncfusion:ChartColorModel>
+                            <syncfusion:ChartColorModel.CustomBrushes>
+                                <SolidColorBrush Color="#FFC087"/>
+                                <SolidColorBrush Color="Red"/>
+                                <SolidColorBrush Color="#F98E3C"/>
+                                <SolidColorBrush Color="#FFDEFF87"/>
+                                <SolidColorBrush Color="#FF87FFB8"/>
+                                <SolidColorBrush Color="#FF87C3FF"/>
+                                <SolidColorBrush Color="#FF5949FF"/>
+                                <SolidColorBrush Color="#FFFF87E9"/>
+                                <SolidColorBrush Color="#FFBB275D"/>
+                                <SolidColorBrush Color="#FF5DFF00"/>
+                            </syncfusion:ChartColorModel.CustomBrushes>
+                        </syncfusion:ChartColorModel>
+                    </syncfusion:DoughnutSeries.ColorModel>
+
+                    <syncfusion:DoughnutSeries.AdornmentsInfo>
+                        <syncfusion:ChartAdornmentInfo SegmentLabelContent="LabelContentPath" ShowLabel="True" 
+                                                               LabelTemplate= "{StaticResource LabelTemplate2}"   
+                                                               HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                                               AdornmentsPosition="Bottom" ConnectorHeight="50" LabelPosition="Auto"/>
+                    </syncfusion:DoughnutSeries.AdornmentsInfo>
+
+                </syncfusion:DoughnutSeries>
+                <syncfusion:SfChart.Behaviors>
+                    <syncfusion:ChartSelectionBehavior SelectionCursor="Hand" SelectionMode="MouseMove"  />
+                </syncfusion:SfChart.Behaviors>
+            </syncfusion:SfChart>
+        </Grid>
+
+        <ScrollViewer Grid.Column="1" Margin="10">
+            <ItemsControl Name="iLegend" >
+                <!--ItemsSource="{Binding Segments, ElementName=sInner}"-->
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle Fill="{Binding Value}" Width="8" Height="8"></Rectangle>
+                            <TextBlock Text="{Binding Key.Name}" Margin="5,0,0,0" FontSize="12" Foreground="{StaticResource Gray86}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

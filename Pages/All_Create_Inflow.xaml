@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="Custodian.Pages.All_Create_Inflow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Custodian.Pages"
+             mc:Ignorable="d" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:tasc="clr-namespace:Custodian.Pages"
+             d:DesignHeight="600" d:DesignWidth="820" MinHeight="600" MinWidth="820"
+             >
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="b2v"/>
+    </UserControl.Resources>
+    <Grid Style="{StaticResource StyleMainBorder}">
+        <Grid Margin="0,0,0,394">
+            <tasc:CurrentTaskc/>
+        </Grid>
+        <Grid Margin="0,211,0,0">
+            <Label Height="26" Content="Create Inflow" Width="86" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="350,21,384,0"/>
+            <Label Height="30" Content="Select All Documents" Width="132" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="139,77,549,0"/>
+
+            <Label Height="30" Content="{Binding DocNumbers}" Width="132" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="139,147,549,0"/>
+
+            <Button  Template="{StaticResource ButtonControlTemplate}"  Style="{StaticResource StyleOkButton}" 
+                Content="Select" Height="24" Width="106"  VerticalAlignment="Top" HorizontalAlignment="Center"
+                Margin="150,116,564,0" Command="{Binding MultiSelect}" />
+            <Label Height="30" Content="{Binding infloDoc}" Width="132" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="271,112,417,0"/>
+
+            <Button   Template="{StaticResource ButtonControlTemplate}"  Style="{StaticResource StyleOkButton}"  
+                Content="Create New Task" Height="24" Width="140" VerticalAlignment="Top" HorizontalAlignment="Center" 
+                Margin="350,282,330,0"  Command="{Binding MultiorderSend}"/>
+            <Label x:Name="error" Height="28" Content="Only integers, more than 0" Width="158" VerticalAlignment="Top" HorizontalAlignment="Center"
+                Foreground="Red" Visibility="{Binding Formaterrorflag, Converter={StaticResource b2v}}"  Margin="527,135,135,0"/>
+
+            <Label x:Name="numbers" Height="28" Content="Number of Operations :" Width="133" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="552,77,135,0"/>
+
+            <TextBox x:Name="Buytxb" Width="100" Margin="558,110,162,221" Text="{Binding Inumber}"
+                     Style="{StaticResource StyleInput}" Height="Auto" VerticalAlignment="Top" HorizontalAlignment="Center">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="TextChanged">
+                        <i:InvokeCommandAction Command="{Binding FormatCount}" CommandParameter="{Binding ElementName=Buytxb, Path=Text}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
+        </Grid>
+    </Grid>
+
+
+</UserControl>

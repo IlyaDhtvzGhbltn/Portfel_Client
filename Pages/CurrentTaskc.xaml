@@ -1,0 +1,28 @@
+﻿<UserControl x:Class="Custodian.Pages.CurrentTaskc"
+               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Custodian.Pages"
+      mc:Ignorable="d" 
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:context="clr-namespace:Custodian.Model" 
+             d:DesignHeight="200" d:DesignWidth="820" MinHeight="200" MinWidth="820">
+    <Grid>
+
+        <Grid Background="{StaticResource Gray36}">
+            <Label Content="CURRENT TASKS:" Style="{StaticResource StyleTableHeader}" Grid.Row="0" Margin="6,0,0,178" />
+            <DataGrid Style="{StaticResource StyleTable}" x:Name="datagrid" Margin="10,29,10,0" Height="166" Width="Auto"
+                      VerticalAlignment="Top" HorizontalAlignment="Center" 
+                      AutoGenerateColumns="False" ItemsSource="{Binding tascKollections, Mode=TwoWay}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Task Number" Width="*" Binding="{Binding numberT}" />
+                    <DataGridTextColumn Header="Date Time IN" Width="*" Binding="{Binding dateIn}"/>
+                    <DataGridTextColumn Header="Current Status" Width="*" Binding="{Binding status}"/>
+                    <DataGridTextColumn Header="Date Time OUT" Width="*" Binding="{Binding dateOUT}"/>
+                    <DataGridTextColumn Header="Comment"  Width="*" Binding="{Binding comment}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</UserControl>

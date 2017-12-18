@@ -1,0 +1,199 @@
+﻿<UserControl x:Class="Custodian.Pages.Investment_Details"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+      xmlns:local="clr-namespace:Custodian.Pages"
+      xmlns:context ="clr-namespace:Custodian.Model"
+      mc:Ignorable="d" d:DesignWidth="800"
+      xmlns:convert="clr-namespace:Custodian.DALs.InterfaceService"
+      Height="315" Loaded="UserControl_Loaded" BorderBrush="{StaticResource Gray26}" BorderThickness="1">
+
+
+    <Grid Background="{StaticResource Gray46}">
+        <TabControl Style="{StaticResource StyleTabControl}" Margin="0" >
+            <TabItem Header="INVESTMENT"  BorderThickness="0"  >
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <DataGrid x:Name="DGInvestmentDetails" ItemsSource="{Binding InvestCollection}" 
+                                                  AutoGenerateColumns="False" IsReadOnly="True" FontSize="13"
+                                                  Style="{StaticResource StyleTable}" SelectedIndex="{Binding SelectedIndexCurrent}"
+                                                  CurrentCell="{Binding CellInfo, Mode=OneWayToSource}" Grid.Row="0">
+                        <DataGrid.Resources>
+                            <convert:CellToBrushConverter x:Key="CellConvert"/>
+                        </DataGrid.Resources>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                <i:InvokeCommandAction Command="{Binding SelectDetails}" />
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="MouseDoubleClick">
+                                <i:InvokeCommandAction Command="{Binding GetInfoInNew}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn  Header="Ticker" MinWidth="50" Width="auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Type}" ToolTip="{Binding Type}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn  Header="Currency" MinWidth="50" Width="auto" >
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Value}" ToolTip="{Binding Value}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Date" MinWidth="100" Width="auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Date}" ToolTip="{Binding Date}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Units" MinWidth="90" Width="auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Units}" ToolTip="{Binding Units}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Aq.Price" MinWidth="80" Width="auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding AqPr}" ToolTip="{Binding AqPr}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Quote" MinWidth="80" Width="auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Quote}" ToolTip="{Binding Quote}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Isin"  Width="auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Isin}" ToolTip="{Binding Isin}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Market Value" MinWidth="70" Width="auto" >
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Markedvalue}" ToolTip="{Binding Markedvalue}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Market Value USD" MinWidth="70" Width="auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding MarkedvalueUSD}" ToolTip="{Binding MarkedvalueUSD}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Indicative Perfomance" Width="auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding profit}" ToolTip="{Binding profit}">
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="Foreground" Value="{Binding Converter={StaticResource CellConvert}}"/>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Weight, %" MinWidth="70" Width="auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Percent}" ToolTip="{Binding Percent}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Valuation Date" MinWidth="100" Width="auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding currentDate}" ToolTip="{Binding currentDate}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <GridSplitter Grid.Row="1" Height="10" Style="{StaticResource StyleSplitter}" 
+                                                      HorizontalAlignment="Stretch" />
+
+
+
+                    <DataGrid ItemsSource="{Binding TotalInvestCollection, Mode=TwoWay}" 
+                                                  AutoGenerateColumns="False" FontSize="13"
+                                                  Style="{StaticResource StyleTable}"
+                                                  IsReadOnly="True" Grid.Row="3">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Operation"  MinWidth="50" Width="auto" >
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Operation}" ToolTip="{Binding Operation}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Title" MinWidth="90" Width="auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding  Title}" ToolTip="{Binding Title}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Isin" MinWidth="50" Width="auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Isin}" ToolTip="{Binding Isin}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Value" MinWidth="50" Width="auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding value}" ToolTip="{Binding value}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Units" MinWidth="90" Width="auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Units}" ToolTip="{Binding Units}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Aq.Price" MinWidth="70" Width="auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding AqP}" ToolTip="{Binding AqP}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Date" MinWidth="70" Width="auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Date}" ToolTip="{Binding Date}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

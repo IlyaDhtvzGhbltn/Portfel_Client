@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="Custodian.Pages.All_Create_Outflow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Custodian.Pages"
+             mc:Ignorable="d" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:tasc="clr-namespace:Custodian.Pages"
+             d:DesignHeight="600" d:DesignWidth="820" MinHeight="600" MinWidth="820">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="b2v"/>
+    </UserControl.Resources>
+
+    <Grid  Style="{StaticResource StyleMainBorder}">
+        <Grid Margin="0,0,0,394">
+            <tasc:CurrentTaskc/>
+        </Grid>
+        <Grid Margin="0,211,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+
+            </Grid.RowDefinitions>
+            <Label Height="26" Content="Create Outflow" Width="105" VerticalAlignment="Top" HorizontalAlignment="Center"  Grid.Row="0"/>
+
+            <StackPanel  Grid.Row="1" Orientation="Vertical">
+                <Label  Content="Select Document" Width="104" VerticalAlignment="Top" HorizontalAlignment="Center" />
+                <Label x:Name="mainSelect" Height="30" Content="{Binding mainSelect}" Margin="0,0,0,-10" HorizontalAlignment="Center" Width="auto"/>
+                <Button  Template="{StaticResource ButtonControlTemplate}"  Style="{StaticResource StyleOkButton}"
+                Content="Select"  Command="{Binding SelectMainDoc}" />
+            </StackPanel>
+
+
+
+
+            <StackPanel Grid.Row="2">
+                <Label x:Name="numbers" Height="28" Content="Number of Operations  :" Width="134" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="355,12,331,0" />
+                <TextBox x:Name="Buytxb" Width="100"
+                     Style="{StaticResource StyleInput}" Height="Auto" Text="{Binding Onumber}" VerticalAlignment="Top" HorizontalAlignment="Center">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="TextChanged">
+                            <i:InvokeCommandAction Command="{Binding FormatCount}" CommandParameter="{Binding ElementName=Buytxb, Path=Text}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
+                <Label x:Name="error" Height="28" Content="Only integers, more than 0" Width="158" VerticalAlignment="Top" HorizontalAlignment="Center"
+                Foreground="Red" Visibility="{Binding Formaterrorflag, Converter={StaticResource b2v}}" />
+            </StackPanel>
+
+            <Button   Template="{StaticResource ButtonControlTemplate}"  Style="{StaticResource StyleOkButton}"  Grid.Row="3"
+                Content="Create New Task" Height="24" Width="140" VerticalAlignment="Top" HorizontalAlignment="Center" 
+                Command="{Binding SendOrder}"/>
+        </Grid>
+    </Grid>
+</UserControl>

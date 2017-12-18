@@ -1,0 +1,96 @@
+﻿<UserControl x:Class="Custodian.Pages.Summary_ClientDet_Docs"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Custodian.Pages"
+      mc:Ignorable="d" 
+      xmlns:context ="clr-namespace:Custodian.Model"
+      d:DesignHeight="350" d:DesignWidth="300" Loaded="UserControl_Loaded" >
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="B2V"/>
+    </UserControl.Resources>
+
+    <Border Style="{StaticResource StyleMainBorder}" HorizontalAlignment="Stretch" >
+        <Grid>
+            <TabControl Name="Summar" Style="{StaticResource StyleTabControl}" BorderBrush="Transparent" Margin="-2" >
+
+                <TabItem Header="SUMMARY"  Style="{StaticResource StyleTab}" Margin="0,0,3,0" RenderTransformOrigin="0.5,0.5"  >
+                    <TabItem.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="0.128"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TabItem.RenderTransform>
+                    <Border Style="{StaticResource StyleInnerBorder}">
+                        <Grid x:Name="OrderDetails">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="Contract No." Style="{StaticResource StyleComment}" Grid.Row="0" Grid.Column="0" FontSize="14"/>
+                            <Label Content="{Binding Order}" Style="{StaticResource StyleLabel}" Grid.Row="0" Grid.Column="3" FontSize="14"/>
+
+                            <Label Content="Currency" Style="{StaticResource StyleComment}" Grid.Row="1" Grid.Column="0" FontSize="14"/>
+                            <Label Content="USD"  Style="{StaticResource StyleLabel}" Grid.Row="1" Grid.Column="1" FontSize="14"/>
+
+                            <Label Content="Status" Style="{StaticResource StyleComment}" Grid.Row="2" Grid.Column="0" FontSize="14"/>
+                            <Label Content="{Binding Status}" Style="{StaticResource StyleLabel}" Grid.Row="2" Grid.Column="1" FontSize="14"/>
+
+                            <Label Content="Subscription Date" Style="{StaticResource StyleComment}" Grid.Row="3" Grid.ColumnSpan="1" FontSize="14"/>
+                            <Label Content="{Binding DateReg}"  Style="{StaticResource StyleLabel}" Grid.Row="3" Grid.Column="3" FontSize="14"/>
+
+                            <Label Content="Consultant" Style="{StaticResource StyleComment}" Grid.Row="4" Grid.ColumnSpan="2" FontSize="14"/>
+                            <Label Content="{Binding Adviser}"  Style="{StaticResource StyleLabel}" Grid.Row="4" Grid.Column="1" FontSize="14"/>
+
+                            <Label Content="{Binding Company}"  Style="{StaticResource StyleLabel}" Grid.Row="5" Grid.Column="1" FontSize="14"/>
+
+                        </Grid>
+                    </Border>
+                </TabItem>
+
+                <TabItem Header="CLIENT DETAILS"  Style="{StaticResource StyleTab}" Template="{StaticResource TemplateTab}" Margin="-5,0,13,0" >
+                    <Grid x:Name="Details" 
+                            HorizontalAlignment="Stretch" 
+                            Style="{StaticResource StyleLabel}">
+                        <Label Content="Client Details" FontSize="16" Margin="0,0,65,0" Style="{StaticResource StyleComment}"/>
+                        <Label Content="Name" Margin="0,25,110,0" Style="{StaticResource StyleComment}"/>
+                        <Label Content="{Binding FIO}" Margin="125,25,0,0"  Style="{StaticResource StyleLabel}"/>
+                        <Label Content="Date of Birth" Margin="0,54,110,0" Style="{StaticResource StyleComment}"/>
+                        <Label Content="{Binding DateofBirth}" Margin="120,54,0,0" HorizontalAlignment="Left" Width="100" Style="{StaticResource StyleLabel}"/>
+
+                        <DataGrid Margin="0,80,0,0" 
+                              ItemsSource="{Binding TestCollection}" 
+                              AutoGenerateColumns="False" 
+                              GridLinesVisibility="Vertical"
+                              Style="{StaticResource StyleTable}" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding title}"/>
+                                <DataGridTextColumn Binding="{Binding result}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+            <Button x:Name="btn_Library" Style="{StaticResource StyleButton}" Template="{StaticResource ButtonControlTemplate}"
+                    Padding="0" Background="{StaticResource Gray36}" BorderBrush="{StaticResource Gray26}"
+                    VerticalAlignment="Top" HorizontalAlignment="Right" Width="82"
+                    Margin="0,-3,0,0" Content="Library" Click="btn_Library_Click"  />
+            <!--Click="btn_Library_Click"-->
+        </Grid>
+    </Border>
+</UserControl>

@@ -1,0 +1,176 @@
+﻿<Page x:Class="Custodian.Pages.Admin.ClientOperations.TestRiscProfil"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Custodian.Pages.Admin.ClientOperations"
+      mc:Ignorable="d" 
+      Background="AntiqueWhite"
+      d:DesignHeight="2600" d:DesignWidth="800"
+      Title="TestRiscProfil">
+    <Grid>
+        <ScrollViewer CanContentScroll="True">
+            <Grid x:Name="TestContent">
+                <Grid.RowDefinitions>
+
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="200"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="150"/>
+                    <RowDefinition Height="150"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="300"/>
+                    <RowDefinition Height="330"/>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="150"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <RadioButton Content="RU" x:Name="RUS" IsChecked="True" Height="20" Width="55" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="305,10,423,10"/>
+                    <RadioButton Checked="GoToENGVersion" Content="ENG" Height="20" Width="55" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="385,10,343,10"/>
+                </Grid>
+
+                <Grid Grid.Row="1" Background="Aquamarine">
+                    <Label Content="ПРОФИЛЬ ИНВЕСТИЦИОННОГО РИСКА
+ВАЖНО: ПРОЧТИТЕ ДО ЗАПОЛНЕНИЯ ФОРМЫ ПРОФИЛЯ РИСКА!" Height="25" MinWidth="600" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                    <TextBlock Text= "    Приведенные вопросы помогут оценить Ваше отношение к риску, финансовые средства и цели инвестирования до того, как Вы выберете подходящий инвестиционный продукт или продукты. Если Вы не хотите предоставлять какую-то определенную информацию, пожалуйста, укажите это рядом с соответствующим вопросом. Если Вы считаете, что ни один из предлагаемых вариантов ответа Вам не подходит, пожалуйста, напишите свой ответ. Все рекомендации будут основываться на информации, которую Вы предоставили (или отказались предоставлять) в рамках настоящей формы. Поэтому очень важно, чтобы предоставляемая Вами информация была полной и достоверной (Вы можете использовать дополнительные листы при необходимости), поскольку это может повлиять на уместность наших рекомендаций. Вы подтверждаете и признаете, что, если Вы предоставите неполную и/или недостоверную информацию и/или примете решение не предоставлять определенную информацию, подобные действия могут иметь негативные последствия для результатов профилирования, за которые мы не несем ответственности.
+" TextWrapping="Wrap" Margin="10,30,0,0"/>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Label Content="Каков Ваш возраст?" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+                    <RadioButton Margin="10,30,0,0" Tag="6" Name="A10" Content="Менее 64 лет" Height="20" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" Click="TestContent_MouseDown"/>
+                    <RadioButton Margin="10,50,0,0" Tag="5" Name="A20" Content="От 64 до 79 лет " Height="20" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" Click="TestContent_MouseDown"/>
+                    <RadioButton Margin="10,70,0,0" Tag="4" Name="A30"  Content="80 и более лет " Height="20" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" Click="TestContent_MouseDown"/>
+                </Grid>
+                <Grid Grid.Row="3">
+                    <Label Content="На какой срок Вы желаете осуществить инвестиции?" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+                    <RadioButton Margin="10,30,0,0" Tag="4" Name="B11"  Content="Менее 3 лет " Height="20" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" Click="TestContent_MouseDown"/>
+                    <RadioButton Margin="10,50,0,0" Tag="5" Name="B21" Click="TestContent_MouseDown" Content="Не менее 3 лет" Height="20" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <RadioButton Margin="10,70,0,0" Tag="6" Name="B31" Click="TestContent_MouseDown" Content="Без определенного срока " Height="20" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                </Grid>
+
+                <Grid Grid.Row="4">
+                    <TextBlock Text="Какой процент Ваших ликвидных чистых активов Вы готовы инвестировать в финансовые инструменты.
+Ликвидные чистые активы (т.е. средства, к которым вы имеете оперативный доступ) = [Текущие счета + сбережения + инвестиции] за вычетом общей непогашенной задолженности. Пожалуйста, не включайте сюда недвижимость или стоимость предприятия, которым Вы владеете.
+" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap"/>
+
+                    <RadioButton Margin="10,70,0,0" Name="C12" Tag="6" Click="TestContent_MouseDown" Content="Менее 25%  " Height="20" MinWidth="200" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <RadioButton Margin="10,90,0,0" Name="C22"  Tag="5" Click="TestContent_MouseDown" Content="От 25% до 50% " Height="20" MinWidth="200" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <RadioButton Margin="10,110,0,0" Name="C32"  Tag="4" Click="TestContent_MouseDown" Content="Более 50%" Height="20" MinWidth="200" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                </Grid>
+
+                <Grid Grid.Row="5">
+                    <TextBlock Text="Я рассчитываю на то, что _______ средств, которые я инвестировал в финансовые продукты, включая доход, будут использованы для покрытия моих расходов в текущем году." VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap"/>
+                    <RadioButton Margin="10,70,0,0" Name="D13"  Tag="6" Click="TestContent_MouseDown" Content="Менее 25%" Height="20" MinWidth="200" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <RadioButton Margin="10,90,0,0"  Name="D23" Tag="5" Click="TestContent_MouseDown" Content="От 25% до 50% " MinWidth="20" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <RadioButton Margin="10,110,0,0" Name="D33" Tag="4" Click="TestContent_MouseDown" Content="Более 50%" MinWidth="20" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                </Grid>
+
+                <Grid Grid.Row="6" Background="Aquamarine">
+                    <Label Content="ОТНОШЕНИЕ К РИСКУ" Height="25" MinWidth="200" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Нижеследующие вопросы предназначены для того, чтобы помочь нам оценить комфортный для Вас уровень инвестиционных рисков в связи с нашим сотрудничеством.
+" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,30,0,0" TextWrapping="Wrap"/>
+                </Grid>
+
+
+                <Grid Grid.Row="7">
+                    <TextBlock Text="Какое из нижеследующих утверждений наилучшим образом описывает Ваши инвестиционные цели в нашем сотрудничестве?" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap"/>
+                    <RadioButton Tag="1" Name="E14" Click="TestContent_MouseDown" Margin="10,70,0,0" Content="Безопасность – Я хочу защитить свой капитал и согласен на получение дохода на уровне сберегательного счета." Height="20" MinWidth="700" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <RadioButton Tag="2" Name="E24" Click="TestContent_MouseDown" Margin="10,90,0,0" Height="40" MinWidth="700" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <RadioButton.Content>
+                            <TextBlock Text="Сохранение – Я стремлюсь сохранить стоимость своих инвестиций и согласен на получение дохода свыше дохода сберегательного счета. " TextWrapping="Wrap"/>
+                        </RadioButton.Content>
+                    </RadioButton>
+                    <RadioButton Name="E34" Tag="2" Click="TestContent_MouseDown" Margin="10,125,0,0" Content=" Ориентированность на доход – Я предпочитаю регулярный доход и некоторый прирост капитала. " Height="20" MinWidth="700" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+                    <RadioButton Name="E44"  Tag="3" Click="TestContent_MouseDown" Margin="10,145,0,0" Content=" Прирост капитала и доход – Я предпочитаю равное отношение прироста капитала и регулярного дохода.  " Height="20" MinWidth="700" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+                    <RadioButton Name="E54" Tag="4" Click="TestContent_MouseDown" Margin="10,165,0,0" Height="40" MinWidth="700" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <RadioButton.Content>
+                            <TextBlock TextWrapping="Wrap" Text="Ориентированность на прирост капитала – В первую очередь, я стремлюсь к приросту капитала с некоторой долей регулярного дохода."/>
+                        </RadioButton.Content>
+                    </RadioButton>
+
+                    <RadioButton Name="E64" Tag="5" Click="TestContent_MouseDown" Margin="10,200,0,0" Content=" Прирост капитала – Мне интересен только прирост капитала, и не нужен регулярный доход.  " Height="20" MinWidth="700" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+                    <RadioButton Name="E74" Tag="6" Click="TestContent_MouseDown" Margin="10,220,0,0" Height="66" MinWidth="700" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <RadioButton.Content>
+                            <TextBlock TextWrapping="Wrap" Text="Инвестиции для специалиста – Мне интересны инвестиции для специалистов, при том, что такие инвестиции могут иметь неясное ценообразование, значительные колебания в цене, ограниченную ликвидность и/или ограничение прав погашения. Примерами инвестиций для специалистов являются сделки на разницу курсов валют, хэдж-фонды и прямые инвестиции. "/>
+                        </RadioButton.Content>
+                    </RadioButton>
+                </Grid>
+
+
+                <Grid Grid.Row="8">
+                    <TextBlock Text="Какое из нижеследующих утверждений наилучшим образом описывает объем рыночных колебаний стоимости Ваших инвестиций, который является допустимым для Вас? " VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap"/>
+
+                    <RadioButton Name="F15" Click="TestContent_MouseDown"  Margin="10,50,0,0" Height="40" MinWidth="700" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <RadioButton.Content>
+                            <TextBlock Tag="1" Text="Я предпочитаю инвестиции с минимальными колебаниями цены, которые могут быть в обычном порядке реализованы в течение недели, или обещают возврат моих средств в течение года. " TextWrapping="Wrap"/>
+                        </RadioButton.Content>
+                    </RadioButton>
+                    <RadioButton Name="F25"  Tag="2" Click="TestContent_MouseDown" Margin="10,90,0,0" Height="40" MinWidth="700" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <RadioButton.Content>
+                            <TextBlock Text="Я допускаю инвестиции с ограниченными отрицательными движениями цен, которые могут быть в обычном порядке реализованы в течение недели за цену, приближенную к актуальной среднерыночной цене.   " TextWrapping="Wrap"/>
+                        </RadioButton.Content>
+                    </RadioButton>
+                    <RadioButton Name="F35"  Tag="3" Click="TestContent_MouseDown" Margin="10,130,0,0" Height="40" MinWidth="700" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <RadioButton.Content>
+                            <TextBlock Text="Я допускаю инвестиции с умеренными отрицательными движениями цен, которые могут быть в обычном порядке реализованы в течение недели за цену, приближенную к актуальной среднерыночной цене.  " TextWrapping="Wrap"/>
+                        </RadioButton.Content>
+                    </RadioButton>
+                    <RadioButton Name="F45"  Tag="4" Click="TestContent_MouseDown" Margin="10,170,0,0" Height="50" MinWidth="700" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <RadioButton.Content>
+                            <TextBlock Text="Я допускаю инвестиции со значительными отрицательными движениями цен, которые могут нести небольшой риск потери их полной стоимости, и которые может быть сложно реализовать, либо которые могут быть реализованы ниже актуальной среднерыночной цены. " TextWrapping="Wrap"/>
+                        </RadioButton.Content>
+                    </RadioButton>
+                    <RadioButton Name="F55"  Tag="5" Click="TestContent_MouseDown" Margin="10,230,0,0" Height="50" MinWidth="700" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <RadioButton.Content>
+                            <TextBlock Text="Я допускаю инвестиции со значительными отрицательными движениями цен, которые могут нести существенный риск потери их полной стоимости, и которые может быть сложно или невозможно реализовать в течение длительного периода времени.
+ " TextWrapping="Wrap"/>
+                        </RadioButton.Content>
+                    </RadioButton>
+                    <RadioButton Name="F65"  Tag="6" Click="TestContent_MouseDown" Margin="10,280,0,0" Height="50" MinWidth="700" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <RadioButton.Content>
+                            <TextBlock Text="Я допускаю инвестиции, которые могут нести высокий риск потери их полной стоимости, либо даже риск потери сверх моих инвестиций, и цена которых в любой момент времени является значительно неопределенной и которые может быть сложно или невозможно реализовать в течение длительного периода времени." TextWrapping="Wrap"/>
+                        </RadioButton.Content>
+                    </RadioButton>
+                </Grid>
+
+                <Grid Grid.Row="9" Background="Aquamarine" >
+                    <Label Content="ЗНАНИЯ И ОПЫТ" Height="25" MinWidth="200" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                    <TextBlock TextWrapping="Wrap" Margin="10,30,0,0" Text="Нижеследующие вопросы предназначены для того, чтобы помочь нам оценить степень Вашего знакомства и осведомленности и различных типах инвестиционных продуктов."/>
+                </Grid>
+
+
+                <Grid Grid.Row="10" >
+                    <TextBlock TextWrapping="Wrap" Margin="10,10,0,0" Text="Опишите Ваши познания и опыт в сфере инвестиций:"/>
+
+                    <RadioButton Name="J16"  Tag="3" Click="TestContent_MouseDown" Margin="10,30,0,0" Height="50" MinWidth="700" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <RadioButton.Content>
+                            <TextBlock Text="Ограниченные – Мои познания в сфере инвестиций небольшие или отсутствуют, если не считать сберегательных счетов или срочных депозитов.  " TextWrapping="Wrap"/>
+                        </RadioButton.Content>
+                    </RadioButton>
+
+                    <RadioButton Name="J26" Tag="4" Click="TestContent_MouseDown" Margin="10,65,0,0" Height="50" MinWidth="700" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <RadioButton.Content>
+                            <TextBlock Text="Умеренные – Я имею общие познания и понимание в сфере инвестиций, которые не являются сберегательными счетами или срочными депозитами, и я осведомлен об обычных рисках с которыми связано инвестирование." TextWrapping="Wrap"/>
+                        </RadioButton.Content>
+                    </RadioButton>
+
+                    <RadioButton Name="J36" Tag="6" Click="TestContent_MouseDown" Margin="10,100,0,0" Height="50" MinWidth="700" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <RadioButton.Content>
+                            <TextBlock Text="Обширные – Я имею обширные познания и понимание в сфере инвестиций, мой опыт достаточен для того, чтобы самостоятельно принимать инвестиционные решения. " TextWrapping="Wrap"/>
+                        </RadioButton.Content>
+                    </RadioButton>
+                </Grid>
+
+                <Grid Grid.Row="11" Background="Azure">
+                    <Button Height="25" Width="100" Content="Готово" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,10" Click="Button_Click"/>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>
