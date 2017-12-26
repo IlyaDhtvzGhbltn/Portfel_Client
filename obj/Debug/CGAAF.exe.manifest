@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="CGAAF.exe" size="894928">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="CGAAF.exe" size="903632">
       <assemblyIdentity name="CGAAF" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>R5ZJPbGQqm1Fqks4H4F29kEgPIKu6xPBbjunn13+YX0=</dsig:DigestValue>
+        <dsig:DigestValue>k2awduq4CII4cqae0DlR2cV5W4n9Lez3dJfSYnrGw5Y=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -519,13 +519,13 @@
       <dsig:DigestValue>blyWizW1NfGyaKuCzMSTTF902d+hVLuXMFrfyosQGoQ=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="CGAAF.exe.config" size="2453">
+  <file name="CGAAF.exe.config" size="2502">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>DTdGwAVp5kzqLmR3yX+EFNYpHyfIRH0Eivhb61HQnyU=</dsig:DigestValue>
+      <dsig:DigestValue>V09LdhxGraKyH/MqkyhcImryB3VbCIzO/wADke/5Yqo=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

@@ -25,9 +25,92 @@ FontSize="12" FontFamily="{StaticResource MainFont}" Foreground="{StaticResource
 HorizontalAlignment="Center" VerticalAlignment="Center" />
         </DataTemplate>
 
+        <Style x:Key="SliderThumb" TargetType="Thumb">
+            <Setter Property="Focusable" Value="false"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Thumb">
 
-        
-        
+                        <Ellipse StrokeThickness="0.2" Stroke="black" Fill="#FFF98D3B" Width="26" Height="26">
+                            <Ellipse.BitmapEffect>
+                                <DropShadowBitmapEffect></DropShadowBitmapEffect>
+                            </Ellipse.BitmapEffect>
+                        </Ellipse>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SliderRepeatEmptyButton" TargetType="RepeatButton">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="IsTabStop" Value="false" />
+            <Setter Property="Focusable" Value="false" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Rectangle Name="HorizontalTrackRect" Height="16"
+                               Fill="#FF878787"	 RadiusX="5" RadiusY="5"	
+                               Margin="-14 0 0 0" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SliderRepeatCompleteButton" TargetType="RepeatButton">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Rectangle Name="HorizontalTrackRect" Height="16"
+                               Fill="#FFF98D3B"	 RadiusX="5" RadiusY="5"	
+                               Margin="0 0 -14 0" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <ControlTemplate x:Key="FinPlanSlider"  TargetType="Slider">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Track Grid.Row="1" x:Name="PART_Track">
+                    <Track.DecreaseRepeatButton>
+                        <RepeatButton Style="{StaticResource SliderRepeatCompleteButton}"  Command="Slider.DecreaseLarge" />
+                    </Track.DecreaseRepeatButton>
+
+                    <Track.IncreaseRepeatButton>
+                        <RepeatButton Style="{StaticResource SliderRepeatEmptyButton}" Command="Slider.IncreaseLarge"/>
+                    </Track.IncreaseRepeatButton>
+
+                    <Track.Thumb>
+                        <Thumb Style="{StaticResource SliderThumb}"  />
+                    </Track.Thumb>
+                </Track>
+            </Grid>
+        </ControlTemplate>
+
+        <Style x:Key="FinPlanTextBox" TargetType="TextBox">
+            <Setter Property="FontFamily" Value="MainFont"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Background" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border BorderThickness="2" BorderBrush="#FF868686" CornerRadius="4" >
+                            <Border x:Name="PART_ContentHost" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="StyleTableHeader">
             <Setter Property="Control.FontSize" Value="12"/>
             <Setter Property="Control.FontFamily" Value="{StaticResource MainFont}"/>

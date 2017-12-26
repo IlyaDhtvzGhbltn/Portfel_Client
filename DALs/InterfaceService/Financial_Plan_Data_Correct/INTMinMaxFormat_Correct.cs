@@ -9,11 +9,10 @@ using System.Windows.Controls;
 
 namespace Custodian.DALs.InterfaceService.Financial_Plan_Data_Correct
 {
-    class INTMinMaxFormat_Correct : ValidationRule
+    public sealed class INTMinMaxFormat_Correct : ValidationRule
     {
         public int Min { get; set; }
         public int Max { get; set; }
-
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             var str = value as string;

@@ -9,7 +9,8 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:correct="clr-namespace:Custodian.DALs.InterfaceService.Financial_Plan_Data_Correct"
         Title="Financial_Plan"
-        Height="700" Width="800" MinWidth="1000">
+        ResizeMode="NoResize"
+        Height="599" Width="1200" >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="32"/>
@@ -17,74 +18,83 @@
         </Grid.RowDefinitions>
         <Grid  Background="{StaticResource Gray26}" Grid.Row="0"
                MouseLeftButtonDown="Grid_MouseLeftButtonDown">
-            <Label Content="FINANCIAL PLAN" HorizontalAlignment="Center"
-                   Style="{StaticResource StyleTableHeader}" VerticalAlignment="Center"/>
-
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-
                 <Button Content="_" Width="20" Margin="5,5" FontFamily="{StaticResource MainFont}" Click="MinimaseState_Click"
                     Template="{StaticResource ButtonControlTemplate}" Style="{StaticResource StyleButton}" Cursor="Hand"/>
                 <Button Content="▀" Width="20" Margin="5,5" FontFamily="{StaticResource MainFont}" Click="NormalState_Click"
-                    Template="{StaticResource ButtonControlTemplate}" Style="{StaticResource StyleButton}" Cursor="Hand"/>
+                    Template="{StaticResource ButtonControlTemplate}" Style="{StaticResource StyleButton}" Cursor="Hand" IsEnabled="False"/>
                 <Button Content="X" Width="20" Margin="5,5" FontFamily="{StaticResource MainFont}" Click="Hide_Click"
                     Template="{StaticResource ButtonControlTemplate}" Style="{StaticResource StyleButton}" Cursor="Hand"/>
             </StackPanel>
         </Grid>
         <Grid Background="{StaticResource Gray46}" Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="310"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Grid Margin="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="630"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <Border BorderBrush="Black" BorderThickness="1">
-                    <StackPanel Grid.Row="0" Orientation="Vertical" Margin="10">
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch"  Margin="10" Name="ParentPanel1">
-                            <TextBox Width="100" Height="22" FontFamily="{StaticResource MainFont}" 
-                                 IsEnabled="{Binding IsEnabledTextBoxs}" Name="InvSumm">
-                                <TextBox.Text>
-                                    <Binding Path="CurrentPortfel" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+            <TextBlock x:Name="Financial_plan1" Foreground="White" FontWeight="Bold"
+                           FontSize="16" FontFamily="Futuris Cyrillic" IsHyphenationEnabled="True" 
+                           HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10"
+                           TextAlignment="Left" TextWrapping="Wrap" Text="Financial plan">
+            </TextBlock>
+
+            <Grid x:Name="Financial_plan" ClipToBounds="True" HorizontalAlignment="Left" Height="599"
+                  UseLayoutRounding="False" VerticalAlignment="Top" Width="1200">
+
+                <Grid x:Name="Settings" Background="#FF292929" Height="238"
+                       Width="542" Margin="20,40,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition Height="0.9*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Column="0" Grid.Row="0">
+                        <StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="30" Margin="0, 10, 0, 0">
+                            <TextBlock Text="Investment summ. (USD)" Foreground="White" FontWeight="Bold" Margin="10,7,0,0"/>
+                                <TextBox Style="{StaticResource FinPlanTextBox}" IsEnabled="{Binding IsEnabledTextBoxs}"
+                                         Name="InvSummText" Width="90" Margin="20, 0">
+                                    <Binding Path="CurrentPortfel" UpdateSourceTrigger="PropertyChanged" ValidatesOnNotifyDataErrors="True">
                                         <Binding.ValidationRules>
-                                            <correct:INTMinMaxFormat_Correct Min="500000" Max="1000000000"/>
+                                            <correct:INTMinMaxFormat_Correct Min="1000000" Max="100000000"/>
                                         </Binding.ValidationRules>
                                     </Binding>
-                                </TextBox.Text>
-                            </TextBox>
-
-                            <Label Content="Investment Summ (USD)" Foreground="White" FontFamily="{StaticResource MainFont}"/>
-                            <Slider Margin="40,5" TickFrequency="1" Width="310" IsSnapToTickEnabled="True" 
-                                Maximum="1000000000" Minimum="500000" 
-                                Value="{Binding ElementName=InvSumm, Path=Text, Mode=TwoWay}" HorizontalAlignment="Stretch"
-                                IsEnabled="{Binding IsEnabledTextBoxs}">
-                            </Slider>
+                                </TextBox>
+                            </StackPanel>
+                        <Slider Template="{StaticResource FinPlanSlider}"  Name="InvSummSlider" Margin="10, 10"
+                                Value="{Binding ElementName=InvSummText, Path=Text}" 
+                                Minimum="1000000" Maximum="100000000" IsEnabled="{Binding IsEnabledTextBoxs}"
+                                Orientation="Horizontal" TickFrequency="100" IsSnapToTickEnabled="True"/>
                         </StackPanel>
+                    </Grid>
 
-                        <StackPanel Orientation="Horizontal"  Margin="10">
-                            <TextBox Width="100" Height="22"  IsEnabled="{Binding IsEnabledTextBoxs}" Name="Pri">
-                                <TextBox.Text>
-                                    <Binding Path="CurrentPRI" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                    <Grid Grid.Column="0" Grid.Row="1">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Height="30" Margin="0, 10, 0, 0">
+                                <TextBlock Text="PRI" Foreground="White" FontWeight="Bold" Margin="10,7,0,0"/>
+
+                                <TextBox Style="{StaticResource FinPlanTextBox}" Name="PRIText" IsEnabled="{Binding IsEnabledTextBoxs}"
+                                         Width="90" Margin="140,0" >
+                                    <TextBox.Text>
+                                    <Binding Path="CurrentPRI" UpdateSourceTrigger="PropertyChanged" ValidatesOnNotifyDataErrors="True" >
                                         <Binding.ValidationRules>
-                                            <correct:INTMinMaxFormat_Correct Min="1" Max="6" />
-                                        </Binding.ValidationRules>
+                                                <correct:INTMinMaxFormat_Correct Min="1" Max="6"/>
+                                            </Binding.ValidationRules>
                                     </Binding>
-                                </TextBox.Text>
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="TextChanged">
-                                        <i:InvokeCommandAction Command="{Binding PropertyValidChanged}"/>
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                            </TextBox>
-                            <Label Content="PRI" Foreground="White" FontFamily="{StaticResource MainFont}"/>
-                            <Slider Margin="142,0" TickFrequency="1"  MinWidth="310" Minimum="1" Maximum="6" HorizontalAlignment="Stretch"
-                                Value="{Binding ElementName=Pri, Path=Text, Mode=TwoWay}" IsSnapToTickEnabled="True" IsEnabled="{Binding IsEnabledTextBoxs}">
-                            </Slider>
+                                    </TextBox.Text>
+                                </TextBox>
+                            </StackPanel>
+                            <Slider Template="{StaticResource FinPlanSlider}"  
+                                    Margin="10, 10" Name="PriSlider" IsSnapToTickEnabled="True"
+                                Value="{Binding ElementName=PRIText, Path=Text}" IsEnabled="{Binding IsEnabledTextBoxs}"
+                                    Minimum="1" Maximum="6" Orientation="Horizontal" TickFrequency="1"/>
                         </StackPanel>
+                    </Grid>
 
-                        <CheckBox Content="Get from Current Portfell" Template="{StaticResource TemplateCheckBox}" Style="{StaticResource StyleInput}"
-                              FontFamily="{StaticResource MainFont}" Height="15" Margin="10">
+                    <Grid Grid.Column="0" Grid.Row="2">
+                        <CheckBox Content="Get from Current Portfolio" FontWeight="Bold"
+                                  Template="{StaticResource TemplateCheckBox}" Style="{StaticResource StyleInput}" >
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Checked">
                                     <i:InvokeCommandAction Command="{Binding InsertCurrentPortfelData}"/>
@@ -94,125 +104,273 @@
                                     <i:InvokeCommandAction Command="{Binding CheckNull}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
+
                         </CheckBox>
-                        <StackPanel Orientation="Horizontal" Margin="10">
-                            <TextBox Width="100" Height="22" Name="Profit">
-                                <TextBox.Text>
-                                    <Binding Path="Target" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
-                                        <Binding.ValidationRules>
-                                            <correct:INTMinMaxFormat_Correct Min="1" Max="500"/>
-                                        </Binding.ValidationRules>
-                                    </Binding>
-                                </TextBox.Text>
-                            </TextBox>
-                            <Label Content="Target (% Profit)" Foreground="White" FontFamily="{StaticResource MainFont}"/>
-                            <Slider Margin="82,0" Minimum="1" TickFrequency="1" Maximum="500" MinWidth="310" IsSnapToTickEnabled="True"
-                                Value="{Binding ElementName=Profit, Path=Text, Mode=TwoWay}">
+                    </Grid>
 
-                            </Slider>
+                    <Grid Grid.Column="1" Grid.Row="0">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Height="30" Margin="0, 10, 0, 0">
+                                <TextBlock Text="Target (% Profil)" Foreground="White" FontWeight="Bold" Margin="10,7,0,0"/>
+                                <TextBox Style="{StaticResource FinPlanTextBox}" Name="TargText"
+                                         Width="90" Margin="70,0" >
+                                    <TextBox.Text>
+                                        <Binding Path="Target" UpdateSourceTrigger="PropertyChanged" ValidatesOnNotifyDataErrors="True">
+                                            <Binding.ValidationRules>
+                                                <correct:INTMinMaxFormat_Correct Min="1" Max="100"/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                            </StackPanel>
+                            <Slider Template="{StaticResource FinPlanSlider}"  Margin="10, 10" Name="TargSlider" IsSnapToTickEnabled="True"
+                                Value="{Binding ElementName=TargText, Path=Text}" Minimum="1" Maximum="100" Orientation="Horizontal" TickFrequency="1"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal"  Margin="10">
-                            <TextBox Width="100" Height="22" Name="Time">
-                                <TextBox.Text>
-                                    <Binding Path="TargetTime" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
-                                        <Binding.ValidationRules>
-                                            <correct:INTMinMaxFormat_Correct Min="1" Max="5"/>
-                                        </Binding.ValidationRules>
-                                    </Binding>
-                                </TextBox.Text>
-                            </TextBox>
-                            <Label Content="Time (Years)"  Foreground="White" FontFamily="{StaticResource MainFont}"/>
-                            <Slider MinWidth="310"  TickFrequency="{Binding YearToPlain, Mode=TwoWay}" Margin="100,0" Minimum="1" Maximum="5" IsSnapToTickEnabled="True"
-                                Value="{Binding ElementName=Time, Path=Text, Mode=TwoWay}">
+                    </Grid>
 
-                            </Slider>
+                    <Grid Grid.Column="1" Grid.Row="1">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Height="30" Margin="0, 10, 0, 0">
+                                <TextBlock Text="Time (Years)" Foreground="White" FontWeight="Bold" Margin="10,7,0,0"/>
+                                <TextBox Style="{StaticResource FinPlanTextBox}" Name="YearText"
+                                         Width="90" Margin="94,0">
+                                    <TextBox.Text>
+                                        <Binding Path="TargetTime" UpdateSourceTrigger="PropertyChanged" ValidatesOnNotifyDataErrors="True">
+                                            <Binding.ValidationRules>
+                                                <correct:INTMinMaxFormat_Correct Min="1" Max="5"/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                            </StackPanel>
+                            <Slider Template="{StaticResource FinPlanSlider}"  Margin="10, 10" Name="YearSlider" IsSnapToTickEnabled="True"
+                                Value="{Binding ElementName=YearText, Path=Text}" Minimum="1" Maximum="5" Orientation="Horizontal" TickFrequency="1"/>
                         </StackPanel>
-                        <Button Margin="0,-4,0,0" Content="Get Plan" Template="{StaticResource ButtonControlTemplate}" Foreground="{StaticResource GrayEA}"
-                           Width="100" Height="26" Cursor="Hand" HorizontalAlignment="Center" Background="{StaticResource Gray36}">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="PreviewMouseDown">
-                                    <i:InvokeCommandAction Command="{Binding FillEtfCollections}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
+                    </Grid>
 
-                            <Button.Style>
-                                <Style TargetType="{x:Type Button}">
-                                    <Setter Property="IsEnabled" Value="False"/>
-                                    <Style.Triggers>
-                                        <MultiDataTrigger>
-                                            <MultiDataTrigger.Conditions>
-                                                <Condition Binding="{Binding ElementName=Pri, Path=(Validation.HasError)}" Value="false"/>
-                                                <Condition Binding="{Binding ElementName=InvSumm, Path=(Validation.HasError)}" Value="false"/>
-                                                <Condition Binding="{Binding ElementName=Profit, Path=(Validation.HasError)}" Value="false"/>
-                                                <Condition Binding="{Binding ElementName=Time, Path=(Validation.HasError)}" Value="false"/>
-                                            </MultiDataTrigger.Conditions>
-                                            <Setter Property="IsEnabled" Value="True"/>
-                                        </MultiDataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                        </Button>
+                    <Button Grid.Column="1" Grid.Row="2" Height="30" Width="140" Content="Get Plan">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Control.Foreground" Value="Black"/>
+                                <Setter Property="FontSize" Value="14"/>
+                                <Setter Property="FontFamily" Value="{StaticResource MainFont}"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="IsEnabled" Value="False"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border  x:Name="border" CornerRadius="3" BorderThickness="1" BorderBrush="#FF464646">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                </ContentPresenter>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="true">
+                                                    <Setter Property="Background" TargetName="border" Value="#FFF98D3B"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding ElementName=InvSummText, Path=(Validation.HasError)}" Value="false"/>
+                                            <Condition Binding="{Binding ElementName=PRIText, Path=(Validation.HasError)}" Value="false"/>
+                                            <Condition Binding="{Binding ElementName=TargText, Path=(Validation.HasError)}" Value="false"/>
+                                            <Condition Binding="{Binding ElementName=YearText, Path=(Validation.HasError)}" Value="false"/>
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter Property="IsEnabled" Value="True"/>
+                                    </MultiDataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+
+                </Grid>
+
+
+                <Grid x:Name="Results"  Background="#FF292929" Height="238"  Width="258" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="579,40,0,0">
+                    <StackPanel Orientation="Vertical" Margin="20, 30">
+                        <Grid Margin="0,10">
+                            <StackPanel Orientation="Horizontal">
+                                <Ellipse Fill="Red" StrokeThickness="1" Stroke="White" Height="10" Width="10"/>
+                                <TextBlock x:Name="Optimistic_scenario" FontWeight="Bold" FontSize="14" 
+                                       FontFamily="Futuris Cyrillic" Margin="10, 0" Foreground="White"
+                                       LineStackingStrategy="BlockLineHeight" TextAlignment="Left">
+                       <Run Text="Optimistic scenario  "/>
+                       <Run Text="$"/>
+                       <Run Text="430,000"/>
+                                </TextBlock>
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid Margin="0, 10">
+                            <StackPanel Orientation="Horizontal">
+                                <Ellipse Fill="#FFF98E3C" StrokeThickness="1" Stroke="White" Height="10" Width="10"/>
+                                <TextBlock x:Name="Medium_scenario" FontWeight="Bold" FontSize="14"  Margin="10, 0"
+                                       FontFamily="Futuris Cyrillic" TextAlignment="Left" Foreground="White">
+                        <Run Foreground="#FF878787" Text="Medium scenario    "/>
+                        <Run Foreground="White" Text="$"/>
+                        <Run Text="215,000"/>
+                                </TextBlock>
+                            </StackPanel>
+                        </Grid>
+                        <Grid Margin="0, 10">
+                            <StackPanel Orientation="Horizontal">
+                                <Ellipse Fill="#FFFFC087" StrokeThickness="1" Stroke="White" Height="10" Width="10"/>
+                                <TextBlock x:Name="Pessimistic_scenario" FontWeight="Bold" Margin="10, 0"
+                                       FontSize="14" FontFamily="Futuris Cyrillic" 
+                                       TextAlignment="Left" Foreground="White">
+                        <Run Text="Pessimistic scenario   "/>
+                        <Run Text="$"/>
+                        <Run Text="89,000"/>
+                                </TextBlock>
+                            </StackPanel>
+                        </Grid>
                     </StackPanel>
-                </Border>
-                <Border Grid.Column="1" BorderThickness="1" BorderBrush="Black">
-                    <ScrollViewer>
-                        <StackPanel Orientation="Vertical" Margin="10">
-                                <TextBlock Foreground="Green" FontFamily="{StaticResource MainFont}" FontSize="16" 
-                                           HorizontalAlignment="Center"> Good Script : 
-                                </TextBlock>
-                            <TextBlock Text="{Binding GoodScreenAnnotation}" TextWrapping="Wrap"/>
-                            <TextBlock Foreground="Aqua" FontFamily="{StaticResource MainFont}" FontSize="16"
-                                           HorizontalAlignment="Center"> Normal Script :
-                                </TextBlock>
-                            <TextBlock Text="{Binding NormalScreenAnnotation}" TextWrapping="Wrap"/>
-                            <TextBlock Foreground="Red" FontFamily="{StaticResource MainFont}" FontSize="16" 
-                                       HorizontalAlignment="Center"> Bad Script :
-                            </TextBlock>
-                            <TextBlock Text="{Binding BadScreenAnnotation}" TextWrapping="Wrap"/>
-                        </StackPanel>
-                    </ScrollViewer>
-                </Border>
-            </Grid>
-            <Border Grid.Row="1" Margin="10" BorderBrush="Black" BorderThickness="1">
+                </Grid>
+                <Grid x:Name="Comments" Margin="856,40,20,0" Background="#FF292929" VerticalAlignment="Top" Height="496">
+                    <StackPanel Margin="20">
+                        <TextBlock x:Name="Comments1" Foreground="White" FontWeight="Bold" 
+                               FontSize="16" FontFamily="{StaticResource MainFont}" 
+                               TextAlignment="Left" Text="Comments" Margin="0, 0, 0, 10"/>
+
+                        <FlowDocumentScrollViewer Height="480">
+                            <FlowDocument FontFamily="{StaticResource MainFont}" Foreground="White">
+                                <Paragraph>
+                                    1) If the balance sheet achieves the target level for a period not earlier than 85% of the period established by the client:
+                                </Paragraph>
+                                <Paragraph>
+                                    Under the optimistic scenario, the target in XXX USD with the initial balance of YYY is likely to be achieved by the planned term of ZZZ years.
+                                </Paragraph>
+                                <Paragraph>
+                                    If the balance sheet achieves the target level for a period earlier than 85% of the period set by the client:
+                                </Paragraph>
+                                <Paragraph>
+                                    Under the optimistic scenario, the target in XXX USD with the initial YYY balance based on the model is much faster than the planned ZZZ years, which may indicate too high volatility of the chosen strategy.
+It is recommended to reduce the risk level (reference to passing profiling)
+                                </Paragraph>
+                                <Paragraph>
+                                    If the balance sheet is not achieved under any scenario, then:
+                                </Paragraph>
+                                <Paragraph>
+                                    Unfortunately, at a given risk level in none of the calculated scenarios, the target of XXX USD with the initial balance of YYY is not achieved, which may indicate:
+                                </Paragraph>
+
+                                <Paragraph>
+                                    A) too conservative strategy for a given target profit (reference to risk-profiling)
+                                </Paragraph>
+                                <Paragraph>
+                                    B) low initial investments for achievement the target YYY for a given period ZZZ years
+                                </Paragraph>
+                                <Paragraph>
+                                    B) too short period of ZZZ for achievement a given target.
+
+
+                                </Paragraph>
+                            </FlowDocument>
+                        </FlowDocumentScrollViewer>
+                    </StackPanel>
+                </Grid>
+
                 
-                <chart:SfChart Margin="3">
+                <Grid Background="#FF292929" Margin="20,300,363,63"/>
+                <Viewbox Margin="1">
+                <chart:SfChart Margin="5" Background="#FF292929">
+                    <chart:SfChart.Resources>
+                        <DataTemplate x:Key="contentTemplate">
+                            <Border Margin="20, 0">
+                                <TextBlock VerticalAlignment="Bottom" 
+                                   Foreground="Wheat" Text="Total Goal"/>
+                            </Border>
+                        </DataTemplate>
+
+                    </chart:SfChart.Resources>
                     <chart:SfChart.Annotations>
-                        <chart:HorizontalLineAnnotation Y1="{Binding Target}" CanDrag="False" ShowAxisLabel="True"/>
+
+                        <chart:HorizontalLineAnnotation Y1="80" Stroke="#FFF98D3B" VerticalTextAlignment="Top"
+				 HorizontalTextAlignment="Stretch" ContentTemplate="{StaticResource contentTemplate}"
+				  StrokeDashArray="2" StrokeThickness="2">
+                        </chart:HorizontalLineAnnotation>
+
+                        <chart:VerticalLineAnnotation X1="3" Stroke="#707070" StrokeThickness="1.4">
+                        </chart:VerticalLineAnnotation>
+
+                        <chart:EllipseAnnotation Fill="Red" Stroke="White" StrokeThickness="1.2"
+                                         X1="2,95" X2="3,05" Y1="36" Y2="40"/>
+                        <chart:EllipseAnnotation Fill="#f98e3c" Stroke="White" StrokeThickness="1.2"
+                                         X1="2,95" X2="3,05" Y1="26" Y2="30"/>
+                        <chart:EllipseAnnotation Fill="#ffc087" Stroke="White" StrokeThickness="1.2"
+                                         X1="2,95" X2="3,05" Y1="8" Y2="12"/>
+
+
+
                     </chart:SfChart.Annotations>
-                    
-                    
-                    <chart:SfChart.PrimaryAxis>
-                        <chart:CategoryAxis AxisLineOffset="1000000" PlotOffset="15" Foreground="#868686" MajorTickLineStyle="{DynamicResource StyleLine2}"  
-                                TickLineSize="20" MaximumLabels="80" ShowGridLines="False" FontSize="12" TickLinesPosition="Inside" />
+
+                    <chart:SfChart.PrimaryAxis >
+                        <chart:NumericalAxis AxisLineOffset="1000000" 
+                                    Name="XAxis" 
+                                    PlotOffset="0" 
+                                    Foreground="#8a8a8a" 
+                                    TickLineSize="20" 
+                                    MaximumLabels="5" 
+                                    ShowGridLines="False" 
+                                    AxisLineStyle="{x:Null}"
+                                    FontSize="12"
+                                    TickLinesPosition="Inside" />
                     </chart:SfChart.PrimaryAxis>
 
                     <chart:SfChart.SecondaryAxis>
-                        <chart:NumericalAxis AxisLineOffset="1000000" RangePadding="Round" Header="%" FontSize="12" Foreground="#868686" TickLinesPosition="Inside"
-                                 ShowGridLines="False" MajorTickLineStyle="{DynamicResource StyleLine2}" />
-                    </chart:SfChart.SecondaryAxis>
+                        <chart:NumericalAxis Name="YAxis" LabelFormat="0"
+                                     RangePadding="Round" 
+                                     Header="%"
+                                     ThumbLabelVisibility="Hidden"
+                                     FontSize="12" 
+                                     Foreground="#8a8a8a" 
+                                     TickLinesPosition="Outside"
+                                     ShowGridLines="True" >
+                            <chart:NumericalAxis.MajorGridLineStyle>
+                                <Style TargetType="Line">
+                                    <Setter Property="Stroke" Value="#696969"/>
+                                    <Setter Property="StrokeThickness" Value="1"/>
+                                </Style>
+                            </chart:NumericalAxis.MajorGridLineStyle>
+                        </chart:NumericalAxis>
+                    </chart:SfChart.SecondaryAxis >
+
+                    <!--MAX-->
+                    <chart:SplineSeries Name="MaxStroke" Opacity="1"  StrokeThickness="3.6" Interior="Red"
+                ItemsSource="{Binding ChartPlpanMax}" XBindingPath="Name" YBindingPath="Value">
+                    </chart:SplineSeries>
+
+                    <chart:SplineAreaSeries Name="Max" Opacity="0.5" Interior="#ff0f04" 
+                ItemsSource="{Binding ChartPlpanMax}" XBindingPath="Name" YBindingPath="Value">
+                    </chart:SplineAreaSeries>
 
 
-                    <chart:SfChart.Behaviors>
-                        <chart:ChartZoomPanBehavior ZoomMode="XY"></chart:ChartZoomPanBehavior>
-                    </chart:SfChart.Behaviors>
+                    <!--MIDL-->
+                    <chart:SplineSeries Name="MiddlStroke" Opacity="1"  StrokeThickness="2" Interior="#f8a94c"
+                ItemsSource="{Binding ChartPlpanMidl}" XBindingPath="Name" YBindingPath="Value">
+                    </chart:SplineSeries>
 
-                    <chart:SplineSeries EnableAnimation="True"  
-                        XBindingPath="chartDate"
-                        YBindingPath="chartVal"
-                        ItemsSource="{Binding MinEtf}"
-                        />
-                    <chart:SplineSeries EnableAnimation="True"
-                        XBindingPath="chartDate"
-                        YBindingPath="chartVal"
-                        ItemsSource="{Binding MaxEtf}"
-                        />
-                    <chart:SplineSeries EnableAnimation="True"
-                        XBindingPath="chartDate"
-                        YBindingPath="chartVal"
-                        ItemsSource="{Binding MiddleEtf}"
-                        />
+                    <chart:SplineAreaSeries Name="Middl" Opacity="0.3" Stroke="#f8a94c"
+                ItemsSource="{Binding ChartPlpanMidl}" XBindingPath="Name" YBindingPath="Value">
+                    </chart:SplineAreaSeries>
+
+                    <!--MIN-->
+                    <chart:SplineSeries Name="MinlStroke" Opacity="1"  StrokeThickness="3" Interior="#fda872"
+                ItemsSource="{Binding ChartPlpanMin}" XBindingPath="Name" YBindingPath="Value">
+                    </chart:SplineSeries>
+
+                    <chart:SplineAreaSeries Name="Min" Opacity="0.5" Interior="#af7253"
+                ItemsSource="{Binding ChartPlpanMin}"  XBindingPath="Name" YBindingPath="Value">
+                    </chart:SplineAreaSeries>
+
+
                 </chart:SfChart>
-            </Border>
+                </Viewbox>
+            </Grid>
         </Grid>
     </Grid>
 </Window>

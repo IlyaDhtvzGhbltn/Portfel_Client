@@ -6155,4 +6155,404 @@ Table 'cgaaf_db.activesfunding' doesn't exist
 mscorlib
 Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
 
-18.12.2017 13:59:27=
+18.12.2017 13:59:27==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 11:47:46==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 11:47:49==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 11:49:58==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 11:50:00==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 13:46:24==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 13:46:26==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 13:48:01==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 13:48:03==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 13:50:15==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 13:50:18==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 14:13:49==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 14:13:55==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 14:21:22==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 14:21:27==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 14:26:42==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 14:26:44==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 14:35:10==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 14:35:13==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 14:40:53==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 14:40:56==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 14:41:39==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 14:41:42==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 14:43:42==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 14:43:44==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 14:44:40==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 14:44:42==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 14:54:15==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 14:54:18==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 14:55:09==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 14:55:11==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 14:57:07==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 14:57:10==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 14:58:13==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 14:58:15==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 15:03:32==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 15:03:34==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 15:10:15==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 15:10:17==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 15:17:18==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 15:17:20==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 15:19:20==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 15:19:23==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 15:21:05==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 15:21:08==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 15:22:30==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 15:22:33==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 15:25:12==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 15:25:15==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 15:37:48==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 15:37:52==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 15:43:07==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 15:43:16==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 15:45:11==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 15:45:13==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 15:47:26==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 15:47:29==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 15:51:14==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 15:51:17==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 15:53:01==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 15:53:03==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 15:54:28==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 15:54:30==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 15:56:03==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 15:56:06==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 15:59:52==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 15:59:54==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 16:02:20==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 16:02:22==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 16:07:53==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 16:07:56==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 16:11:39==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 16:11:41==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 16:12:37==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 16:12:39==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 16:16:24==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 16:16:26==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 16:17:43==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 16:17:46==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 16:18:39==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 16:18:42==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 16:19:42==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 16:19:44==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 16:24:23==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 16:24:25==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 16:46:43==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 16:46:45==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 17:13:10==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 17:13:12==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 17:19:28==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 17:19:30==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 17:21:03==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 17:21:05==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 17:22:38==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 17:22:41==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 17:24:16==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 17:24:18==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 17:29:17==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 17:29:20==
+MySql.Data.CF
+Table 'cgaaf_db.activesfunding' doesn't exist
+
+26.12.2017 17:30:19==
+mscorlib
+Не удалось привести тип объекта "System.Decimal[]" к типу "System.IConvertible".
+
+26.12.2017 17:30:21=

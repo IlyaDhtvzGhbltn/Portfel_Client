@@ -16,13 +16,13 @@ namespace Custodian.Model
     {
         FundContext EtfChartContext { get; set; }
 
-        public ObservableCollection<model.Chart> MinEtf { get; set; }
-        public ObservableCollection<model.Chart> MaxEtf { get; set; }
-        public ObservableCollection<model.Chart> MiddleEtf { get; set; }
+        public ObservableCollection<model.Chart> ChartPlpanMax { get; set; }
+        public ObservableCollection<model.Chart> ChartPlpanMin { get; set; }
+        public ObservableCollection<model.Chart> ChartPlpanMidl { get; set; }
 
-        public string GoodScreenAnnotation { get; set; }
-        public string NormalScreenAnnotation { get; set; }
-        public string BadScreenAnnotation { get; set; }
+        public double GoodScreenAnnotation { get; set; }
+        public double NormalScreenAnnotation { get; set; }
+        public double BadScreenAnnotation { get; set; }
 
         public int CurrentPRI { get; set; }
         public double CurrentPortfel { get; set; }
@@ -43,12 +43,9 @@ namespace Custodian.Model
             CurrentPortfel = 1000000;
             Target = 50;
             TargetTime = 5;
-            MinEtf = new ObservableCollection<model.Chart>();
-            MaxEtf = new ObservableCollection<model.Chart>();
-            MiddleEtf = new ObservableCollection<model.Chart>();
-            GoodScreenAnnotation = string.Empty;
-            NormalScreenAnnotation = string.Empty;
-            BadScreenAnnotation = string.Empty;
+            ChartPlpanMin = new ObservableCollection<model.Chart>();
+            ChartPlpanMidl = new ObservableCollection<model.Chart>();
+            ChartPlpanMax = new ObservableCollection<model.Chart>();
         }
 
 
@@ -97,11 +94,11 @@ namespace Custodian.Model
             {
                 return _FillEtfCollections ?? (_FillEtfCollections = new RelayCommand(()=> 
                 {
-                    if (MinEtf != null)
+                    if (ChartPlpanMin != null)
                     {
-                        MinEtf.Clear();
-                        MaxEtf.Clear();
-                        MiddleEtf.Clear();
+                        ChartPlpanMin.Clear();
+                        ChartPlpanMax.Clear();
+                        ChartPlpanMidl.Clear();
                     }
                     NotifyPropertyChanged("Target");
                     NotifyPropertyChanged("TargetTime");
@@ -110,35 +107,18 @@ namespace Custodian.Model
                     var MinChar = EtfChartContext.MinFund();
                     var MiddleChart = EtfChartContext.MiddleFund();
 
-                    MaxEtf.Add(new model.Chart { chartDate = "0", chartVal =0 });
-                    MinEtf.Add(new model.Chart { chartDate = "0", chartVal = 0 });
-                    MiddleEtf.Add(new model.Chart { chartDate = "0", chartVal = 0 });
+                    ChartPlpanMax.Add(new model.Chart { chartDate = "0", chartVal =0 });
+                    ChartPlpanMin.Add(new model.Chart { chartDate = "0", chartVal = 0 });
+                    ChartPlpanMidl.Add(new model.Chart { chartDate = "0", chartVal = 0 });
 
                     for (int i=0; i< TargetTime; i++)
                     {
-                        MaxEtf.Add(new model.Chart { chartVal = MaxChar.PerfPrice[i], chartDate = model.EtfDates[i] });
-                        MinEtf.Add(new model.Chart { chartVal = MinChar.PerfPrice[i], chartDate = model.EtfDates[i] });
-                        MiddleEtf.Add(new model.Chart { chartVal = MiddleChart.PerfPrice[i], chartDate = model.EtfDates[i] });
+                        ChartPlpanMax.Add(new model.Chart { chartVal = MaxChar.PerfPrice[i], chartDate = model.EtfDates[i] });
+                        ChartPlpanMin.Add(new model.Chart { chartVal = MinChar.PerfPrice[i], chartDate = model.EtfDates[i] });
+                        ChartPlpanMidl.Add(new model.Chart { chartVal = MiddleChart.PerfPrice[i], chartDate = model.EtfDates[i] });
 
-                        if (Target<= MaxChar.PerfPrice[i])
-                             GoodScreenAnnotation = "При благоприятном сценарии цель будет достигнута";
-                        else
-                            GoodScreenAnnotation = "Даже при благоприятном сценарии цель не будет достигнута";
-
-                        if (Target <= MiddleChart.PerfPrice[i])
-                            NormalScreenAnnotation = "При нормальном сценарии цель будет достигнута";
-                        else
-                            NormalScreenAnnotation = "При нормальном сценарии цель не будет достигнута";
-
-                        if (Target <= MinChar.PerfPrice[i])
-                            BadScreenAnnotation = "Даже при неблагоприятном сценарии цель будет достигнута";
-                        else
-                            BadScreenAnnotation = "При неблагоприятном сценарии цель не будет достигнута";
+                       
                     }
-                    NotifyPropertyChanged("BadScreenAnnotation");
-                    NotifyPropertyChanged("NormalScreenAnnotation");
-                    NotifyPropertyChanged("GoodScreenAnnotation");
-
                 }));
             }
         }
