@@ -26,6 +26,14 @@ namespace Custodian.Model
             public double chartVal { get; set; }
             public string chartDate { get; set; }
         }
+
+        public class DigitChart
+        {
+            public double Value { get; set; }
+            public int Name { get; set; }
+        }
+
+
         public class OperationsAll
         {
             public string Type { get; set; }

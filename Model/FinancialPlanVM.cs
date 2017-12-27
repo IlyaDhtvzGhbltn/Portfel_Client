@@ -16,24 +16,41 @@ namespace Custodian.Model
     {
         FundContext EtfChartContext { get; set; }
 
-        public ObservableCollection<model.Chart> ChartPlpanMax { get; set; }
-        public ObservableCollection<model.Chart> ChartPlpanMin { get; set; }
-        public ObservableCollection<model.Chart> ChartPlpanMidl { get; set; }
+        public ObservableCollection<model.DigitChart> ChartPlpanMax { get; set; }
+        public ObservableCollection<model.DigitChart> ChartPlpanMin { get; set; }
+        public ObservableCollection<model.DigitChart> ChartPlpanMidl { get; set; }
 
-        public double GoodScreenAnnotation { get; set; }
-        public double NormalScreenAnnotation { get; set; }
-        public double BadScreenAnnotation { get; set; }
+        //public double GoodScreenAnnotation { get; set; }
+        //public double NormalScreenAnnotation { get; set; }
+        //public double BadScreenAnnotation { get; set; }
 
         public int CurrentPRI { get; set; }
         public double CurrentPortfel { get; set; }
         public double Target { get; set; }
-        public double TargetTime { get; set; }
+        public int TargetTime { get; set; }
+
+        public string OptitmisticResult { get; set; }
+        public string NormalResult { get; set; }
+        public string PessimisticResult { get; set; }
+
+        public double _X1 { get; set; }
+        public double _X2 { get; set; }
+        public double MaxY1 { get; set; }
+        public double MaxY2 { get; set; }
+
+
+        public double MidY1 { get; set; }
+        public double MidY2 { get; set; }
+
+
+        public double MinY1 { get; set; }
+        public double MinY2 { get; set; }
 
         public bool IsEnabledTextBoxs { get; set; }
 
         private double _CurrentPortfel { get; set; }
         private string _CurrentPRI { get; set; }
-
+        
         internal FinancialPlanVM(ClientReportVM ContextModel)
         {
             _CurrentPRI = ContextModel.RiscLev;
@@ -43,9 +60,9 @@ namespace Custodian.Model
             CurrentPortfel = 1000000;
             Target = 50;
             TargetTime = 5;
-            ChartPlpanMin = new ObservableCollection<model.Chart>();
-            ChartPlpanMidl = new ObservableCollection<model.Chart>();
-            ChartPlpanMax = new ObservableCollection<model.Chart>();
+            ChartPlpanMin = new ObservableCollection<model.DigitChart>();
+            ChartPlpanMidl = new ObservableCollection<model.DigitChart>();
+            ChartPlpanMax = new ObservableCollection<model.DigitChart>();
         }
 
 
@@ -107,18 +124,58 @@ namespace Custodian.Model
                     var MinChar = EtfChartContext.MinFund();
                     var MiddleChart = EtfChartContext.MiddleFund();
 
-                    ChartPlpanMax.Add(new model.Chart { chartDate = "0", chartVal =0 });
-                    ChartPlpanMin.Add(new model.Chart { chartDate = "0", chartVal = 0 });
-                    ChartPlpanMidl.Add(new model.Chart { chartDate = "0", chartVal = 0 });
+                    ChartPlpanMax.Add(new model.DigitChart { Name = 0, Value =0 });
+                    ChartPlpanMin.Add(new model.DigitChart { Name = 0, Value = 0 });
+                    ChartPlpanMidl.Add(new model.DigitChart { Name = 0, Value = 0 });
 
-                    for (int i=0; i< TargetTime; i++)
+                    for (int i=0; i< MaxChar.PerfPrice.Length; i++)
                     {
-                        ChartPlpanMax.Add(new model.Chart { chartVal = MaxChar.PerfPrice[i], chartDate = model.EtfDates[i] });
-                        ChartPlpanMin.Add(new model.Chart { chartVal = MinChar.PerfPrice[i], chartDate = model.EtfDates[i] });
-                        ChartPlpanMidl.Add(new model.Chart { chartVal = MiddleChart.PerfPrice[i], chartDate = model.EtfDates[i] });
-
-                       
+                        ChartPlpanMax.Add(new model.DigitChart { Value = MaxChar.PerfPrice[i], Name = i });
+                        ChartPlpanMin.Add(new model.DigitChart { Value = MinChar.PerfPrice[i], Name = i });
+                        ChartPlpanMidl.Add(new model.DigitChart { Value = MiddleChart.PerfPrice[i], Name = i });
                     }
+                    int MAXMASS = MaxChar.PerfPrice.Length - 1;
+
+
+                    ChartPlpanMax.Add(new model.DigitChart { Value = MaxChar.PerfPrice[MAXMASS], Name = 6 });
+                    ChartPlpanMin.Add(new model.DigitChart { Value = MinChar.PerfPrice[MAXMASS], Name = 6 });
+                    ChartPlpanMidl.Add(new model.DigitChart { Value = MiddleChart.PerfPrice[MAXMASS], Name = 6 });
+
+                    var one_perc = CurrentPortfel / 100;
+                    OptitmisticResult = (CurrentPortfel + (one_perc * MaxChar.PerfPrice[TargetTime])).ToString("N2");
+                    PessimisticResult = (CurrentPortfel + (one_perc * MinChar.PerfPrice[TargetTime])).ToString("N2");
+                    NormalResult = (CurrentPortfel +  (one_perc * MiddleChart.PerfPrice[TargetTime])).ToString("N2");
+
+
+                    _X1 = TargetTime - 0.05;
+                    _X2 = TargetTime + 0.05;
+
+                    MaxY1 = MaxChar.PerfPrice[TargetTime ] - 10;
+                    MaxY2 = MaxChar.PerfPrice[TargetTime ] + 10;
+
+                    MinY1 = MinChar.PerfPrice[TargetTime ] - 10;
+                    MinY2 = MinChar.PerfPrice[TargetTime ] + 10;
+
+                    MidY1 = MiddleChart.PerfPrice[TargetTime] - 10;
+                    MidY2 = MiddleChart.PerfPrice[TargetTime] + 10;
+
+
+                    NotifyPropertyChanged("OptitmisticResult");
+                    NotifyPropertyChanged("PessimisticResult");
+                    NotifyPropertyChanged("NormalResult");
+
+                    NotifyPropertyChanged("_X1");
+                    NotifyPropertyChanged("_X2");
+                    NotifyPropertyChanged("MaxY1");
+                    NotifyPropertyChanged("MaxY2");
+
+                    NotifyPropertyChanged("MinY1");
+                    NotifyPropertyChanged("MinY2");
+
+                    NotifyPropertyChanged("MidY1");
+                    NotifyPropertyChanged("MidY2");
+
+
                 }));
             }
         }

@@ -10,7 +10,8 @@
         xmlns:correct="clr-namespace:Custodian.DALs.InterfaceService.Financial_Plan_Data_Correct"
         Title="Financial_Plan"
         ResizeMode="NoResize"
-        Height="599" Width="1200" >
+        Height="599" Width="1250">
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="32"/>
@@ -51,8 +52,8 @@
 
                     <Grid Grid.Column="0" Grid.Row="0">
                         <StackPanel>
-                        <StackPanel Orientation="Horizontal" Height="30" Margin="0, 10, 0, 0">
-                            <TextBlock Text="Investment summ. (USD)" Foreground="White" FontWeight="Bold" Margin="10,7,0,0"/>
+                            <StackPanel Orientation="Horizontal" Height="30" Margin="0, 10, 0, 0">
+                                <TextBlock Text="Investment summ. (USD)" Foreground="White" FontWeight="Bold" Margin="10,7,0,0"/>
                                 <TextBox Style="{StaticResource FinPlanTextBox}" IsEnabled="{Binding IsEnabledTextBoxs}"
                                          Name="InvSummText" Width="90" Margin="20, 0">
                                     <Binding Path="CurrentPortfel" UpdateSourceTrigger="PropertyChanged" ValidatesOnNotifyDataErrors="True">
@@ -62,7 +63,7 @@
                                     </Binding>
                                 </TextBox>
                             </StackPanel>
-                        <Slider Template="{StaticResource FinPlanSlider}"  Name="InvSummSlider" Margin="10, 10"
+                            <Slider Template="{StaticResource FinPlanSlider}"  Name="InvSummSlider" Margin="10, 10"
                                 Value="{Binding ElementName=InvSummText, Path=Text}" 
                                 Minimum="1000000" Maximum="100000000" IsEnabled="{Binding IsEnabledTextBoxs}"
                                 Orientation="Horizontal" TickFrequency="100" IsSnapToTickEnabled="True"/>
@@ -77,11 +78,11 @@
                                 <TextBox Style="{StaticResource FinPlanTextBox}" Name="PRIText" IsEnabled="{Binding IsEnabledTextBoxs}"
                                          Width="90" Margin="140,0" >
                                     <TextBox.Text>
-                                    <Binding Path="CurrentPRI" UpdateSourceTrigger="PropertyChanged" ValidatesOnNotifyDataErrors="True" >
-                                        <Binding.ValidationRules>
+                                        <Binding Path="CurrentPRI" UpdateSourceTrigger="PropertyChanged" ValidatesOnNotifyDataErrors="True" >
+                                            <Binding.ValidationRules>
                                                 <correct:INTMinMaxFormat_Correct Min="1" Max="6"/>
                                             </Binding.ValidationRules>
-                                    </Binding>
+                                        </Binding>
                                     </TextBox.Text>
                                 </TextBox>
                             </StackPanel>
@@ -184,14 +185,19 @@
                                 </Style.Triggers>
                             </Style>
                         </Button.Style>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseDown">
+                                <i:InvokeCommandAction Command="{Binding FillEtfCollections}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                     </Button>
 
 
                 </Grid>
 
 
-                <Grid x:Name="Results"  Background="#FF292929" Height="238"  Width="258" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="579,40,0,0">
-                    <StackPanel Orientation="Vertical" Margin="20, 30">
+                <Grid x:Name="Results"  Background="#FF292929" Height="238"  Width="282" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="579,40,0,0">
+                    <StackPanel Orientation="Vertical" Margin="5, 30">
                         <Grid Margin="0,10">
                             <StackPanel Orientation="Horizontal">
                                 <Ellipse Fill="Red" StrokeThickness="1" Stroke="White" Height="10" Width="10"/>
@@ -200,7 +206,7 @@
                                        LineStackingStrategy="BlockLineHeight" TextAlignment="Left">
                        <Run Text="Optimistic scenario  "/>
                        <Run Text="$"/>
-                       <Run Text="430,000"/>
+                       <Run Text="{Binding OptitmisticResult}"/>
                                 </TextBlock>
                             </StackPanel>
                         </Grid>
@@ -210,9 +216,9 @@
                                 <Ellipse Fill="#FFF98E3C" StrokeThickness="1" Stroke="White" Height="10" Width="10"/>
                                 <TextBlock x:Name="Medium_scenario" FontWeight="Bold" FontSize="14"  Margin="10, 0"
                                        FontFamily="Futuris Cyrillic" TextAlignment="Left" Foreground="White">
-                        <Run Foreground="#FF878787" Text="Medium scenario    "/>
-                        <Run Foreground="White" Text="$"/>
-                        <Run Text="215,000"/>
+                        <Run Text="Medium scenario    "/>
+                        <Run Text="$"/>
+                        <Run Text="{Binding NormalResult}"/>
                                 </TextBlock>
                             </StackPanel>
                         </Grid>
@@ -222,21 +228,21 @@
                                 <TextBlock x:Name="Pessimistic_scenario" FontWeight="Bold" Margin="10, 0"
                                        FontSize="14" FontFamily="Futuris Cyrillic" 
                                        TextAlignment="Left" Foreground="White">
-                        <Run Text="Pessimistic scenario   "/>
+                        <Run Text="Pessimistic scenario  "/>
                         <Run Text="$"/>
-                        <Run Text="89,000"/>
+                        <Run Text="{Binding PessimisticResult}"/>
                                 </TextBlock>
                             </StackPanel>
                         </Grid>
                     </StackPanel>
                 </Grid>
-                <Grid x:Name="Comments" Margin="856,40,20,0" Background="#FF292929" VerticalAlignment="Top" Height="496">
-                    <StackPanel Margin="20">
+                <Grid x:Name="Comments" Margin="880,40,0,0" Background="#FF292929" VerticalAlignment="Top" Height="496">
+                    <StackPanel Margin="10">
                         <TextBlock x:Name="Comments1" Foreground="White" FontWeight="Bold" 
                                FontSize="16" FontFamily="{StaticResource MainFont}" 
                                TextAlignment="Left" Text="Comments" Margin="0, 0, 0, 10"/>
 
-                        <FlowDocumentScrollViewer Height="480">
+                        <FlowDocumentScrollViewer Height="446">
                             <FlowDocument FontFamily="{StaticResource MainFont}" Foreground="White">
                                 <Paragraph>
                                     1) If the balance sheet achieves the target level for a period not earlier than 85% of the period established by the client:
@@ -274,42 +280,43 @@ It is recommended to reduce the risk level (reference to passing profiling)
                     </StackPanel>
                 </Grid>
 
-                
-                <Grid Background="#FF292929" Margin="20,300,363,63"/>
-                <Viewbox Margin="1">
-                <chart:SfChart Margin="5" Background="#FF292929">
-                    <chart:SfChart.Resources>
-                        <DataTemplate x:Key="contentTemplate">
-                            <Border Margin="20, 0">
-                                <TextBlock VerticalAlignment="Bottom" 
+                <Grid Margin="20,300,339,63">
+                    <chart:SfChart Background="#FF292929" Margin="5,5,10,5">
+                        <chart:SfChart.Resources>
+                            <DataTemplate x:Key="contentTemplate">
+                                <Border Margin="20, 0">
+                                    <TextBlock VerticalAlignment="Bottom" 
                                    Foreground="Wheat" Text="Total Goal"/>
-                            </Border>
-                        </DataTemplate>
+                                </Border>
+                            </DataTemplate>
 
-                    </chart:SfChart.Resources>
-                    <chart:SfChart.Annotations>
+                        </chart:SfChart.Resources>
+                        <chart:SfChart.Behaviors>
+                            <chart:ChartZoomPanBehavior/>
+                        </chart:SfChart.Behaviors>
+                        <chart:SfChart.Annotations>
 
-                        <chart:HorizontalLineAnnotation Y1="80" Stroke="#FFF98D3B" VerticalTextAlignment="Top"
+
+                            <chart:HorizontalLineAnnotation Y1="{Binding Target}" Stroke="#FFF98D3B" VerticalTextAlignment="Top"
 				 HorizontalTextAlignment="Stretch" ContentTemplate="{StaticResource contentTemplate}"
 				  StrokeDashArray="2" StrokeThickness="2">
-                        </chart:HorizontalLineAnnotation>
+                            </chart:HorizontalLineAnnotation>
 
-                        <chart:VerticalLineAnnotation X1="3" Stroke="#707070" StrokeThickness="1.4">
-                        </chart:VerticalLineAnnotation>
+                            <chart:VerticalLineAnnotation X1="{Binding TargetTime}" Stroke="#707070" StrokeThickness="1.4">
+                            </chart:VerticalLineAnnotation>
 
-                        <chart:EllipseAnnotation Fill="Red" Stroke="White" StrokeThickness="1.2"
-                                         X1="2,95" X2="3,05" Y1="36" Y2="40"/>
-                        <chart:EllipseAnnotation Fill="#f98e3c" Stroke="White" StrokeThickness="1.2"
-                                         X1="2,95" X2="3,05" Y1="26" Y2="30"/>
-                        <chart:EllipseAnnotation Fill="#ffc087" Stroke="White" StrokeThickness="1.2"
-                                         X1="2,95" X2="3,05" Y1="8" Y2="12"/>
+                            <chart:EllipseAnnotation Fill="Red" Stroke="White" StrokeThickness="1.2"
+                                         X1="{Binding _X1}" X2="{Binding _X2}" Y1="{Binding MaxY1}" Y2="{Binding MaxY2}"/>
+                            <chart:EllipseAnnotation Fill="#f98e3c" Stroke="White" StrokeThickness="1.2"
+                                         X1="{Binding _X1}" X2="{Binding _X2}" Y1="{Binding MidY1}" Y2="{Binding MidY2}"/>
+                            <chart:EllipseAnnotation Fill="#ffc087" Stroke="White" StrokeThickness="1.2"
+                                         X1="{Binding _X1}" X2="{Binding _X2}" Y1="{Binding MinY1}" Y2="{Binding MinY2}"/>
 
 
 
-                    </chart:SfChart.Annotations>
-
-                    <chart:SfChart.PrimaryAxis >
-                        <chart:NumericalAxis AxisLineOffset="1000000" 
+                        </chart:SfChart.Annotations>
+                        <chart:SfChart.PrimaryAxis >
+                            <chart:NumericalAxis AxisLineOffset="1000000" 
                                     Name="XAxis" 
                                     PlotOffset="0" 
                                     Foreground="#8a8a8a" 
@@ -319,10 +326,10 @@ It is recommended to reduce the risk level (reference to passing profiling)
                                     AxisLineStyle="{x:Null}"
                                     FontSize="12"
                                     TickLinesPosition="Inside" />
-                    </chart:SfChart.PrimaryAxis>
-
-                    <chart:SfChart.SecondaryAxis>
-                        <chart:NumericalAxis Name="YAxis" LabelFormat="0"
+                        </chart:SfChart.PrimaryAxis>
+                        <chart:SfChart.SecondaryAxis>
+                            <chart:NumericalAxis
+                                     LabelFormat="0"
                                      RangePadding="Round" 
                                      Header="%"
                                      ThumbLabelVisibility="Hidden"
@@ -330,46 +337,38 @@ It is recommended to reduce the risk level (reference to passing profiling)
                                      Foreground="#8a8a8a" 
                                      TickLinesPosition="Outside"
                                      ShowGridLines="True" >
-                            <chart:NumericalAxis.MajorGridLineStyle>
-                                <Style TargetType="Line">
-                                    <Setter Property="Stroke" Value="#696969"/>
-                                    <Setter Property="StrokeThickness" Value="1"/>
-                                </Style>
-                            </chart:NumericalAxis.MajorGridLineStyle>
-                        </chart:NumericalAxis>
-                    </chart:SfChart.SecondaryAxis >
-
-                    <!--MAX-->
-                    <chart:SplineSeries Name="MaxStroke" Opacity="1"  StrokeThickness="3.6" Interior="Red"
+                                <chart:NumericalAxis.MajorGridLineStyle>
+                                    <Style TargetType="Line">
+                                        <Setter Property="Stroke" Value="#696969"/>
+                                        <Setter Property="StrokeThickness" Value="1"/>
+                                    </Style>
+                                </chart:NumericalAxis.MajorGridLineStyle>
+                            </chart:NumericalAxis>
+                        </chart:SfChart.SecondaryAxis >
+                        <!--MAX-->
+                        <chart:SplineSeries Name="MaxStroke" Opacity="1"  StrokeThickness="3.6" Interior="Red" ShowTooltip="True"
+                ItemsSource="{Binding ChartPlpanMax}" XBindingPath="Name" YBindingPath="Value" EnableAnimation="True" SplineType="Cardinal">
+                        </chart:SplineSeries>
+                        <chart:SplineAreaSeries Name="Max" Opacity="0.5" Interior="#ff0f04" EnableAnimation="True" SplineType="Cardinal"
                 ItemsSource="{Binding ChartPlpanMax}" XBindingPath="Name" YBindingPath="Value">
-                    </chart:SplineSeries>
-
-                    <chart:SplineAreaSeries Name="Max" Opacity="0.5" Interior="#ff0f04" 
-                ItemsSource="{Binding ChartPlpanMax}" XBindingPath="Name" YBindingPath="Value">
-                    </chart:SplineAreaSeries>
-
-
-                    <!--MIDL-->
-                    <chart:SplineSeries Name="MiddlStroke" Opacity="1"  StrokeThickness="2" Interior="#f8a94c"
+                        </chart:SplineAreaSeries>
+                        <!--MIDL-->
+                        <chart:SplineSeries Name="MiddlStroke" Opacity="1"  StrokeThickness="2" Interior="#f8a94c" ShowTooltip="True"
+                ItemsSource="{Binding ChartPlpanMidl}" XBindingPath="Name" YBindingPath="Value" EnableAnimation="True" SplineType="Cardinal">
+                        </chart:SplineSeries>
+                        <chart:SplineAreaSeries Name="Middl" Opacity="0.3" Stroke="#f8a94c" EnableAnimation="True" SplineType="Cardinal"
                 ItemsSource="{Binding ChartPlpanMidl}" XBindingPath="Name" YBindingPath="Value">
-                    </chart:SplineSeries>
+                        </chart:SplineAreaSeries>
+                        <!--MIN-->
+                        <chart:SplineSeries Name="MinlStroke" Opacity="1"  StrokeThickness="3" Interior="#fda872" ShowTooltip="True"
+                ItemsSource="{Binding ChartPlpanMin}" XBindingPath="Name" YBindingPath="Value" EnableAnimation="True" SplineType="Cardinal">
+                        </chart:SplineSeries>
 
-                    <chart:SplineAreaSeries Name="Middl" Opacity="0.3" Stroke="#f8a94c"
-                ItemsSource="{Binding ChartPlpanMidl}" XBindingPath="Name" YBindingPath="Value">
-                    </chart:SplineAreaSeries>
-
-                    <!--MIN-->
-                    <chart:SplineSeries Name="MinlStroke" Opacity="1"  StrokeThickness="3" Interior="#fda872"
-                ItemsSource="{Binding ChartPlpanMin}" XBindingPath="Name" YBindingPath="Value">
-                    </chart:SplineSeries>
-
-                    <chart:SplineAreaSeries Name="Min" Opacity="0.5" Interior="#af7253"
-                ItemsSource="{Binding ChartPlpanMin}"  XBindingPath="Name" YBindingPath="Value">
-                    </chart:SplineAreaSeries>
-
-
-                </chart:SfChart>
-                </Viewbox>
+                        <chart:SplineAreaSeries Name="Min" Opacity="0.5" Interior="#af7253" EnableAnimation="True" SplineType="Cardinal"
+                ItemsSource="{Binding ChartPlpanMin}"  XBindingPath="Name" YBindingPath="Value" ShowTooltip="True">
+                        </chart:SplineAreaSeries>
+                    </chart:SfChart>
+                </Grid>
             </Grid>
         </Grid>
     </Grid>

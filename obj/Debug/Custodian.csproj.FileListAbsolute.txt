@@ -786,4 +786,3 @@ C:\Users\Vladislav\Desktop\Custodian\portfelserver-master\obj\Debug\CGAAF.exe.ma
 C:\Users\Vladislav\Desktop\Custodian\portfelserver-master\obj\Debug\CGAAF.application
 C:\Users\Vladislav\Desktop\Custodian\portfelserver-master\obj\Debug\CGAAF.exe
 C:\Users\Vladislav\Desktop\Custodian\portfelserver-master\obj\Debug\CGAAF.pdb
-C:\Users\Vladislav\Desktop\Custodian\portfelserver-master\obj\Debug\Custodian.csproj.CoreCompileInputs.cache
